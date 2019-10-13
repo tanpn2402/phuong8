@@ -3,7 +3,7 @@ import View from './Component/View';
 
 const data = [
   {
-      name: "SmallFile",
+      name: "Small File",
       type: "file",
       created: "05-05-1999",
   },
@@ -146,7 +146,6 @@ class App extends React.Component {
 
   componentDidMount(){
     this.setState({data: data})
-    document.addEventListener('contextmenu', function(event){event.preventDefault();})
   }
 
 
