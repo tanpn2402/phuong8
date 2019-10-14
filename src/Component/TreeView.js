@@ -14,16 +14,18 @@ export default function TreeViewComp(props){
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [typeFolder, setTypeFolder] = React.useState(null);
     const [subDialog, setSubDialog] = React.useState(false);
-    const [actionSub, setActionSub] = React.useState(null)
-    const [actionType, setActionType] = React.useState(null)
-    const [itemName, setItemName] = React.useState(null)
-
+    const [actionSub, setActionSub] = React.useState(null);
+    const [actionType, setActionType] = React.useState(null);
+    const [itemName, setItemName] = React.useState(null);
+    const [pathItem, setItemPath] = React.useState(null);
 
     const openDialog=(e)=>{
       setSubDialog(true)
       setActionSub(e.target.getAttribute("name"))
       setActionType(e.target.id)
-
+      if(e.target.id === "add"){
+        setItemName("")
+      }
     } 
 
     const closeDialog =()=>{
@@ -35,12 +37,17 @@ export default function TreeViewComp(props){
         e.preventDefault();
         setAnchorEl(e.currentTarget);
         setTypeFolder(e.currentTarget.id)
+        setItemPath(e.currentTarget.getAttribute("path"))
         setItemName(e.currentTarget.getAttribute("name"))
+
       }
     const handleClose=()=>{
         setAnchorEl(null)
       }
 
+    const submitItem = (valueitem) =>{
+      console.log(valueitem)
+    }
 
       const open = Boolean(anchorEl);
     return(
@@ -55,20 +62,20 @@ export default function TreeViewComp(props){
                     defaultEndIcon={<DescriptionIcon/>}
                   >
                         {props.data.map(function mapfolder(folder) {
-                          if(Array.isArray(folder.files)){
+                          if(folder.type === "folder"){
                             return(
                               <div key={folder.created} style={{display: "flex", justifyContent: "space-between"}}>
-                              <TreeItem nodeId={folder.created.toString()}  style={{textAlign:"left"}} label={folder.name}>
+                              <TreeItem nodeId={folder.created.toString()} style={{textAlign:"left"}} label={folder.name}>
                                 {folder.files.map(mapfolder)}
                               </TreeItem>
-                              <MoreVertIcon id={folder.type} name={folder.name} onClick={optionmenu}/>
+                              <MoreVertIcon path={folder.path} id={folder.type} name={folder.name} onClick={optionmenu}/>
                               </div>
                               )
                           }else{
                             return(
                               <div key={folder.created} style={{display: "flex", justifyContent: "space-between"}}>
                               <TreeItem className={folder.type} nodeId={folder.created.toString()} style={{textAlign:"left"}} label={folder.name}/>
-                              <MoreVertIcon id={folder.type} name={folder.name} onClick={optionmenu} />
+                              <MoreVertIcon path={folder.path} id={folder.type} name={folder.name} onClick={optionmenu} />
                               </div>
                               )
                           }
@@ -86,19 +93,19 @@ export default function TreeViewComp(props){
                   >
                     {
                       (typeFolder ==="folder") ?
-                      <MenuList>
-                        <MenuItem onClick={openDialog} name="folder" id="add" >Add Folder</MenuItem>
-                        <MenuItem onClick={openDialog} name="file" id="add">Add File</MenuItem>
-                        <MenuItem onClick={openDialog} name="folder" id="rename">Rename Folder</MenuItem>
-                        <MenuItem onClick={openDialog} id="delete">Delete Folder</MenuItem>
-                      </MenuList>
+                        <MenuList>
+                          <MenuItem onClick={openDialog} name="folder" id="add" >Add Folder</MenuItem>
+                          <MenuItem onClick={openDialog} name="file" id="add">Add File</MenuItem>
+                          <MenuItem onClick={openDialog} name="folder" id="rename">Rename Folder</MenuItem>
+                          <MenuItem onClick={openDialog} name="folder" id="delete">Delete Folder</MenuItem>
+                        </MenuList>
                       : <MenuList>
                           <MenuItem onClick={openDialog} name="file" id="rename">Rename file</MenuItem>
-                          <MenuItem onClick={openDialog} id="delete">Delete File</MenuItem>
+                          <MenuItem onClick={openDialog} name="file" id="delete">Delete File</MenuItem>
                         </MenuList>
                     }
                 </Popover>
-                <DialogFunc setItemName={(e)=>{setItemName(e.target.value)}} itemName={itemName} actionType={actionType} actionSub={actionSub} subDialog={subDialog} closeDialog={closeDialog}/>
+                <DialogFunc submitItem={submitItem} pathItem={pathItem} setItemName={(e)=>{setItemName(e.target.value)}} itemName={itemName} actionType={actionType} actionSub={actionSub} subDialog={subDialog} closeDialog={closeDialog}/>
               </Paper>
             </Grid>
       )
