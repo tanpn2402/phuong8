@@ -45,15 +45,57 @@ export default function TreeViewComp(props){
         setAnchorEl(null)
       }
 
-    const submitItem = (valueitem) =>{
-      console.log(valueitem)
+    const submitItem = (valueitem, i=1) =>{
+      setSubDialog(false)
+      setAnchorEl(null)
+      const linkarr = pathItem.split("/") 
+      var path = "/" + linkarr[i]
+      var data2 = props.data
+  
+      function subfunc(target){
+        if(actionType === "delete"){
+          if(linkarr.length<=2){
+            data2 = data2.filter((exa)=>{ return exa.path !== target.path})
+          }else{
+          if(i<linkarr.length-2){
+            i = i + 1
+            path = path + "/" + linkarr[i]
+            target = target.files.find((exa)=>{ return exa.path === path})
+            subfunc(target)
+          }else{
+            target.files = target.files.filter((exa)=>{ return exa.path !== pathItem})
+          }}
+        }else{
+        if(linkarr.length<2){
+          props.submit(data2.push(valueitem))
+        }
+        else{
+        if(i<linkarr.length-1){
+          i = i + 1
+          path = path + "/" + linkarr[i]
+          target = target.files.find((exa)=>{ return exa.path === path})
+          console.log(target)
+          subfunc(target)
+        }else{
+          switch(actionType){
+          case "add": target.files.push(valueitem);break
+          case "rename": target.name = valueitem.name;break
+          default: console.log("choose nothing")
+          }
+        }
+      } }
+      }
+      subfunc(data2.find((dataeach)=>{ return dataeach.path === path }))
+      props.submit(data2)
     }
 
       const open = Boolean(anchorEl);
     return(
-        <Grid item xs={3}>
+        <Grid item xs={3} onContextMenu={optionmenu}>
               <Paper className={classes.paper} >
-                  <h1>TreeView-Folders</h1>
+                    <h2 style={{display: "flex", justifyContent: "space-between"}}>TreeView-Folders 
+                    <MoreVertIcon path={""} onClick={optionmenu}/></h2>
+                    
                   <TreeView
                     
                     className={classes.root}
@@ -91,7 +133,7 @@ export default function TreeViewComp(props){
                                        horizontal: 'left',
                                   }}
                   >
-                    {
+                    { (typeFolder) ?
                       (typeFolder ==="folder") ?
                         <MenuList>
                           <MenuItem onClick={openDialog} name="folder" id="add" >Add Folder</MenuItem>
@@ -102,6 +144,10 @@ export default function TreeViewComp(props){
                       : <MenuList>
                           <MenuItem onClick={openDialog} name="file" id="rename">Rename file</MenuItem>
                           <MenuItem onClick={openDialog} name="file" id="delete">Delete File</MenuItem>
+                        </MenuList>
+                      : <MenuList>
+                          <MenuItem onClick={openDialog} name="folder" id="add" >Add Folder</MenuItem>
+                          <MenuItem onClick={openDialog} name="file" id="add">Add File</MenuItem>
                         </MenuList>
                     }
                 </Popover>

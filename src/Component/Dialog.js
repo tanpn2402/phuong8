@@ -15,7 +15,7 @@ export default function DialogFunc(props){
                 name: itemName,
                 type: actionSub,
                 path: pathItem + "/" + itemName.replace(" ", ""),
-                created: date.getHours()+"h"+date.getMinutes()+"m"+date.getSeconds()+"s "+date.getDate()+"-"+date.getMonth()+"-"+date.getFullYear(), 
+                created: date.getHours()+"h"+date.getMinutes()+"m"+date.getSeconds()+"s-"+date.getDate()+"-"+date.getMonth()+"-"+date.getFullYear(), 
                 files: []
             }
         props.submitItem(valueitem)
@@ -32,7 +32,7 @@ export default function DialogFunc(props){
                     <Button onClick={props.closeDialog} color="secondary">
                       Cancel
                     </Button>
-                    <Button onClick={props.closeDialog} color="primary">
+                    <Button onClick={submitF} color="primary">
                       Confirm
                     </Button>
                 </DialogActions>

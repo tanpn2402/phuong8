@@ -107,7 +107,7 @@ export default function View(props) {
         </Toolbar>
       </AppBar>
       <Grid container spacing={1} >
-              <TreeViewComp data={props.data} classstyle={classes}/>
+              <TreeViewComp data={props.data} submit={props.submit} classstyle={classes}/>
               <Grid item xs={9}>
                 <Paper className={classes.paper}>
                   <h1>Show</h1>
