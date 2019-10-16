@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 var cors = require('cors');
 const PORT = 33003;
 const server = express()
-server.use(bodyParser.json());
+server.use(bodyParser.json({ limit: '10mb' }));
 server.use(bodyParser.urlencoded({ extended: true }));
 const request = require('request');
 const moment = require('moment');
@@ -35,10 +35,9 @@ server.get('/resource/*', function (req, res) {
     res.sendFile(req.path, { root: path.join(__dirname) });
 });
 
-server.get('/static/*', function (req, res) {
+server.get('/script/*', function (req, res) {
     res.sendFile(req.path, { root: path.join(__dirname) });
 });
-
 
 server.post('/api/document/save', function (req, res) {
     const { id, data, name, photo } = req.body;
@@ -136,8 +135,8 @@ server.post('/api/document/get', function (req, res) {
                 // success
                 resp.ok = 1;
                 try {
-                    resp.data = JSON.parse(results[0].data);
                     resp.photo = results[0].photo;
+                    resp.data = JSON.parse(results[0].data);
                 }
                 catch (e) {
                     resp.data = {};
@@ -258,34 +257,34 @@ server.post('/api/login', function (req, res) {
 
 
 let app = null;
-app = server.listen(PORT, (err) => {
-    if (err) throw err
-    console.log('> CWM Proxy ready on http://localhost:' + PORT)
-})
-// module.exports = {
-//     start: () => {
-//         request.get({
-//             headers: {
-//                 "Content-Type": "application/json",
-//             },
-//             url: `http://127.0.0.1:${PORT}/api/ping`
-//         }, async (error, response, body) => {
-//             if (response && response.statusCode === 200 && body === 'pong') {
-//                 console.log('> CWM already start at http://localhost:' + PORT)
-//             }
-//             else {
-//                 app = server.listen(PORT, (err) => {
-//                     if (err) throw err
-//                     console.log('> CWM Proxy ready on http://localhost:' + PORT)
-//                 })
-//             }
-//         });
-//     },
-//     stop: () => {
-//         if (app) {
-//             app.close(() => {
-//                 console.log('> CWM Proxy terminated')
-//             })
-//         }
-//     }
-// }
+// app = server.listen(PORT, (err) => {
+//     if (err) throw err
+//     console.log('> CWM Proxy ready on http://localhost:' + PORT)
+// })
+module.exports = {
+    start: () => {
+        request.get({
+            headers: {
+                "Content-Type": "application/json",
+            },
+            url: `http://127.0.0.1:${PORT}/api/ping`
+        }, async (error, response, body) => {
+            if (response && response.statusCode === 200 && body === 'pong') {
+                console.log('> CWM already start at http://localhost:' + PORT)
+            }
+            else {
+                app = server.listen(PORT, (err) => {
+                    if (err) throw err
+                    console.log('> CWM Proxy ready on http://localhost:' + PORT)
+                })
+            }
+        });
+    },
+    stop: () => {
+        if (app) {
+            app.close(() => {
+                console.log('> CWM Proxy terminated')
+            })
+        }
+    }
+}

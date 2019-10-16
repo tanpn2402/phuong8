@@ -61,8 +61,8 @@ export default function DialogFunc(props) {
     if (actionType === "delete") {
         return (
             <Dialog open={subDialog} onClose={props.closeDialog}>
-                {(actionSub === "folder") ? <DialogTitle>Đồng ý xóa thư mục?</DialogTitle>
-                    : <DialogTitle>Đồng ý xóa File ?</DialogTitle>}
+                {(actionSub === "folder") ? <DialogTitle>Đồng ý xóa thư mục {itemName}?</DialogTitle>
+                    : <DialogTitle>Đồng ý xóa file {itemName}?</DialogTitle>}
                 {actionSub === "folder" && <DialogContentText>Tất cả thư mục và files trong thư mục này sẽ mất.</DialogContentText>}
                 <DialogActions>
                     <Button onClick={props.closeDialog} color="secondary">
@@ -141,27 +141,29 @@ export default function DialogFunc(props) {
                             onChange={props.setItemName}
                         />
                     }
-                    <div style={{ marginTop: 20 }}></div>
-                    <Typography>Chọn loại file</Typography>
-                    <List>
-                        {(props.template || []).map(value => {
-                            const labelId = `checkbox-list-label-${value.id}`;
-                            return (
-                                <ListItem key={value.id} role={undefined} dense button onClick={handleCheck(value)}>
-                                    <ListItemIcon style={{ minWidth: 0 }}>
-                                        <Checkbox
-                                            edge="start"
-                                            checked={checked.id === value.id}
-                                            tabIndex={-1}
-                                            disableRipple
-                                            inputProps={{ 'aria-labelledby': labelId }}
-                                        />
-                                    </ListItemIcon>
-                                    <ListItemText id={labelId} primary={value.name} />
-                                </ListItem>
-                            );
-                        })}
-                    </List>
+                    {actionType === 'add' && <>
+                        <div style={{ marginTop: 20 }}></div>
+                        <Typography>Chọn loại file</Typography>
+                        <List>
+                            {(props.template || []).map(value => {
+                                const labelId = `checkbox-list-label-${value.id}`;
+                                return (
+                                    <ListItem key={value.id} role={undefined} dense button onClick={handleCheck(value)}>
+                                        <ListItemIcon style={{ minWidth: 0 }}>
+                                            <Checkbox
+                                                edge="start"
+                                                checked={checked.id === value.id}
+                                                tabIndex={-1}
+                                                disableRipple
+                                                inputProps={{ 'aria-labelledby': labelId }}
+                                            />
+                                        </ListItemIcon>
+                                        <ListItemText id={labelId} primary={value.name} />
+                                    </ListItem>
+                                );
+                            })}
+                        </List>
+                    </>}
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={props.closeDialog} color="secondary">

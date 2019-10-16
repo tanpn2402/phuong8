@@ -11,7 +11,7 @@
 <script src="compatibility.min.js"></script>
 <script src="theViewer.min.js"></script>
 
-<link href="/static/css/main.73fa5b51.chunk.css" rel="stylesheet">
+<link href="/script/css/main.73fa5b51.chunk.css" rel="stylesheet">
 <script>
 try{
 theViewer.defaultViewer = new theViewer.Viewer({});
@@ -20,7 +20,23 @@ theViewer.defaultViewer = new theViewer.Viewer({});
 <title></title>
 </head>
 <body>
-    <div id="fucking"></div>
+<div id="fucking"></div>
+<script>
+    window.payload = ['fullname', 'birthname', 'birthday', 'birthmonth', 'birthyear',
+    'gender', 'idnumber', 'birthregisteredplace', 'nativeland' ,'ethnic',
+    'legion', 'nation', 'permanentaddress', 'recentaddress' ,'familymembers', 
+    'selfrole', 'educationlevel', 'graduationyear', 'trainingfield', 'englishlevel', 
+    'dayjoinparty', 'officialdayjoinparty', 'dayjoinunion',
+    'bonus', 'discipline', 'job', 'salary' ,'jobposition', 'workplace', 'fathename',
+    'fatherstatus', 'fatherbirthyear', 'fatherjob',
+    'mothername', 'motherstatus', 'motherbirthyear', 'motherjob',
+    'partnername', 'partnerbirthyear', 'partnerjob', 'childnumber' ,
+    'childgender', 'siblingsnumber', 'malesiblingsnumber', 'femalesiblingsnumber', 
+    'selforder', 'officecomment_day', 'officecomment_month', 'officecomment_year', 
+    'militaryofficeconclusion_day','militaryofficeconclusion_month','militaryofficeconclusion_year',
+    'councilconclusion_day','councilconclusion_month','councilconclusion_year',
+    'familystatus', 'selfstatus', 'officecomment', 'militaryofficeconclusion', 'councilconclusion']
+</script>
 <div id="sidebar">
 <div id="outline">
 </div>
@@ -128,6 +144,7 @@ theViewer.defaultViewer = new theViewer.Viewer({});
                 <input id="selforder" style="left: 2600px ;width: 900px;" />            
             </div>
             <div class="c x7 y1e w2 h4">
+                <div style="display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; position: relative; z-index: 99;"><img id="image" style="height: 100%;" /></div>
                 <div class="t m0 x8 h5 y1f ff5 fs2 fc0 sc0 ls0 ws0">Ảnh<span class="ff6"> 3x4</span></div>
                 <div class="t m0 x9 h5 y20 ff5 fs2 fc0 sc0 ls0 ws0">Đóng<span class="ff6"> </span>dấu<span class="ff6"> </span></div>
                 <div class="t m0 xa h5 y21 ff6 fs2 fc0 sc0 ls0 ws0">giáp lai</div>
@@ -188,8 +205,7 @@ theViewer.defaultViewer = new theViewer.Viewer({});
             <div class="t m0 x6 h2 y51 ff4 fs0 fc0 sc0 ls0 ws0">.....................................................................................................................................................................</div>
             <div class="t m0 x6 h2 y52 ff4 fs0 fc0 sc0 ls0 ws0">.....................................................................................................................................................................</div>
             <div class="t m0 x6 h2 y53 ff4 fs0 fc0 sc0 ls0 ws0">.....................................................................................................................................................................</div>
-            <div class="t m0 x6 h2 y54 ff4 fs0 fc0 sc0 ls0 ws0">.....................................................................................................................................................................</div>
-            <textarea style="height: 1100px ; top: 204px;" id="familystatus"></textarea>
+            <textarea style="height: 1078px ; top: 204px; overflow: hidden; resize: none;" id="familystatus"></textarea>
         </div>
         <div class="pi" data-data='{"ctm":[1.000000,0.000000,0.000000,1.000000,0.000000,0.000000]}'></div>
     </div>
@@ -211,7 +227,6 @@ theViewer.defaultViewer = new theViewer.Viewer({});
             <div class="t m0 x6 h2 y61 ff4 fs0 fc0 sc0 ls0 ws0">.....................................................................................................................................................................</div>
             <div class="t m0 x6 h2 y62 ff4 fs0 fc0 sc0 ls0 ws0">.....................................................................................................................................................................</div>
             <div class="t m0 x6 h2 y63 ff4 fs0 fc0 sc0 ls0 ws0">.....................................................................................................................................................................</div>
-            <div class="t m0 x6 h2 y64 ff4 fs0 fc0 sc0 ls0 ws0">.....................................................................................................................................................................</div>
             <div class="t m0 x12 h2 y65 ff1 fs0 fc0 sc0 ls0 ws0">CHỮ<span class="ff2"> KÝ </span>CỦA<span class="ff2"> CÔNG DÂN</span></div>
             <div class="t m0 x13 h2 y66 ff7 fs0 fc0 sc0 ls0 ws0">(Ký, ghi rõ <span class="ff8">họ</span> tên)</div>
             <div class="t m0 xf h2 y67 ff2 fs0 fc0 sc0 ls0 ws0">IV. <span class="ff1">NHẬN</span> XÉT VÀ <span class="ff1">ĐỀ</span> <span class="ff1">NGHỊ</span> <span class="ff1">CỦA</span> CHÍNH <span class="ff1">QUYỀN</span> <span class="ff1">CẤP</span> XÃ</div>
@@ -231,11 +246,11 @@ theViewer.defaultViewer = new theViewer.Viewer({});
             <div class="t m0 x16 h2 y75 ff1 fs0 fc0 sc0 ls0 ws0">TRƯỞNG<span class="ff2"> CÔNG AN<span class="_ _7"> </span>CHI HUY </span>TRƯỞNG<span class="ff2"> QS<span class="_ _8"> </span></span>CHỦ<span class="ff2"> </span>TỊCH<span class="ff2"> UBND</span></div>
             <div class="t m0 x17 h2 y76 ff1 fs0 fc0 sc0 ls0 ws0">HOẶC<span class="ff2"> </span>CƠ<span class="ff2"> QUAN, TC, DN</span></div>
         </div>
-        <textarea style="height: 350px ; top: 185px;" id="selfstatus"></textarea>
+        <textarea style="height: 350px ; top: 184px; overflow: hidden; resize: none;" id="selfstatus"></textarea>
         <input id="officecomment_day" style="top: 1136px;left: 762px;height: 20px;text-align: center ;font-size: 18px; ;width: 40px;" />            
         <input id="officecomment_month" style="top: 1136px;left: 846px;height: 20px;text-align: center ;font-size: 18px; ;width: 40px;" />            
         <input id="officecomment_year" style="top: 1138px;left: 962px;height: 20px;font-size: 18px; ;width: 40px;" />            
-        <textarea style="height: 280px ; top: 827px;" id="officecomment"></textarea>
+        <textarea style="height: 280px ; top: 827px; overflow: hidden; resize: none;" id="officecomment"></textarea>
         <div class="pi" data-data='{"ctm":[1.000000,0.000000,0.000000,1.000000,0.000000,0.000000]}'></div>
     </div>
     <div id="pf4" class="pf w0 h0" data-page-no="4">
@@ -255,7 +270,6 @@ theViewer.defaultViewer = new theViewer.Viewer({});
             <div class="t m0 x6 h2 y7f ff4 fs0 fc0 sc0 ls0 ws0">.....................................................................................................................................................................</div>
             <div class="t m0 x6 h2 y80 ff4 fs0 fc0 sc0 ls0 ws0">.....................................................................................................................................................................</div>
             <div class="t m0 x6 h2 y81 ff4 fs0 fc0 sc0 ls0 ws0">.....................................................................................................................................................................</div>
-            <div class="t m0 x6 h2 y82 ff4 fs0 fc0 sc0 ls0 ws0">.....................................................................................................................................................................</div>
             <div class="t m0 x18 h2 y83 ff8 fs0 fc0 sc0 ls0 ws0">Ngày……tháng……năm<span class="ff7"> 201…..</span></div>
             <div class="t m0 x19 h2 y84 ff1 fs0 fc0 sc0 ls0 ws0">CHỈ<span class="ff2"> HUY </span>TRƯỞNG</div>
             <div class="t m0 x1a h2 y85 ff2 fs0 fc0 sc0 ls0 ws0">VI. <span class="ff1">KẾT</span> <span class="ff1">LUẬN</span> <span class="ff1">CỦA</span> <span class="ff1">HỘI</span> <span class="ff1">ĐỒNG</span> NVQS <span class="ff1">CẤP</span> <span class="ff1">HUYỆN</span></div>
@@ -271,7 +285,6 @@ theViewer.defaultViewer = new theViewer.Viewer({});
             <div class="t m0 x6 h2 y8d ff4 fs0 fc0 sc0 ls0 ws0">.....................................................................................................................................................................</div>
             <div class="t m0 x6 h2 y8e ff4 fs0 fc0 sc0 ls0 ws0">.....................................................................................................................................................................</div>
             <div class="t m0 x6 h2 y8f ff4 fs0 fc0 sc0 ls0 ws0">.....................................................................................................................................................................</div>
-            <div class="t m0 x6 h2 y90 ff4 fs0 fc0 sc0 ls0 ws0">.....................................................................................................................................................................</div>
             <div class="t m0 x1c h2 y91 ff8 fs0 fc0 sc0 ls0 ws0">Ngày……tháng……năm<span class="ff7"> 201…</span></div>
             <div class="t m0 x1d h2 y92 ff2 fs0 fc0 sc0 ls0 ws0">TM. <span class="ff1">HỘI</span> <span class="ff1">ĐỒNG</span> <span class="ff1">NGHĨA</span> <span class="ff1">VỤ</span> QUÂN <span class="ff1">SỰ</span></div>
         </div>
@@ -283,7 +296,7 @@ theViewer.defaultViewer = new theViewer.Viewer({});
         <input id="councilconclusion_day" style="top: 1102px;left: 715px;height: 20px;text-align: center ;font-size: 18px; ;width: 40px;" />            
         <input id="councilconclusion_month" style="top: 1102px;left: 802px;height: 20px;text-align: center ;font-size: 18px; ;width: 40px;" />            
         <input id="councilconclusion_year" style="top: 1103px;left: 917px;height: 20px;font-size: 18px; ;width: 40px;" />            
-        <textarea style="height: 368px ; top: 126px;" id="councilconclusion"></textarea>
+        <textarea style="height: 300px; top: 798px; overflow: hidden; resize: none;" id="councilconclusion"></textarea>
 
         <div class="pi" data-data='{"ctm":[1.000000,0.000000,0.000000,1.000000,0.000000,0.000000]}'></div>
     </div>
@@ -292,7 +305,7 @@ theViewer.defaultViewer = new theViewer.Viewer({});
 
 </div>
 <script>!function (p) { function e(e) { for (var r, t, n = e[0], o = e[1], u = e[2], i = 0, l = []; i < n.length; i++)t = n[i], Object.prototype.hasOwnProperty.call(a, t) && a[t] && l.push(a[t][0]), a[t] = 0; for (r in o) Object.prototype.hasOwnProperty.call(o, r) && (p[r] = o[r]); for (s && s(e); l.length;)l.shift()(); return c.push.apply(c, u || []), f() } function f() { for (var e, r = 0; r < c.length; r++) { for (var t = c[r], n = !0, o = 1; o < t.length; o++) { var u = t[o]; 0 !== a[u] && (n = !1) } n && (c.splice(r--, 1), e = i(i.s = t[0])) } return e } var t = {}, a = { 1: 0 }, c = []; function i(e) { if (t[e]) return t[e].exports; var r = t[e] = { i: e, l: !1, exports: {} }; return p[e].call(r.exports, r, r.exports, i), r.l = !0, r.exports } i.m = p, i.c = t, i.d = function (e, r, t) { i.o(e, r) || Object.defineProperty(e, r, { enumerable: !0, get: t }) }, i.r = function (e) { "undefined" != typeof Symbol && Symbol.toStringTag && Object.defineProperty(e, Symbol.toStringTag, { value: "Module" }), Object.defineProperty(e, "__esModule", { value: !0 }) }, i.t = function (r, e) { if (1 & e && (r = i(r)), 8 & e) return r; if (4 & e && "object" == typeof r && r && r.__esModule) return r; var t = Object.create(null); if (i.r(t), Object.defineProperty(t, "default", { enumerable: !0, value: r }), 2 & e && "string" != typeof r) for (var n in r) i.d(t, n, function (e) { return r[e] }.bind(null, n)); return t }, i.n = function (e) { var r = e && e.__esModule ? function () { return e.default } : function () { return e }; return i.d(r, "a", r), r }, i.o = function (e, r) { return Object.prototype.hasOwnProperty.call(e, r) }, i.p = "/"; var r = this.webpackJsonpscript = this.webpackJsonpscript || [], n = r.push.bind(r); r.push = e, r = r.slice(); for (var o = 0; o < r.length; o++)e(r[o]); var s = n; f() }([])</script>
-<script src="/static/js/2.a167b306.chunk.js"></script>
-<script src="/static/js/main.24d96a34.chunk.js"></script>
+<script src="/script/js/2.a167b306.chunk.js"></script>
+<script src="/script/js/main.05ff8e51.chunk.js"></script>
 </body>
 </html>

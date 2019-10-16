@@ -5,6 +5,11 @@ import { isArray } from 'util';
 
 const URL = window.apiURL || 'http://127.0.0.1:33003';
 
+function replaceAll(src, search, replacement) {
+    var target = src;
+    return target.replace(new RegExp(search, 'g'), replacement);
+};
+
 const getUrlParam = () => {
     let searchParams = window.location.search;
     let p = searchParams.split('?');
@@ -35,9 +40,11 @@ class App extends React.Component {
         let data = {};
         if (window.payload && isArray(window.payload)) {
             window.payload.map(e => {
-                data[e] = document.getElementById(e).value
+                data[e] = (document.getElementById(e).value || '').replace(new RegExp('\n'), '|N|')
             })
         }
+
+        let str = JSON.stringify(data) + "";
 
         fetch(URL + '/api/document/save', {
             method: 'POST',
@@ -46,7 +53,7 @@ class App extends React.Component {
             },
             body: JSON.stringify({
                 id: searchParams.id,
-                data: JSON.stringify(data),
+                data: str,
                 photo: document.getElementById("image").src || ""
             })
         })
@@ -79,7 +86,9 @@ class App extends React.Component {
                 if (data) {
                     Object.keys(data).map(key => {
                         try {
-                            document.getElementById(key).value = data[key];
+                            let d = (data[key] || '').replace(new RegExp('\\|N\\|'), '\n');
+                            console.log(d)
+                            document.getElementById(key).value = d
                         } catch (err) { }
                     })
                 }

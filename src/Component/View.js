@@ -110,7 +110,7 @@ export default function View(props) {
             <AppBar position="static" style={{ height: "25" }}>
                 <Toolbar>
                     <Typography className={classes.title} variant="h5" noWrap>
-                        Finder
+                        Phường 8
                     </Typography>
                     <div className={classes.search}>
                         <div className={classes.searchIcon}>

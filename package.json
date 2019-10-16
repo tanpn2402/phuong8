@@ -1,5 +1,5 @@
 {
-  "name": "testfinder",
+  "name": "phuong8",
   "version": "0.1.0",
   "main": "public/electron.js",
   "private": true,
@@ -38,8 +38,10 @@
     "react-build": "react-scripts build",
     "electron-run": "electron .",
     "electron-start": "concurrently \"cross-env BROWSER=none npm run react-start\" \"wait-on http://localhost:3000 && electron .\"",
-    "electron-build": "electron-builder --win",
-    "pack": "npm run react-build && npm run electron-build"
+    "electron-build-win": "electron-builder --win",
+    "electron-build-mac": "electron-builder --mac",
+    "pack-win": "npm run react-build && npm run electron-build-win",
+    "pack-mac": "npm run react-build && npm run electron-build-mac"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -51,11 +53,15 @@
   },
   "build": {
     "appId": "com.acb.xyz",
-    "productName": "MyApp",
+    "productName": "Phuong 8",
     "copyright": "Copyright © 2019",
+    "mac": {
+      "target": "dmg",
+      "icon": "build/icon.png"
+    },
     "win": {
       "target": "nsis",
-      "icon": "build/icon.ico"
+      "icon": "build/icon.png"
     }
   },
   "browserslist": {
