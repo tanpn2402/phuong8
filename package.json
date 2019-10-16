@@ -1,24 +1,62 @@
 {
   "name": "testfinder",
   "version": "0.1.0",
+  "main": "public/electron.js",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.5.0",
     "@material-ui/icons": "^4.4.3",
     "@material-ui/lab": "^4.0.0-alpha.28",
+    "babel-polyfill": "^6.26.0",
+    "body-parser": "^1.19.0",
+    "classnames": "^2.2.6",
+    "cors": "^2.8.5",
+    "electron-is-dev": "0.3.0",
+    "express": "^4.17.1",
+    "moment": "^2.24.0",
+    "mysql": "^2.17.1",
+    "pouchdb": "^7.1.1",
     "react": "^16.10.2",
     "react-context-menu": "^3.0.1",
     "react-dom": "^16.10.2",
-    "react-scripts": "3.2.0"
+    "react-scripts": "3.2.0",
+    "update-electron-app": "^1.2.0"
+  },
+  "devDependencies": {
+    "concurrently": "3.5.1",
+    "cross-env": "^5.2.0",
+    "electron": "2.0.2",
+    "electron-builder": "^20.15.1",
+    "prettier": "^1.4.4",
+    "react-scripts": "2.1.5",
+    "wait-on": "2.1.0"
   },
   "scripts": {
-    "start": "PORT=3001 react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "server-start-win": "node -e require('./public/server').start()",
+    "server-start-mac": "node -e 'require(\"./public/server\").start()'",
+    "react-start": "react-scripts start",
+    "react-build": "react-scripts build",
+    "electron-run": "electron .",
+    "electron-start": "concurrently \"cross-env BROWSER=none npm run react-start\" \"wait-on http://localhost:3000 && electron .\"",
+    "electron-build": "electron-builder --win",
+    "pack": "npm run react-build && npm run electron-build"
   },
   "eslintConfig": {
     "extends": "react-app"
+  },
+  "author": {
+    "name": "Your Name",
+    "email": "your.email@domain.com",
+    "url": "https://your-website.com"
+  },
+  "build": {
+    "appId": "com.acb.xyz",
+    "productName": "MyApp",
+    "copyright": "Copyright © 2019",
+    "win": {
+      "target": "nsis",
+      "icon": "build/icon.ico"
+    }
   },
   "browserslist": {
     "production": [
