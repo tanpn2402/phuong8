@@ -87,7 +87,6 @@ class App extends React.Component {
                     Object.keys(data).map(key => {
                         try {
                             let d = (data[key] || '').replace(new RegExp('\\|N\\|'), '\n');
-                            console.log(d)
                             document.getElementById(key).value = d
                         } catch (err) { }
                     })
@@ -133,7 +132,9 @@ class App extends React.Component {
     render() {
         return <div className='xxx__container' ref='container'>
             <input type='file' onChange={e => this.onfileChange(e)} id="file" className='custom-file-input' />
-            <div style={{ flex: 1 }}></div>
+            <div style={{ flex: 1 }}>
+
+            </div>
             <button className='xxx-button' onClick={() => this.onZoomIn()}>Phóng to</button>
             <button className='xxx-button' onClick={() => this.onZoomOut()}>Thu nhỏ</button>
             <button className='xxx-button' onClick={() => this.onSave()}>Lưu</button>

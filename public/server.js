@@ -118,6 +118,36 @@ server.post('/api/document/new', function (req, res) {
     );
 });
 
+server.post('/api/document/delete', function (req, res) {
+    const { id } = req.body;
+
+    connection.query(`DELETE FROM MS_DOCUMENT.MS_DOCS WHERE id=${id}`,
+        function (error, results, fields) {
+            let resp = {};
+
+            if (error) {
+                // error
+                resp.ok = 0;
+                resp.error = error;
+            }
+            else {
+                let { insertId, affectedRows } = results;
+                if (affectedRows > 0) {
+                    // success
+                    resp.ok = 1;
+                    resp.insertId = insertId;
+                }
+                else {
+                    resp.ok = 0;
+                    resp.error = 'bla';
+                }
+            }
+
+            res.send(resp);
+        }
+    );
+});
+
 server.post('/api/document/get', function (req, res) {
     const { id } = req.body;
 
@@ -149,6 +179,113 @@ server.post('/api/document/get', function (req, res) {
         }
 
         res.send(resp);
+    });
+});
+
+server.post('/api/document/getall', function (req, res) {
+
+
+    const getFileData = (list) => {
+        if (list.length === 0) {
+            res.send({
+                ok: 1,
+                data: []
+            })
+            return;
+        }
+
+        let arr = '';
+        list.forEach(e => {
+            arr += e.fileId + ', ';
+        })
+        arr = arr.substr(0, arr.length - 2);
+
+        connection.query(`SELECT id, data, source FROM MS_DOCS WHERE id in (${arr})`, function (error, results, fields) {
+            let resp = {};
+
+            if (error) {
+                // error
+                resp.ok = 0;
+                resp.error = error;
+            }
+            else {
+                if (results.length > 0) {
+                    // success
+                    resp.ok = 1;
+                    resp.data = results;
+                    resp.total = results.length;
+
+                    resp.data = resp.data.map(e => {
+                        let t = list.filter(el => el.fileId === e.id)[0]
+                        if (t) {
+                            e.fileName = t.name;
+                            e.created = t.created;
+                            e.path = t.path;
+                            e.actualPath = t.actualPath;
+                        }
+
+                        return e;
+                    })
+                }
+                else {
+                    resp.ok = 0;
+                    resp.error = 'bla bla';
+                }
+            }
+
+            res.send(resp);
+        });
+    }
+
+
+
+    connection.query(`SELECT * FROM MS_FOLDER WHERE id=1`, function (error, results, fields) {
+        let resp = {};
+        if (error) {
+            // error
+            resp.ok = 0;
+            resp.error = error;
+        }
+        else {
+            if (results.length > 0) {
+                // success
+                resp.ok = 1;
+                try {
+                    let data = JSON.parse(results[0].folder);
+                    let list = [];
+
+
+                    const getFile = (e, path) => {
+                        if (e.files && e.files.length > 0) {
+                            e.files.map(el => {
+                                getFile(el, path + '/' + el.name);
+                            })
+                        }
+                        else {
+                            if (e.type === 'file') {
+                                list.push({
+                                    ...e,
+                                    actualPath: path.replace('/' + e.name, '')
+                                });
+                            }
+                        }
+                    }
+
+                    data.map(e => {
+                        getFile(e, e.name);
+                    })
+
+                    getFileData(list);
+                }
+                catch (e) {
+                    resp.data = [];
+                }
+            }
+            else {
+                resp.ok = 0;
+                resp.error = 'invalid id';
+            }
+        }
     });
 });
 

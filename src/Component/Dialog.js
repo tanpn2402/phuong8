@@ -24,6 +24,10 @@ export default function DialogFunc(props) {
 
         if (actionSub === 'file') {
             if (actionType === 'add') {
+                if (checked.path === undefined) {
+                    alert("Vui lòng chọn loại file");
+                    return;
+                }
                 fetch(URL + '/api/document/new', {
                     method: 'POST',
                     headers: {
@@ -41,6 +45,29 @@ export default function DialogFunc(props) {
                             valueitem.fileId = e.insertId;
                             valueitem.filePath = checked.path;
                             props.submitItem(valueitem);
+                        }
+                        else {
+                            alert("Xuất hiện lỗi, vui lòng thử lại");
+                        }
+                    })
+            }
+            else if (actionType === 'delete') {
+                fetch(URL + '/api/document/delete', {
+                    method: 'POST',
+                    headers: {
+                        'Content-type': 'application/json; charset=utf-8'
+                    },
+                    body: JSON.stringify({
+                        id: props.fileSelected.fileId
+                    })
+                })
+                    .then(e => e.json())
+                    .then(e => {
+                        if (e.ok === 1) {
+                            props.submitItem(valueitem);
+                        }
+                        else {
+                            alert("Xuất hiện lỗi, vui lòng thử lại");
                         }
                     })
             }

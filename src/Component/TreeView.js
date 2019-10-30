@@ -2,13 +2,17 @@ import React from 'react';
 import TreeView from '@material-ui/lab/TreeView';
 import TreeItem from '@material-ui/lab/TreeItem';
 import FolderIcon from '@material-ui/icons/Folder';
-import { Grid, Paper, Popover, MenuList, IconButton } from '@material-ui/core';
+import { Grid, Paper, Popover, MenuList, IconButton, Button } from '@material-ui/core';
 import FolderOpenIcon from '@material-ui/icons/FolderOpen';
 import DescriptionIcon from '@material-ui/icons/Description';
 import MenuItem from '@material-ui/core/MenuItem';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import CreateNewFolderIcon from '@material-ui/icons/Add';
 import DialogFunc from './Dialog';
 import classNames from 'classnames';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+import ListDocument from './ListDocument';
 
 export default function TreeViewComp(props) {
     const classes = props.classstyle;
@@ -55,38 +59,71 @@ export default function TreeViewComp(props) {
     const submitItem = (valueitem, i = 1) => {
         setSubDialog(false)
         setAnchorEl(null)
-        const linkarr = pathItem.split("/")
+        const linkarr = (pathItem || '').split("/")
         var path = "/" + linkarr[i]
         var data2 = props.data
+        var subtarget = null;
 
         function subfunc(target) {
             if (actionType === "delete") {
                 if (linkarr.length <= 2) {
-                    data2 = data2.filter((exa) => { return exa.path !== target.path })
-                } else {
+                    data2 = data2.filter((exa) => {
+                        return exa.path !== target.path
+                    })
+                }
+                else {
                     if (i < linkarr.length - 2) {
                         i = i + 1
                         path = path + "/" + linkarr[i]
-                        target = target.files.find((exa) => { return exa.path === path })
+                        target = target.files.find((exa) => {
+                            return exa.path === path
+                        })
                         subfunc(target)
                     } else {
-                        target.files = target.files.filter((exa) => { return exa.path !== pathItem })
+                        target.files = target.files.filter((exa) => {
+                            return exa.path !== pathItem
+                        })
                     }
                 }
             } else {
                 if (linkarr.length < 2) {
-                    props.submit(data2.push(valueitem))
+                    data2.push(valueitem)
+                    props.submit(data2)
                 }
                 else {
                     if (i < linkarr.length - 1) {
                         i = i + 1
+                        subtarget = target
                         path = path + "/" + linkarr[i]
-                        target = target.files.find((exa) => { return exa.path === path })
+                        target = target.files.find((exa) => {
+                            return exa.path === path
+                        })
                         subfunc(target)
-                    } else {
+                    }
+                    else {
                         switch (actionType) {
-                            case "add": target.files.push(valueitem); break
-                            case "rename": target.name = valueitem.name; break
+                            case "add":
+                                if (target.files.filter((item) => { return item.name === valueitem.name }).length > 0) {
+                                    alert("Tên đã trùng, vui lòng chọn tên khác")
+                                }
+                                else {
+                                    target.files.push(valueitem)
+                                }
+                                break;
+                            case "rename":
+                                if (subtarget !== null) {
+                                    if (subtarget.files.filter((item) => { return item.name === valueitem.name }).length > 0) {
+                                        alert("Tên đã trùng, vui lòng chọn tên khác")
+                                    }
+                                    else { target.name = valueitem.name }
+                                }
+                                else {
+                                    if (data2.filter((item) => { return item.name === valueitem.name }).length > 0) {
+                                        alert("Tên đã trùng, vui lòng chọn tên khác")
+                                    }
+                                    else { target.name = valueitem.name }
+                                }
+                                ; break
                             default: console.log("choose nothing")
                         }
                     }
@@ -97,21 +134,47 @@ export default function TreeViewComp(props) {
         props.submit(data2)
     }
 
-    function openFile() {
-        props.onOpenFile(fileSelected);
+    function openFile(e) {
+        // need: fileId, filePath
+        props.onOpenFile(e || fileSelected);
         handleClose();
     }
 
+    const [tabSelected, setTabSelected] = React.useState(0);
+
+    const handleTabChange = (event, newValue) => {
+        setTabSelected(newValue);
+    };
+
     const open = Boolean(anchorEl);
     return (
-        <Grid item xs={3} onContextMenu={optionmenu} style={{ maxWidth: 400, minWidth: 300 }}>
-            <Paper className={classNames(classes.paper, classes.treeView)} >
-                <h2 style={{ display: "flex", justifyContent: "space-between", margin: 0 }}>
-                    Thư mục
-                    <IconButton size="small">
-                        <MoreVertIcon path={""} onClick={optionmenu} />
-                    </IconButton>
-                </h2>
+        <Grid item xs={3} style={{ maxWidth: 400, minWidth: 300 }}>
+            <Tabs
+                className={classes.tabMain}
+                value={tabSelected}
+                onChange={handleTabChange}
+                indicatorColor="primary"
+                textColor="primary"
+                centered
+            >
+                <Tab label="Thư mục" />
+                <Tab label="Danh sách" />
+            </Tabs>
+
+            {tabSelected === 1 && <Paper className={classNames(classes.paper, classes.treeView)} >
+                <ListDocument
+                    onOpenFile={e => openFile(e)}
+                />
+            </Paper>}
+
+            {tabSelected === 0 && <Paper className={classNames(classes.paper, classes.treeView)} >
+                <div style={{ margin: 0, display: 'flex', justifyContent: 'end' }}>
+                    <Button path={""} onClick={optionmenu}>
+                        <CreateNewFolderIcon />
+                        &nbsp;
+                        Tạo mới
+                    </Button>
+                </div>
 
                 <TreeView
                     className={classes.root}
@@ -193,17 +256,20 @@ export default function TreeViewComp(props) {
                     }
                 </Popover>
                 <DialogFunc
+                    fileSelected={fileSelected}
                     submitItem={submitItem}
                     pathItem={pathItem}
-                    setItemName={(e) => { setItemName(e.target.value) }}
                     itemName={itemName}
                     actionType={actionType}
                     actionSub={actionSub}
                     subDialog={subDialog}
                     template={props.template}
                     closeDialog={closeDialog}
+                    setItemName={(e) => {
+                        setItemName(e.target.value)
+                    }}
                 />
-            </Paper>
+            </Paper>}
         </Grid>
     )
 }

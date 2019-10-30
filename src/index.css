@@ -16,3 +16,7 @@ body {
 * {
   box-sizing: border-box;
 }
+
+.ReactTable .rt-tbody .rt-td {
+  text-align: left;
+}

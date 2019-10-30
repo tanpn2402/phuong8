@@ -90,6 +90,9 @@ const useStyles = makeStyles(theme => ({
     treeItemIcon: {
         position: 'absolute',
         right: 0
+    },
+    tabMain: {
+        backgroundColor: '#FFF'
     }
 }));
 
@@ -112,7 +115,7 @@ export default function View(props) {
                     <Typography className={classes.title} variant="h5" noWrap>
                         Phường 8
                     </Typography>
-                    <div className={classes.search}>
+                    {/* <div className={classes.search}>
                         <div className={classes.searchIcon}>
                             <SearchIcon />
                         </div>
@@ -124,7 +127,7 @@ export default function View(props) {
                             }}
                             inputProps={{ 'aria-label': 'search' }}
                         />
-                    </div>
+                    </div> */}
                 </Toolbar>
             </AppBar>
             <Grid container spacing={2} style={{ padding: 6, flex: 1, minHeight: 0 }}>

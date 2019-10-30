@@ -5,11 +5,14 @@ const server = require('./server');
 const path = require('path');
 const isDev = require('electron-is-dev');
 const { ipcMain, dialog } = require('electron');
-
+const IS_PROD = true;
 let mainWindow;
 
 function createWindow() {
-    server.start();
+    if (IS_PROD) {
+        server.start();
+    }
+
     mainWindow = new BrowserWindow({
         fullscreen: false,
         title: 'Phuong 8'
@@ -26,7 +29,9 @@ function createWindow() {
 app.on('ready', createWindow);
 
 app.on('window-all-closed', () => {
-    server.stop();
+    if (IS_PROD) {
+        server.stop();
+    }
     if (process.platform !== 'darwin') {
         app.quit();
     }
