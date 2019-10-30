@@ -148,7 +148,7 @@ export default function TreeViewComp(props) {
 
     const open = Boolean(anchorEl);
     return (
-        <Grid item xs={3} style={{ maxWidth: 400, minWidth: 300 }}>
+        <Grid item xs={3} style={{ maxWidth: 500, minWidth: 400, height: '100%', display: 'flex', flexDirection: 'column' }}>
             <Tabs
                 className={classes.tabMain}
                 value={tabSelected}
@@ -177,7 +177,7 @@ export default function TreeViewComp(props) {
                 </div>
 
                 <TreeView
-                    className={classes.root}
+                    className={classes.treeviewRoot}
                     defaultCollapseIcon={<FolderOpenIcon />}
                     defaultExpandIcon={<FolderIcon />}
                     defaultEndIcon={<DescriptionIcon />}

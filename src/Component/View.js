@@ -81,7 +81,16 @@ const useStyles = makeStyles(theme => ({
     },
     treeView: {
         padding: 10,
-        userSelect: 'none'
+        userSelect: 'none',
+        flex: 1,
+        minHeight: 0,
+        display: 'flex',
+        flexDirection: 'column',
+        overflow: 'auto',
+        '& .ReactTable': {
+            flex: 1,
+            overflow: 'auto'
+        }
     },
     treeItem: {
         textAlign: 'left',
@@ -93,6 +102,11 @@ const useStyles = makeStyles(theme => ({
     },
     tabMain: {
         backgroundColor: '#FFF'
+    },
+    treeviewRoot:  {
+        flex: 1,
+        minHeight: 0,
+        overflow: 'auto'
     }
 }));
 

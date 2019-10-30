@@ -20,3 +20,6 @@ body {
 .ReactTable .rt-tbody .rt-td {
   text-align: left;
 }
+.ReactTable .rt-tr-group {
+  flex: 0 !important;
+}
