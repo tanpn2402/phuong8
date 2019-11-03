@@ -11,6 +11,8 @@ export default function DialogFunc(props) {
     const pathItem = props.pathItem
     const [checked, setChecked] = React.useState(-1);
 
+    console.log(props.fileSelected)
+
     const submitF = () => {
         const date = new Date();
 
@@ -24,6 +26,8 @@ export default function DialogFunc(props) {
 
         if (actionSub === 'file') {
             if (actionType === 'add') {
+                console.log(valueitem);
+                // return;
                 if (checked.path === undefined) {
                     alert("Vui lòng chọn loại file");
                     return;
@@ -44,7 +48,7 @@ export default function DialogFunc(props) {
                         if (e.ok === 1) {
                             valueitem.fileId = e.insertId;
                             valueitem.filePath = checked.path;
-                            props.submitItem(valueitem);
+                            props.submitItem(valueitem, actionType);
                         }
                         else {
                             alert("Xuất hiện lỗi, vui lòng thử lại");
@@ -64,19 +68,60 @@ export default function DialogFunc(props) {
                     .then(e => e.json())
                     .then(e => {
                         if (e.ok === 1) {
-                            props.submitItem(valueitem);
+                            props.submitItem(valueitem, actionType);
                         }
                         else {
                             alert("Xuất hiện lỗi, vui lòng thử lại");
                         }
                     })
             }
+            else if (actionType === 'move') {
+                // console.log(valueitem)
+                // console.log(checked);
+
+                let p = {
+                    from: valueitem,
+                    to: {
+                        ...valueitem,
+                        path: checked.path + "/" + itemName.replace(" ", ""),
+                    }
+                }
+
+                fetch(URL + '/api/document/new', {
+                    method: 'POST',
+                    headers: {
+                        'Content-type': 'application/json; charset=utf-8'
+                    },
+                    body: JSON.stringify({
+                        name: itemName,
+                        folder: checked.path,
+                        source: props.fileSelected.filePath
+                    })
+                })
+                    .then(e => e.json())
+                    .then(e => {
+                        if (e.ok === 1) {
+                            p.to.fileId = e.insertId;
+                            p.to.filePath = props.fileSelected.filePath;
+                            console.log(p);
+                            props.moveFile(p);
+                        }
+                        else {
+                            alert("Xuất hiện lỗi, vui lòng thử lại");
+                        }
+                    })
+                // 
+                // props.moveFile(p);
+            }
+            else if (actionType === 'copy') {
+                props.submitItem(valueitem, actionType);
+            }
             else {
-                props.submitItem(valueitem);
+                props.submitItem(valueitem, actionType);
             }
         }
         else {
-            props.submitItem(valueitem);
+            props.submitItem(valueitem, actionType);
         }
     }
 
@@ -84,6 +129,8 @@ export default function DialogFunc(props) {
         setChecked(value);
     };
 
+
+    const listFolder = getFolder(props.listFolder);
 
     if (actionType === "delete") {
         return (
@@ -146,8 +193,18 @@ export default function DialogFunc(props) {
             <Dialog open={subDialog} onClose={props.closeDialog}>
                 <DialogTitle>File</DialogTitle>
                 <DialogContent>
-                    {(actionType === "add")
-                        ? <TextField
+                    {actionType === "rename" && <TextField
+                        autoFocus
+                        margin="dense"
+                        id={"rename" + actionSub}
+                        label={"Tên file"}
+                        type="text"
+                        fullWidth
+                        value={itemName}
+                        onChange={props.setItemName}
+                    />}
+                    {actionType === 'add' && <>
+                        <TextField
                             autoFocus
                             margin="dense"
                             id={"new" + actionSub}
@@ -157,18 +214,6 @@ export default function DialogFunc(props) {
                             value={itemName}
                             onChange={props.setItemName}
                         />
-                        : <TextField
-                            autoFocus
-                            margin="dense"
-                            id={"rename" + actionSub}
-                            label={"Tên file"}
-                            type="text"
-                            fullWidth
-                            value={itemName}
-                            onChange={props.setItemName}
-                        />
-                    }
-                    {actionType === 'add' && <>
                         <div style={{ marginTop: 20 }}></div>
                         <Typography>Chọn loại file</Typography>
                         <List>
@@ -191,6 +236,55 @@ export default function DialogFunc(props) {
                             })}
                         </List>
                     </>}
+
+                    {actionType === 'move' && <>
+                        <div style={{ marginTop: 20 }}></div>
+                        <Typography>Chuyển đến thư mục: </Typography>
+                        <List>
+                            {(listFolder || []).map(value => {
+                                const labelId = `checkbox-list-label-${value.actualPath}`;
+                                return (
+                                    <ListItem key={value} role={undefined} dense button onClick={handleCheck(value)}>
+                                        <ListItemIcon style={{ minWidth: 0 }}>
+                                            <Checkbox
+                                                edge="start"
+                                                checked={checked.actualPath === value.actualPath}
+                                                tabIndex={-1}
+                                                disableRipple
+                                                inputProps={{ 'aria-labelledby': labelId }}
+                                            />
+                                        </ListItemIcon>
+                                        <ListItemText id={labelId} primary={value.actualPath} />
+                                    </ListItem>
+                                );
+                            })}
+                        </List>
+                    </>}
+
+                    {actionType === 'copy' && <>
+                        <div style={{ marginTop: 20 }}></div>
+                        <Typography>Chuyển đến thư mục: </Typography>
+                        <List>
+                            {(listFolder || []).map(value => {
+                                const labelId = `checkbox-list-label-${value}`;
+                                return (
+                                    <ListItem key={value} role={undefined} dense button onClick={handleCheck(value)}>
+                                        <ListItemIcon style={{ minWidth: 0 }}>
+                                            <Checkbox
+                                                edge="start"
+                                                checked={checked.actualPath === value.actualPath}
+                                                tabIndex={-1}
+                                                disableRipple
+                                                inputProps={{ 'aria-labelledby': labelId }}
+                                            />
+                                        </ListItemIcon>
+                                        <ListItemText id={labelId} primary={value.actualPath} />
+                                    </ListItem>
+                                );
+                            })}
+                        </List>
+                    </>}
+
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={props.closeDialog} color="secondary">
@@ -206,3 +300,52 @@ export default function DialogFunc(props) {
         return <div></div>
     }
 }
+
+
+const getFolder = (data) => {
+    let list = [];
+
+    const getListFolder = (e, path) => {
+        if (e.files && e.files.length > 0) {
+            // e.files.map(el => {
+            //     getListFolder(el, path + '/' + el.name);
+            // })
+            if (e.files.filter(el => el.type === 'folder').length > 0) {
+
+                e.files.filter(el => el.type === 'folder').map(el => {
+                    getListFolder(el, path + '/' + el.name);
+                })
+            }
+            else {
+                list.push({
+                    ...e,
+                    actualPath: path
+                });
+            }
+        }
+        else {
+            list.push({
+                ...e,
+                actualPath: path
+            });
+        }
+    }
+
+    data.map(e => {
+        getListFolder(e, e.name);
+    })
+
+    let rlt = [];
+    list.forEach(e => {
+        if (rlt.indexOf(e.actualPath) > -1) {
+
+        }
+        else {
+            rlt.push(e);
+        }
+    })
+
+    // console.log(rlt);
+    return rlt;
+}
+

@@ -2,7 +2,7 @@ import React from 'react';
 import TreeView from '@material-ui/lab/TreeView';
 import TreeItem from '@material-ui/lab/TreeItem';
 import FolderIcon from '@material-ui/icons/Folder';
-import { Grid, Paper, Popover, MenuList, IconButton, Button } from '@material-ui/core';
+import { Grid, Paper, Popover, MenuList, IconButton, Button, Divider } from '@material-ui/core';
 import FolderOpenIcon from '@material-ui/icons/FolderOpen';
 import DescriptionIcon from '@material-ui/icons/Description';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -56,7 +56,7 @@ export default function TreeViewComp(props) {
         setFileSelected({})
     }
 
-    const submitItem = (valueitem, i = 1) => {
+    const submitItem = (valueitem, i = 1, actionType) => {
         setSubDialog(false)
         setAnchorEl(null)
         const linkarr = (pathItem || '').split("/")
@@ -64,7 +64,12 @@ export default function TreeViewComp(props) {
         var data2 = props.data
         var subtarget = null;
 
+        console.log(actionType);
+
         function subfunc(target) {
+
+            console.log(valueitem);
+
             if (actionType === "delete") {
                 if (linkarr.length <= 2) {
                     data2 = data2.filter((exa) => {
@@ -130,8 +135,22 @@ export default function TreeViewComp(props) {
                 }
             }
         }
-        subfunc(data2.find((dataeach) => { return dataeach.path === path }))
+        subfunc(data2.find((dataeach) => { 
+            return dataeach.path === path 
+        }))
         props.submit(data2)
+    }
+
+    function moveFile(e) {
+        const {from, to} = e;
+
+        console.log(from, to);
+
+        // create new
+        submitItem(to, 1, 'add');
+
+        // delete
+        // submitItem(from, 1, 'delete');
     }
 
     function openFile(e) {
@@ -248,6 +267,9 @@ export default function TreeViewComp(props) {
                                 <MenuItem onClick={() => openFile()} name="file" id="open">Mở file</MenuItem>
                                 <MenuItem onClick={openDialog} name="file" id="rename">Đổi tên</MenuItem>
                                 <MenuItem onClick={openDialog} name="file" id="delete">Xóa</MenuItem>
+                                <Divider/>
+                                <MenuItem onClick={openDialog} name="file" id="move">Chuyển đến thư mục...</MenuItem>
+                                {/* <MenuItem onClick={openDialog} name="file" id="copy">Sao chép đến thư mục...</MenuItem> */}
                             </MenuList>
                         : <MenuList>
                             <MenuItem onClick={openDialog} name="folder" id="add" >Tạo thư mục</MenuItem>
@@ -256,8 +278,9 @@ export default function TreeViewComp(props) {
                     }
                 </Popover>
                 <DialogFunc
+                    listFolder={props.data}
                     fileSelected={fileSelected}
-                    submitItem={submitItem}
+                    submitItem={(v, e) => submitItem(v, 1, e)}
                     pathItem={pathItem}
                     itemName={itemName}
                     actionType={actionType}
@@ -268,6 +291,7 @@ export default function TreeViewComp(props) {
                     setItemName={(e) => {
                         setItemName(e.target.value)
                     }}
+                    moveFile={e => moveFile(e)}
                 />
             </Paper>}
         </Grid>
