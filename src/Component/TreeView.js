@@ -59,17 +59,13 @@ export default function TreeViewComp(props) {
     const submitItem = (valueitem, i = 1, actionType) => {
         setSubDialog(false)
         setAnchorEl(null)
-        const linkarr = (pathItem || '').split("/")
+        const linkarr = (actionType === "remove") ? valueitem.path.split("/") : (pathItem || '').split("/")
         var path = "/" + linkarr[i]
         var data2 = props.data
         var subtarget = null;
 
-        console.log(actionType);
-
         function subfunc(target) {
-
-            console.log(valueitem);
-
+            console.log(target)
             if (actionType === "delete") {
                 if (linkarr.length <= 2) {
                     data2 = data2.filter((exa) => {
@@ -115,6 +111,14 @@ export default function TreeViewComp(props) {
                                     target.files.push(valueitem)
                                 }
                                 break;
+                            case "remove":
+                                    if (subtarget.files.filter((item) => { return item.name === valueitem.name }).length > 0) {
+                                        subtarget.files.push({...valueitem,filePath: valueitem.filePath, fileId: valueitem.fileId ,name: valueitem.name+" "+subtarget.files.filter((item) => { return item.name === valueitem.name }).length, path: subtarget.path + "/" + valueitem.name+" "+subtarget.files.filter((item) => { return item.name === valueitem.name }).length})
+                                    }
+                                    else {
+                                        subtarget.files.push(valueitem)
+                                    }
+                                break;
                             case "rename":
                                 if (subtarget !== null) {
                                     if (subtarget.files.filter((item) => { return item.name === valueitem.name }).length > 0) {
@@ -144,13 +148,13 @@ export default function TreeViewComp(props) {
     function moveFile(e) {
         const {from, to} = e;
 
-        console.log(from, to);
+        console.log(e.to);
 
         // create new
-        submitItem(to, 1, 'add');
-
+        submitItem(to,1,'remove');
+        
         // delete
-        // submitItem(from, 1, 'delete');
+        submitItem(from, 1, 'delete');
     }
 
     function openFile(e) {

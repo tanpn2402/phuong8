@@ -56,15 +56,17 @@ export default function DialogFunc(props) {
                     })
             }
             else if (actionType === 'delete') {
-                fetch(URL + '/api/document/delete', {
-                    method: 'POST',
-                    headers: {
-                        'Content-type': 'application/json; charset=utf-8'
-                    },
-                    body: JSON.stringify({
-                        id: props.fileSelected.fileId
+                if(props.fileSelected.fileId) {
+
+                    fetch(URL + '/api/document/delete', {
+                        method: 'POST',
+                        headers: {
+                            'Content-type': 'application/json; charset=utf-8'
+                        },
+                        body: JSON.stringify({
+                            id: props.fileSelected.fileId
+                        })
                     })
-                })
                     .then(e => e.json())
                     .then(e => {
                         if (e.ok === 1) {
@@ -74,6 +76,10 @@ export default function DialogFunc(props) {
                             alert("Xuất hiện lỗi, vui lòng thử lại");
                         }
                     })
+                } 
+                else {
+                    props.submitItem(valueitem, actionType);
+                }
             }
             else if (actionType === 'move') {
                 // console.log(valueitem)
@@ -84,33 +90,37 @@ export default function DialogFunc(props) {
                     to: {
                         ...valueitem,
                         path: checked.path + "/" + itemName.replace(" ", ""),
+                        fileId: props.fileSelected.fileId,
+                        filePath: props.fileSelected.filePath
                     }
                 }
+                console.log(p)
+                props.moveFile(p);
 
-                fetch(URL + '/api/document/new', {
-                    method: 'POST',
-                    headers: {
-                        'Content-type': 'application/json; charset=utf-8'
-                    },
-                    body: JSON.stringify({
-                        name: itemName,
-                        folder: checked.path,
-                        source: props.fileSelected.filePath
-                    })
-                })
-                    .then(e => e.json())
-                    .then(e => {
-                        if (e.ok === 1) {
-                            p.to.fileId = e.insertId;
-                            p.to.filePath = props.fileSelected.filePath;
-                            console.log(p);
-                            props.moveFile(p);
-                        }
-                        else {
-                            alert("Xuất hiện lỗi, vui lòng thử lại");
-                        }
-                    })
-                // 
+                // fetch(URL + '/api/document/new', {
+                //     method: 'POST',
+                //     headers: {
+                //         'Content-type': 'application/json; charset=utf-8'
+                //     },
+                //     body: JSON.stringify({
+                //         name: itemName,
+                //         folder: checked.path,
+                //         source: props.fileSelected.filePath
+                //     })
+                // })
+                //     .then(e => e.json())
+                //     .then(e => {
+                //         if (e.ok === 1) {
+                //             p.to.fileId = e.insertId;
+                //             p.to.filePath = props.fileSelected.filePath;
+                //             console.log(p);
+                //             props.moveFile(p);
+                //         }
+                //         else {
+                //             alert("Xuất hiện lỗi, vui lòng thử lại");
+                //         }
+                //     })
+                
                 // props.moveFile(p);
             }
             else if (actionType === 'copy') {
@@ -241,10 +251,10 @@ export default function DialogFunc(props) {
                         <div style={{ marginTop: 20 }}></div>
                         <Typography>Chuyển đến thư mục: </Typography>
                         <List>
-                            {(listFolder || []).map(value => {
+                            {(listFolder || []).map((value, index) => {
                                 const labelId = `checkbox-list-label-${value.actualPath}`;
                                 return (
-                                    <ListItem key={value} role={undefined} dense button onClick={handleCheck(value)}>
+                                    <ListItem key={index} role={undefined} dense button onClick={(props.pathItem.includes(value.path)) ? ()=>alert("Bạn đang chọn thư mục hiện tại ! Vui lòng chọn thư mục khác !") : handleCheck(value)}>
                                         <ListItemIcon style={{ minWidth: 0 }}>
                                             <Checkbox
                                                 edge="start"
