@@ -3,10 +3,11 @@ import { withStyles } from '@material-ui/styles';
 import ReactTable from "react-table";
 import "react-table/react-table.css";
 import matchSorter from 'match-sorter'
-import { Grid, IconButton, Tooltip, Menu, MenuItem, Button } from '@material-ui/core';
+import { Grid, IconButton, Tooltip, Menu, MenuItem, Button, Select } from '@material-ui/core';
 import IconFolder from '@material-ui/icons/Folder';
 import IconAdd from '@material-ui/icons/Add';
 import IconRemove from '@material-ui/icons/Remove';
+import IconAttachment from '@material-ui/icons/Attachment';
 
 const URL = window.apiURL || 'http://127.0.0.1:33003';
 
@@ -63,6 +64,9 @@ class ListDocument extends React.Component {
         let { data, filters } = this.state;
 
         filters = filters.map(e => {
+            if (e.filterId === 'fileType') {
+                return e
+            }
             return {
                 ...e,
                 value: document.getElementById(e.id).value || ''
@@ -75,6 +79,7 @@ class ListDocument extends React.Component {
             try {
                 fileData = JSON.parse(e.data);
                 filters.forEach(condition => {
+
                     if (rlt === false) {
                         return;
                     }
@@ -123,6 +128,14 @@ class ListDocument extends React.Component {
                             }
                         }
                     }
+                    else if (condition.filterId === 'fileType') {
+                        if (e.source === condition.value.path) {
+                            rlt = true;
+                        }
+                        else {
+                            rlt = false;
+                        }
+                    }
                 })
 
 
@@ -139,9 +152,23 @@ class ListDocument extends React.Component {
         })
     }
 
+
+    handleFilterByFileType = (f, event) => {
+        // console.log(e);
+        let { filters } = this.state;
+        let t = filters.filter(e => e.id === f.id)[0];
+
+        if (t) {
+            t.value = event.target.value;
+            this.setState({
+                filters
+            })
+        }
+    }
+
     render() {
         const { filteredData, anchorEl, filters } = this.state;
-        const { classes } = this.props;
+        const { classes, fileTemplate } = this.props;
 
         return <>
             <div>
@@ -163,11 +190,35 @@ class ListDocument extends React.Component {
                             <MenuItem onClick={e => this.handleCloseMenuFilter(e, 'birthyear', 'Năm sinh')}>Năm sinh</MenuItem>
                             <MenuItem onClick={e => this.handleCloseMenuFilter(e, 'address', 'Địa chỉ')}>Địa chỉ thường trú của gia đình</MenuItem>
                             <MenuItem onClick={e => this.handleCloseMenuFilter(e, 'sex', 'Giới tính')}>Giới tính</MenuItem>
+                            <MenuItem onClick={e => this.handleCloseMenuFilter(e, 'fileType', 'Loại văn bản')}>Loại văn bản</MenuItem>
                         </Menu>
                     </Grid>
                 </Grid>
 
                 {filters.map(e => {
+                    if (e.filterId === 'fileType') {
+                        return <Grid container alignItems='center' style={{ marginBottom: 10 }}>
+                            <Grid item style={{ paddingLeft: 10 }}>
+                                <Tooltip title='Xoá điều kiện lọc'>
+                                    <IconButton size='small' onClick={() => this.handleRemoveFilter(e)}>
+                                        <IconRemove fontSize='small' />
+                                    </IconButton>
+                                </Tooltip>
+                            </Grid>
+                            <Grid item style={{ minWidth: 100, textAlign: 'left', paddingLeft: 10 }}>{e.filterName}</Grid>
+                            <Grid item xs>
+                                <Select
+                                    labelId="demo-simple-select-label"
+                                    id="demo-simple-select"
+                                    value={e.value}
+                                    onChange={evt => this.handleFilterByFileType(e, evt)}
+                                >
+                                    {fileTemplate.map(type => <MenuItem value={type}>{type.name}</MenuItem>)}
+                                </Select>
+                            </Grid>
+                        </Grid>
+                    }
+
                     return <Grid container alignItems='center' style={{ marginBottom: 10 }}>
                         <Grid item style={{ paddingLeft: 10 }}>
                             <Tooltip title='Xoá điều kiện lọc'>
@@ -211,16 +262,27 @@ class ListDocument extends React.Component {
                             return false;
                         },
                         Cell: p => {
+                            let fileType = fileTemplate.filter(e => e.path === p.original.source)[0];
+
                             return <div>
                                 <div className={classes.fileName} onClick={() => this.onOpenFile(p.original)}>
-                                    {p.original.fileName}
+                                    <strong>{p.original.fileName}</strong>
                                 </div>
                                 <Grid container wrap='nowrap'>
                                     <Grid item>
                                         <IconFolder className={classes.folderIcon} />
                                     </Grid>
                                     &nbsp;
-                                <Grid item><small>{p.original.actualPath}</small></Grid>
+                                    <Grid item><small>{p.original.actualPath}</small></Grid>
+                                </Grid>
+                                <Grid container wrap='nowrap'>
+                                    <Grid item>
+                                        <IconAttachment className={classes.folderIcon} />
+                                    </Grid>
+                                    &nbsp;
+                                    <Grid item>
+                                        {fileType ? <small>{fileType.name}</small> : <small>Không xác định</small>}
+                                    </Grid>
                                 </Grid>
                             </div>
                         }
@@ -344,7 +406,9 @@ class ListDocument extends React.Component {
 
 const styles = theme => ({
     folderIcon: {
-        fontSize: '1em'
+        fontSize: '1em',
+        position: 'relative',
+        top: 4
     },
     fileName: {
         '&:hover': {

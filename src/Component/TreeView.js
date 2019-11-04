@@ -65,7 +65,6 @@ export default function TreeViewComp(props) {
         var subtarget = null;
 
         function subfunc(target) {
-            console.log(target)
             if (actionType === "delete") {
                 if (linkarr.length <= 2) {
                     data2 = data2.filter((exa) => {
@@ -112,12 +111,12 @@ export default function TreeViewComp(props) {
                                 }
                                 break;
                             case "remove":
-                                    if (subtarget.files.filter((item) => { return item.name === valueitem.name }).length > 0) {
-                                        subtarget.files.push({...valueitem,filePath: valueitem.filePath, fileId: valueitem.fileId ,name: valueitem.name+" "+subtarget.files.filter((item) => { return item.name === valueitem.name }).length, path: subtarget.path + "/" + valueitem.name+" "+subtarget.files.filter((item) => { return item.name === valueitem.name }).length})
-                                    }
-                                    else {
-                                        subtarget.files.push(valueitem)
-                                    }
+                                if (subtarget.files.filter((item) => { return item.name === valueitem.name }).length > 0) {
+                                    subtarget.files.push({ ...valueitem, filePath: valueitem.filePath, fileId: valueitem.fileId, name: valueitem.name + " " + subtarget.files.filter((item) => { return item.name === valueitem.name }).length, path: subtarget.path + "/" + valueitem.name + " " + subtarget.files.filter((item) => { return item.name === valueitem.name }).length })
+                                }
+                                else {
+                                    subtarget.files.push(valueitem)
+                                }
                                 break;
                             case "rename":
                                 if (subtarget !== null) {
@@ -139,20 +138,18 @@ export default function TreeViewComp(props) {
                 }
             }
         }
-        subfunc(data2.find((dataeach) => { 
-            return dataeach.path === path 
+        subfunc(data2.find((dataeach) => {
+            return dataeach.path === path
         }))
         props.submit(data2)
     }
 
     function moveFile(e) {
-        const {from, to} = e;
-
-        console.log(e.to);
+        const { from, to } = e;
 
         // create new
-        submitItem(to,1,'remove');
-        
+        submitItem(to, 1, 'remove');
+
         // delete
         submitItem(from, 1, 'delete');
     }
@@ -187,6 +184,7 @@ export default function TreeViewComp(props) {
             {tabSelected === 1 && <Paper className={classNames(classes.paper, classes.treeView)} >
                 <ListDocument
                     onOpenFile={e => openFile(e)}
+                    fileTemplate={props.template}
                 />
             </Paper>}
 
@@ -271,7 +269,7 @@ export default function TreeViewComp(props) {
                                 <MenuItem onClick={() => openFile()} name="file" id="open">Mở file</MenuItem>
                                 <MenuItem onClick={openDialog} name="file" id="rename">Đổi tên</MenuItem>
                                 <MenuItem onClick={openDialog} name="file" id="delete">Xóa</MenuItem>
-                                <Divider/>
+                                <Divider />
                                 <MenuItem onClick={openDialog} name="file" id="move">Chuyển đến thư mục...</MenuItem>
                                 {/* <MenuItem onClick={openDialog} name="file" id="copy">Sao chép đến thư mục...</MenuItem> */}
                             </MenuList>

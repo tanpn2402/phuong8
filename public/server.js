@@ -184,7 +184,6 @@ server.post('/api/document/get', function (req, res) {
 
 server.post('/api/document/getall', function (req, res) {
 
-
     const getFileData = (list) => {
         if (list.length === 0) {
             res.send({
@@ -196,7 +195,9 @@ server.post('/api/document/getall', function (req, res) {
 
         let arr = '';
         list.forEach(e => {
-            arr += e.fileId + ', ';
+            if (e.fileId && e.fileId !== '') {
+                arr += e.fileId + ', ';
+            }
         })
         arr = arr.substr(0, arr.length - 2);
 
@@ -212,20 +213,22 @@ server.post('/api/document/getall', function (req, res) {
                 if (results.length > 0) {
                     // success
                     resp.ok = 1;
-                    resp.data = results;
-                    resp.total = results.length;
+                    resp.data = [];
 
-                    resp.data = resp.data.map(e => {
-                        let t = list.filter(el => el.fileId === e.id)[0]
+                    results.forEach(e => {
+                        let t = list.filter(el => el.fileId == e.id)[0];
+
                         if (t) {
                             e.fileName = t.name;
                             e.created = t.created;
                             e.path = t.path;
                             e.actualPath = t.actualPath;
-                        }
 
-                        return e;
+                            resp.data.push(e);
+                        }
                     })
+
+                    resp.total = resp.data;
                 }
                 else {
                     resp.ok = 0;
@@ -256,17 +259,17 @@ server.post('/api/document/getall', function (req, res) {
 
 
                     const getFile = (e, path) => {
-                        if (e.files && e.files.length > 0) {
-                            e.files.map(el => {
-                                getFile(el, path + '/' + el.name);
-                            })
+                        if (e.type === 'file') {
+                            list.push({
+                                ...e,
+                                actualPath: path.replace('/' + e.name, '')
+                            });
                         }
                         else {
-                            if (e.type === 'file') {
-                                list.push({
-                                    ...e,
-                                    actualPath: path.replace('/' + e.name, '')
-                                });
+                            if (e.files && e.files.length > 0) {
+                                e.files.map(el => {
+                                    getFile(el, path + '/' + el.name);
+                                })
                             }
                         }
                     }
