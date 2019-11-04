@@ -86,21 +86,37 @@ class ListDocument extends React.Component {
 
                     rlt = false;
                     if (condition.filterId === 'name') {
-                        if (xoa_dau((fileData.birthname || '')).toLowerCase().indexOf(xoa_dau(condition.value).toLowerCase()) > -1) {
+                        // hotenkhaisinh
+                        // birthname
+                        // fullname
+                        if (xoa_dau((fileData.birthname || '')).toLowerCase().indexOf(xoa_dau(condition.value).toLowerCase()) > -1 ||
+                            xoa_dau((fileData.hotenkhaisinh || '')).toLowerCase().indexOf(xoa_dau(condition.value).toLowerCase()) > -1 ||
+                            xoa_dau((fileData.fullname || '')).toLowerCase().indexOf(xoa_dau(condition.value).toLowerCase()) > -1) {
                             rlt = true;
                         }
                     }
                     else if (condition.filterId === 'sex') {
+                        // gender
                         if (xoa_dau((fileData.gender || '')).toLowerCase().indexOf(xoa_dau(condition.value).toLowerCase()) > -1) {
                             rlt = true;
                         }
                     }
                     else if (condition.filterId === 'address') {
-                        if (xoa_dau((fileData.permanentaddress || '')).toLowerCase().indexOf(xoa_dau(condition.value).toLowerCase()) > -1) {
+                        // permanentaddress
+                        // hokhauthuongtru_1
+                        // hokhauthuongtru_2
+                        // noicutruhienngay_1
+                        // noicutruhienngay_2
+                        if (xoa_dau((fileData.permanentaddress || '')).toLowerCase().indexOf(xoa_dau(condition.value).toLowerCase()) > -1 ||
+                            xoa_dau((fileData.hokhauthuongtru_1 || '')).toLowerCase().indexOf(xoa_dau(condition.value).toLowerCase()) > -1 ||
+                            xoa_dau((fileData.hokhauthuongtru_2 || '')).toLowerCase().indexOf(xoa_dau(condition.value).toLowerCase()) > -1 ||
+                            xoa_dau((fileData.noicutruhienngay_1 || '')).toLowerCase().indexOf(xoa_dau(condition.value).toLowerCase()) > -1 ||
+                            xoa_dau((fileData.noicutruhienngay_2 || '')).toLowerCase().indexOf(xoa_dau(condition.value).toLowerCase()) > -1) {
                             rlt = true;
                         }
                     }
                     else if (condition.filterId === 'birthyear') {
+                        // birthyear
                         let birthyear = parseInt(fileData.birthyear);
                         let searchValue = xoa_dau(condition.value).toLowerCase();
 

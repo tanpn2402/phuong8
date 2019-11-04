@@ -7,7 +7,7 @@
 @font-face{font-family:ff6;src:url(f6.woff)format("woff");}.ff6{font-family:ff6;line-height:1.106934;font-style:normal;font-weight:normal;visibility:visible;}
 
 
-input{
+input:not(.custom-file-input){
     font-family: ff3;
     line-height: 1.106934;
     font-style: normal;

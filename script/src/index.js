@@ -54,7 +54,7 @@ class App extends React.Component {
             body: JSON.stringify({
                 id: searchParams.id,
                 data: str,
-                photo: document.getElementById("image").src || ""
+                photo: (document.getElementById("image") || {}.src) || ""
             })
         })
             .then(e => e.json())
@@ -129,9 +129,14 @@ class App extends React.Component {
         })
     }
 
+    onRemoveImage() {
+        document.getElementById("image").src = null;
+    }
+
     render() {
         return <div className='xxx__container' ref='container'>
             <input type='file' onChange={e => this.onfileChange(e)} id="file" className='custom-file-input' />
+            <button className='xxx-button' onClick={() => this.onRemoveImage()}>Xóa ảnh</button>
             <div style={{ flex: 1 }}>
 
             </div>
