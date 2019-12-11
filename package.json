@@ -1,6 +1,6 @@
 {
   "name": "phuong8",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "main": "public/electron.js",
   "homepage": "./",
   "private": true,

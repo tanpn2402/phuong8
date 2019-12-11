@@ -11,8 +11,8 @@ const path = require('path');
 var mysql = require('mysql');
 
 var connection = mysql.createConnection({
-    host: "104.197.193.208",
-    user: "root",
+    host: "104.197.129.110",
+    user: "admin",
     password: "Concacne1!",
     database: 'MS_DOCUMENT'
 });
@@ -367,6 +367,97 @@ server.post('/api/template/get', function (req, res) {
 
         res.send(resp);
     });
+});
+
+
+// identity
+server.post('/api/identity/get', function (req, res) {
+    const { fileid } = req.body;
+
+    connection.query(`SELECT * FROM MS_IDENTITY WHERE fileid=${fileid}`, function (error, results, fields) {
+        let resp = {};
+        resp.fileid = fileid;
+
+        if (error) {
+            // error
+            resp.ok = 0;
+            resp.error = error;
+        }
+        else {
+            if (results.length > 0) {
+                // success
+                resp.ok = 1;
+                resp.data = results;
+            }
+            else {
+                resp.ok = 0;
+                resp.data = [];
+                resp.error = 'invalid file id';
+            }
+        }
+
+        res.send(resp);
+    });
+});
+
+server.post('/api/identity/insert', function (req, res) {
+    const { fileid, value } = req.body;
+
+    connection.query(`INSERT INTO MS_IDENTITY (fileid, value) VALUES('${fileid}', '${value}')`,
+        function (error, results, fields) {
+            let resp = {};
+
+            if (error) {
+                // error
+                resp.ok = 0;
+                resp.error = error;
+            }
+            else {
+                let { insertId, affectedRows } = results;
+                if (affectedRows > 0) {
+                    // success
+                    resp.ok = 1;
+                    resp.insertId = insertId;
+                }
+                else {
+                    resp.ok = 0;
+                    resp.error = 'bla';
+                }
+            }
+
+            res.send(resp);
+        }
+    );
+});
+
+server.post('/api/identity/delete', function (req, res) {
+    const { id } = req.body;
+
+    connection.query(`DELETE FROM MS_DOCUMENT.MS_IDENTITY WHERE id=${id}`,
+        function (error, results, fields) {
+            let resp = {};
+
+            if (error) {
+                // error
+                resp.ok = 0;
+                resp.error = error;
+            }
+            else {
+                let { insertId, affectedRows } = results;
+                if (affectedRows > 0) {
+                    // success
+                    resp.ok = 1;
+                    resp.insertId = insertId;
+                }
+                else {
+                    resp.ok = 0;
+                    resp.error = 'bla';
+                }
+            }
+
+            res.send(resp);
+        }
+    );
 });
 
 

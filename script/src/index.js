@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import { isArray } from 'util';
+import IdentityDialog from './IdentityDialog';
 
 const URL = window.apiURL || 'http://127.0.0.1:33003';
 
@@ -25,7 +26,8 @@ const getUrlParam = () => {
 
 class App extends React.Component {
     state = {
-        zoom: 100
+        zoom: 100,
+        isOpenIdentityList: false
     }
 
     onPrint() {
@@ -133,17 +135,31 @@ class App extends React.Component {
         document.getElementById("image").src = null;
     }
 
+    onViewIdentity() {
+        this.setState({ isOpenIdentityList: true })
+    }
+
     render() {
+        const searchParams = getUrlParam();
+
         return <div className='xxx__container' ref='container'>
             <input type='file' onChange={e => this.onfileChange(e)} id="file" className='custom-file-input' />
             <button className='xxx-button' onClick={() => this.onRemoveImage()}>Xóa ảnh</button>
             <div style={{ flex: 1 }}>
 
             </div>
+            <button className='xxx-button' onClick={() => this.onViewIdentity()}>Xem CMND</button>
             <button className='xxx-button' onClick={() => this.onZoomIn()}>Phóng to</button>
             <button className='xxx-button' onClick={() => this.onZoomOut()}>Thu nhỏ</button>
             <button className='xxx-button' onClick={() => this.onSave()}>Lưu</button>
             <button className='xxx-button' onClick={() => this.onPrint()}>In</button>
+
+            <IdentityDialog
+                open={this.state.isOpenIdentityList}
+                data={{
+                    fileid: searchParams.id
+                }}
+            />
         </div>
     }
 }
