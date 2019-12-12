@@ -15,7 +15,9 @@ function createWindow() {
 
     mainWindow = new BrowserWindow({
         fullscreen: false,
-        title: 'Phuong 8'
+        title: 'Phuong 8',
+        width: 1600,
+        height: 900
     });
     mainWindow.loadURL(isDev ? 'http://localhost:3000' : `file://${path.join(__dirname, '../build/index.html')}`);
     if (isDev) {

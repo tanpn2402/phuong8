@@ -9,6 +9,7 @@ const request = require('request');
 const moment = require('moment');
 const path = require('path');
 var mysql = require('mysql');
+const fs = require('fs');
 
 var connection = mysql.createConnection({
     host: "104.197.129.110",
@@ -456,6 +457,53 @@ server.post('/api/identity/delete', function (req, res) {
             }
 
             res.send(resp);
+        }
+    );
+});
+
+server.use('/api/identity/download', function (req, res) {
+    let id = '';
+    if (req.method === 'post' || req.method === 'POST') {
+        id = req.body.id;
+    }
+    else {
+        id = req.query.id;
+    }
+
+    connection.query(`SELECT * FROM MS_DOCUMENT.MS_IDENTITY WHERE id=${id}`,
+        function (error, results, fields) {
+            let resp = {};
+
+            if (error) {
+                // error
+                resp.ok = 0;
+                resp.error = error;
+
+                res.send(resp);
+            }
+            else {
+                if (results.length > 0) {
+                    // success
+                    let image = results[0].value;
+                    var data = image.replace(/^data:image\/\w+;base64,/, '');
+                    let id = (Math.random() * 100000000).toFixed(0) + '-' + new Date().getTime()
+                    fs.writeFile(__dirname + '/temp/' + id + '.jpg', data, { encoding: 'base64' }, function (err) {
+                        res.sendFile(__dirname + '/temp/' + id + '.jpg');
+                        setTimeout(() => {
+                            fs.unlink(__dirname + '/temp/' + id + '.jpg', (e) => {
+                                // console.log(e);
+                            });
+                        }, 200)
+                    });
+                }
+                else {
+                    resp.ok = 0;
+                    resp.data = [];
+                    resp.error = 'invalid file id';
+
+                    res.send(resp);
+                }
+            }
         }
     );
 });
