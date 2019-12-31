@@ -56,7 +56,7 @@ class App extends React.Component {
             body: JSON.stringify({
                 id: searchParams.id,
                 data: str,
-                photo: (document.getElementById("image") || {}.src) || ""
+                photo: (document.getElementById("image") || {}).src || ""
             })
         })
             .then(e => e.json())
