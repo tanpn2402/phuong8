@@ -17,7 +17,10 @@ function createWindow() {
         fullscreen: false,
         title: 'Phuong 8',
         width: 1600,
-        height: 900
+        height: 900,
+        webPreferences: {
+            plugins: false
+        }
     });
     mainWindow.loadURL(isDev ? 'http://localhost:3000' : `file://${path.join(__dirname, '../build/index.html')}`);
     if (isDev) {
@@ -26,6 +29,10 @@ function createWindow() {
         // mainWindow.openDevTools({ mode: 'undocked' })
     }
     mainWindow.on('closed', () => mainWindow = null);
+    mainWindow.on('did-finish-load', () => {
+        mainWindow.print({ silent: false });
+    });
+
 }
 
 app.on('ready', createWindow);

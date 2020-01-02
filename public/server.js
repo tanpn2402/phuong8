@@ -10,6 +10,8 @@ const moment = require('moment');
 const path = require('path');
 var mysql = require('mysql');
 const fs = require('fs');
+const opn = require('opn');
+
 
 var connection = mysql.createConnection({
     host: "104.197.129.110",
@@ -534,6 +536,27 @@ server.post('/api/login', function (req, res) {
     });
 });
 
+server.post('/api/open', function (req, res) {
+    opn(`http://127.0.0.1:${PORT}/app`);
+});
+
+// WEP APP
+server.get('/app', async (req, res, next) => {
+    res.sendFile(path.join(__dirname, '../build/index.html'));
+});
+server.get('/static/*', function (req, res) {
+    res.sendFile(path.join(__dirname, '../build/' + req.originalUrl));
+});
+server.get(['/favicon.ico', '/manifest.json', '/logo192.png'], function (req, res) {
+    res.sendFile(path.join(__dirname, '../build/' + req.originalUrl));
+});
+
+server.get('*', function (req, res) {
+    if (req.originalUrl.indexOf('static') > -1) {
+        return res.sendFile(path.join(__dirname, '../build/' + req.originalUrl));
+    }
+    return res.sendFile(req.path, { root: path.join(__dirname, 'assets/page') });
+});
 
 let app = null;
 // app = server.listen(PORT, (err) => {

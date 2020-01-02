@@ -66,6 +66,22 @@ export default function Login(props) {
             })
     }
 
+    function openChrome() {
+        fetch(URL + '/api/open/?e=chrome', {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json; charset=utf-8'
+            },
+            body: JSON.stringify({
+                data: JSON.stringify({})
+            })
+        })
+            .then(e => e.json())
+            .then(e => {
+
+            })
+    }
+
     return (
         <Container component="main" maxWidth="xs">
             <CssBaseline />
@@ -112,6 +128,17 @@ export default function Login(props) {
                     >
                         Đăng nhâp
                     </Button>
+
+                    {window.navigator.appVersion.includes('Electron') && <Button
+                        type="submit"
+                        fullWidth
+                        variant="contained"
+                        color="primary"
+                        className={classes.submit}
+                        onClick={e => openChrome(e)}
+                    >
+                        Mở bằng Chrome
+                    </Button>}
                 </form>
             </div>
         </Container>

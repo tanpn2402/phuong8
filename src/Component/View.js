@@ -5,7 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import InputBase from '@material-ui/core/InputBase';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
-import { Grid, Paper } from '@material-ui/core';
+import { Grid, Paper, Button } from '@material-ui/core';
 import TreeViewComp from './TreeView'
 
 const useStyles = makeStyles(theme => ({
@@ -103,7 +103,7 @@ const useStyles = makeStyles(theme => ({
     tabMain: {
         backgroundColor: '#FFF'
     },
-    treeviewRoot:  {
+    treeviewRoot: {
         flex: 1,
         minHeight: 0,
         overflow: 'auto'
@@ -122,13 +122,37 @@ export default function View(props) {
         setFileSelected(file);
     }
 
+    function openInChrome() {
+        fetch(URL + '/api/open/?e=chrome', {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json; charset=utf-8'
+            },
+            body: JSON.stringify({
+                data: JSON.stringify({})
+            })
+        })
+            .then(e => e.json())
+            .then(e => {
+                
+            })
+    }
+
     return (
         <div className={classes.root} style={{ backgroundColor: "lightgrey" }}>
             <AppBar position="static" style={{ height: "25" }}>
                 <Toolbar>
-                    <Typography className={classes.title} variant="h5" noWrap>
-                        Phường 8
-                    </Typography>
+                    <Grid container>
+                        <Grid item xs>
+                            <Typography className={classes.title} variant="h5" noWrap>
+                                Phường 8
+                            </Typography>
+                        </Grid>
+
+                        {window.navigator.appVersion.includes('Electron') && <Grid item>
+                            <Button variant='contained' onClick={() => openInChrome()}>Mở bằng Chrome</Button>
+                        </Grid>}
+                    </Grid>
                     {/* <div className={classes.search}>
                         <div className={classes.searchIcon}>
                             <SearchIcon />
