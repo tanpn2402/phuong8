@@ -36,9 +36,10 @@ textarea{
     resize: none;
 }
 
-.sign-area {
-    border: 1px solid blue !important;
+.sign-area:hover {
+    background-color: cadetblue;
 }
+
 
 .m0{transform:matrix(0.250000,0.000000,0.000000,0.250000,0,0);-ms-transform:matrix(0.250000,0.000000,0.000000,0.250000,0,0);-webkit-transform:matrix(0.250000,0.000000,0.000000,0.250000,0,0);}
 .v0{vertical-align:0.000000px;}
