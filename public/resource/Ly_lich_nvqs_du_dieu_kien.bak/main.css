@@ -20,6 +20,7 @@ input:not(.custom-file-input){
     bottom: -5px;
     border: 0px ;
     background: transparent;
+    word-spacing: -30px;
 }
 textarea{
     left: 0;
@@ -36,6 +37,7 @@ textarea{
     padding-right: 15px;
     overflow: hidden;
     resize: none;
+    word-spacing: -30px;
 }
 
 .m0{transform:matrix(0.250000,0.000000,0.000000,0.250000,0,0);-ms-transform:matrix(0.250000,0.000000,0.000000,0.250000,0,0);-webkit-transform:matrix(0.250000,0.000000,0.000000,0.250000,0,0);}

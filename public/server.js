@@ -311,6 +311,7 @@ server.post('/api/folder/get', function (req, res) {
                     resp.data = JSON.parse(results[0].folder);
                 }
                 catch (e) {
+                    console.log('parse folder data error', e);
                     resp.data = [];
                 }
             }

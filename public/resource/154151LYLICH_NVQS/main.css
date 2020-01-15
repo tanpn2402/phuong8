@@ -27,6 +27,7 @@ input:not(.custom-file-input){
     bottom: -5px;
     border: 0px ;
     background: transparent;
+    word-spacing: -30px;
 }
 textarea{
     left:87px; 
@@ -42,6 +43,7 @@ textarea{
     padding-left: 15px;
     padding-right: 15px;
     line-height:25px;
+    word-spacing: -30px;
 }
 .v0{vertical-align:0.000000pt;}
 .ls0{letter-spacing:0.000000pt;}
