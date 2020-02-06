@@ -11,7 +11,7 @@ const path = require('path');
 var mysql = require('mysql');
 const fs = require('fs');
 const opn = require('opn');
-
+const storage = require('node-persist');
 
 var connection = mysql.createConnection({
     host: "104.197.129.110",
@@ -34,12 +34,15 @@ server.use('/api/ping', async (req, res, next) => {
 
 server.use(express.static(path.join(__dirname, 'resource')));
 
-server.get('/resource/*', function (req, res) {
-    res.sendFile(req.path, { root: path.join(__dirname) });
+server.get('/resource/*', async function (req, res) {
+    // C:\Users\Pham Nhat Tan\Documents\Phuong 8 Data
+    let rootPath = await storage.getItem('resourcePath');
+    res.sendFile(req.path, { root: rootPath });
 });
 
-server.get('/script/*', function (req, res) {
-    res.sendFile(req.path, { root: path.join(__dirname) });
+server.get('/script/*', async function (req, res) {
+    let rootPath = await storage.getItem('resourcePath');
+    res.sendFile(req.path, { root: rootPath });
 });
 
 server.post('/api/document/save', function (req, res) {
@@ -559,9 +562,35 @@ server.get('*', function (req, res) {
     return res.sendFile(req.path, { root: path.join(__dirname, 'assets/page') });
 });
 
+
+
+// init persist
+async function init() {
+    await storage.init();
+
+    // get config
+    connection.query(`SELECT * FROM MS_CONFIG`, function (error, results, fields) {
+        if (error) {
+            // error
+        }
+        else {
+            if (results.length > 0) {
+                // success
+                results.map( async e => {
+                    await storage.setItem(e.key, e.value);
+                })
+            }
+            else {
+            }
+        }
+    });
+    // await storage.setItem('resourcePath', 'C:/\/Users/\/Pham Nhat Tan/\/Documents/\/Phuong 8 Data');
+}
+
 let app = null;
 // app = server.listen(PORT, (err) => {
-//     if (err) throw err
+//     if (err) throw err;
+//     init();
 //     console.log('> CWM Proxy ready on http://localhost:' + PORT)
 // })
 module.exports = {
@@ -577,7 +606,8 @@ module.exports = {
             }
             else {
                 app = server.listen(PORT, (err) => {
-                    if (err) throw err
+                    if (err) throw err;
+                    init();
                     console.log('> CWM Proxy ready on http://localhost:' + PORT)
                 })
             }
