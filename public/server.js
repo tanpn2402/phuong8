@@ -569,22 +569,22 @@ async function init() {
     await storage.init();
 
     // get config
-    connection.query(`SELECT * FROM MS_CONFIG`, function (error, results, fields) {
-        if (error) {
-            // error
-        }
-        else {
-            if (results.length > 0) {
-                // success
-                results.map( async e => {
-                    await storage.setItem(e.key, e.value);
-                })
-            }
-            else {
-            }
-        }
-    });
-    // await storage.setItem('resourcePath', 'C:/\/Users/\/Pham Nhat Tan/\/Documents/\/Phuong 8 Data');
+    // connection.query(`SELECT * FROM MS_CONFIG`, function (error, results, fields) {
+    //     if (error) {
+    //         // error
+    //     }
+    //     else {
+    //         if (results.length > 0) {
+    //             // success
+    //             results.map( async e => {
+    //                 await storage.setItem(e.key, e.value);
+    //             })
+    //         }
+    //         else {
+    //         }
+    //     }
+    // });
+    await storage.setItem('resourcePath', 'D:/\/Phuong 8 Data');
 }
 
 let app = null;
