@@ -86,12 +86,18 @@ class App extends React.Component {
             .then(e => {
                 let data = e.data;
                 if (data) {
-                    Object.keys(data).map(key => {
-                        try {
-                            let d = (data[key] || '').replace(new RegExp('\\|N\\|'), '\n');
-                            document.getElementById(key).value = d
-                        } catch (err) { }
-                    })
+                    if(typeof setValue == 'function') {
+                        // eslint-disable-next-line no-undef
+                        setValue(data);
+                    }
+                    else {
+                        Object.keys(data).map(key => {
+                            try {
+                                let d = (data[key] || '').replace(new RegExp('\\|N\\|'), '\n');
+                                document.getElementById(key).value = d
+                            } catch (err) { }
+                        })
+                    }
                 }
 
                 if (e.photo) {
