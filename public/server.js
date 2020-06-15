@@ -11,7 +11,7 @@ const opn = require('opn');
 const storage = require('node-persist');
 const proxy = require('express-http-proxy');
 
-const SERVER_ADDRESS = "http://localhost:33001/";
+const SERVER_ADDRESS = "http://167.179.65.8:33001/";
 
 server.use(cors());
 

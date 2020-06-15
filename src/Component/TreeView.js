@@ -203,14 +203,14 @@ export default function TreeViewComp(props) {
                     defaultExpandIcon={<FolderIcon />}
                     defaultEndIcon={<DescriptionIcon />}
                 >
-                    {props.data.map(function mapfolder(folder) {
+                    {props.data.map(function mapfolder(folder, index) {
                         if (folder.type === "folder") {
                             return (
                                 <div key={folder.created} style={{ display: "flex", justifyContent: "space-between", position: 'relative', minHeight: 28 }}>
                                     <TreeItem className={classes.treeItem}
                                         nodeId={folder.created.toString()}
                                         style={{ textAlign: "left" }}
-                                        label={folder.name}
+                                        label={(index + 1) + ". " + folder.name}
                                     >
                                         {folder.files.map(mapfolder)}
                                     </TreeItem>
@@ -230,7 +230,7 @@ export default function TreeViewComp(props) {
                                     <TreeItem className={classes.treeItem}
                                         nodeId={folder.created.toString()}
                                         style={{ textAlign: "left" }}
-                                        label={folder.name}
+                                        label={(index + 1) + ". " + folder.name}
                                     />
                                     <IconButton className={classes.treeItemIcon} size="small">
                                         <MoreVertIcon
