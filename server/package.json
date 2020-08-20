@@ -1,0 +1,50 @@
+{
+  "name": "phuong8",
+  "version": "0.1.12",
+  "main": "index.js",
+  "homepage": "./",
+  "private": true,
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "express-http-proxy": "^1.6.0",
+    "mysql": "^2.17.1"
+  },
+  "scripts": {
+    
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "author": {
+    "name": "Your Name",
+    "email": "your.email@domain.com",
+    "url": "https://your-website.com"
+  },
+  "build": {
+    "appId": "com.acb.xyz",
+    "productName": "Phuong 8",
+    "copyright": "Copyright © 2019",
+    "mac": {
+      "target": "dmg",
+      "icon": "build/icon.png"
+    },
+    "win": {
+      "target": "nsis",
+      "icon": "build/icon.png"
+    }
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

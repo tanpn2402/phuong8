@@ -104,7 +104,7 @@ server.post('/api/document/new', function (req, res) {
 server.post('/api/document/delete', function (req, res) {
     const { id } = req.body;
 
-    connection.query(`DELETE FROM MS_DOCUMENT.MS_DOCS WHERE id=${id}`,
+    connection.query(`DELETE FROM MS_DOCS WHERE id=${id}`,
         function (error, results, fields) {
             let resp = {};
 
@@ -415,7 +415,7 @@ server.post('/api/identity/insert', function (req, res) {
 server.post('/api/identity/delete', function (req, res) {
     const { id } = req.body;
 
-    connection.query(`DELETE FROM MS_DOCUMENT.MS_IDENTITY WHERE id=${id}`,
+    connection.query(`DELETE FROM MS_IDENTITY WHERE id=${id}`,
         function (error, results, fields) {
             let resp = {};
 
@@ -451,7 +451,7 @@ server.use('/api/identity/download', function (req, res) {
         id = req.query.id;
     }
 
-    connection.query(`SELECT * FROM MS_DOCUMENT.MS_IDENTITY WHERE id=${id}`,
+    connection.query(`SELECT * FROM MS_IDENTITY WHERE id=${id}`,
         function (error, results, fields) {
             let resp = {};
 
