@@ -1,7 +1,7 @@
 import React from 'react';
 import { TextField, Button, Dialog, DialogActions, DialogContent, DialogTitle, DialogContentText, Typography, List, ListItem, ListItemIcon, Checkbox, ListItemText } from '@material-ui/core';
-
-const URL = window.apiURL || 'http://127.0.0.1:33003';
+import constant from '../constants';
+const URL = constant.API_URL;
 
 export default function DialogFunc(props) {
     const actionSub = props.actionSub

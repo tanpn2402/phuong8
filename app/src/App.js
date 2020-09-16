@@ -1,8 +1,8 @@
 import React from 'react';
 import View from './Component/View';
 import Login from './Component/Login';
-
-const URL = window.apiURL || 'http://127.0.0.1:33003';
+import constant from './constants';
+const URL = constant.API_URL;
 
 class App extends React.Component {
 

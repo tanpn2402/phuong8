@@ -3,15 +3,18 @@ const bodyParser = require('body-parser');
 var cors = require('cors');
 const PORT = 33001;
 const server = express()
-server.use(bodyParser.json({ limit: '10mb' }));
+server.use(bodyParser.json({ limit: '50mb' }));
 server.use(bodyParser.urlencoded({ extended: true }));
 var mysql = require('mysql');
 const fs = require('fs');
+const path = require('path');
+const puppeteer = require('puppeteer');
 
 var connection = mysql.createConnection({
-    host: "167.179.65.8",
-    user: "admin",
-    // password: "12wqasxZ",
+    host: "127.0.0.1",
+    // host: "167.179.65.8",
+    user: "root",
+    password: "root",
     database: 'MS_DOCUMENT'
 });
 
@@ -21,6 +24,43 @@ connection.connect(function (err) {
 });
 
 server.use(cors());
+// 
+
+
+async function folderGet() {
+    let resp = await new Promise(resolve => {
+        connection.query(`SELECT * FROM MS_FOLDER WHERE id=1`, function (error, results, fields) {
+            let resp = {};
+            if (error) {
+                // error
+                resp.ok = 0;
+                resp.error = error;
+            }
+            else {
+                if (results.length > 0) {
+                    // success
+                    resp.ok = 1;
+                    try {
+                        resp.data = JSON.parse(results[0].folder);
+                    }
+                    catch (e) {
+                        console.log('parse folder data error', e);
+                        resp.data = [];
+                    }
+                }
+                else {
+                    resp.ok = 0;
+                    resp.error = 'invalid id';
+                }
+            }
+
+            resolve(resp);
+        });
+    });
+
+    return resp;
+}
+// APIs
 
 server.post('/api/document/save', function (req, res) {
     const { id, data, name, photo } = req.body;
@@ -71,39 +111,166 @@ server.post('/api/document/save', function (req, res) {
     });
 });
 
-server.post('/api/document/new', function (req, res) {
-    const { name, folder, data, source } = req.body;
+server.post('/api/document/new', async function (req, res) {
+    const { name, folder: path, data, source } = req.body;
 
-    connection.query(`INSERT INTO MS_DOCS (name, folder, data, source) VALUES('${name}', '${folder}', '${data || '{}'}', '${source}')`,
-        function (error, results, fields) {
-            let resp = {};
+    let folder = await folderGet();
+    let linkArr = path.split("/").filter(e => e !== '');
+    let linkPath = [];
 
-            if (error) {
-                // error
-                resp.ok = 0;
-                resp.error = error;
-            }
-            else {
-                let { insertId, affectedRows } = results;
-                if (affectedRows > 0) {
-                    // success
-                    resp.ok = 1;
-                    resp.insertId = insertId;
+    for (let i = 0; i < linkArr.length; i++) {
+        linkPath.push([''].concat([...Array(i + 1).keys()].map(e => linkArr[e])).join("/"));
+    }
+
+    let checkFileExist = await new Promise(async resolve => {
+        if (folder.ok === 1) {
+            let filesInFolder = linkPath.reduce((obj, currPath) => {
+                if (obj.files) {
+                    let pathInfo = obj.files.filter(e => e.path === currPath)[0];
+                    if (pathInfo) {
+                        if (pathInfo.type === 'folder') {
+                            return pathInfo;
+                        }
+                        else {
+                            return {
+                                ok: 0,
+                                code: 'invalid_type'
+                            }
+                        }
+                    }
+                    else {
+                        return {
+                            ok: 0,
+                            code: 'invalid_path'
+                        }
+                    }
                 }
                 else {
-                    resp.ok = 0;
-                    resp.error = 'bla';
+                    return obj;
+                }
+            }, { files: folder.data });
+
+
+            if (filesInFolder.ok === 0) {
+                resolve({
+                    ok: 0,
+                    code: filesInFolder.code
+                })
+            }
+            else {
+                let isExist = filesInFolder.files.filter(e => e.type === 'file' && e.name === name).length > 0;
+                if (isExist) {
+                    resolve({
+                        ok: 0,
+                        code: 'file_existed'
+                    })
+                }
+                else {
+                    resolve({
+                        ok: 1,
+                        folderNeedToAdd: filesInFolder
+                    })
                 }
             }
-
-            res.send(resp);
         }
-    );
+        else {
+            resolve({
+                ok: 1
+            })
+        }
+    });
+
+    if (checkFileExist.ok === 1) {
+        let insertDocResp = await new Promise(resolve => {
+            connection.query(`INSERT INTO MS_DOCS (name, folder, data, source) VALUES('${name}', '${path}', '${data || '{}'}', '${source}')`,
+                function (error, results, fields) {
+                    let resp = {};
+
+                    if (error) {
+                        // error
+                        resp.ok = 0;
+                        resp.error = error;
+                    }
+                    else {
+                        let { insertId, affectedRows } = results;
+                        if (affectedRows > 0) {
+                            // success
+                            resp.ok = 1;
+                            resp.insertId = insertId;
+                        }
+                        else {
+                            resp.ok = 0;
+                            resp.error = 'bla';
+                        }
+                    }
+
+                    resolve(resp);
+                }
+            );
+        });
+
+        if (insertDocResp.ok === 1) {
+            // save file to folder
+            const date = new Date();
+            checkFileExist.folderNeedToAdd.files.push({
+                "name": name,
+                "type": "file",
+                "path": path + '/' + name,
+                "created": date.getHours() + "h" + date.getMinutes() + "m" + date.getSeconds() + "s-" + date.getDate() + "-" + date.getMonth() + "-" + date.getFullYear(),
+                "files": [],
+                "fileId": insertDocResp.insertId,
+                "filePath": source
+            });
+            // update folder
+            let sql = `UPDATE MS_FOLDER SET folder='${JSON.stringify(folder.data)}' where id=1`;
+            let saveFolderResp = await new Promise(resolve => {
+                connection.query(sql, function (error, results, fields) {
+                    let resp = {};
+
+                    if (error) {
+                        // error
+                        resp.ok = 0;
+                        resp.error = error;
+                    }
+                    else {
+                        let { insertId, affectedRows } = results;
+                        if (affectedRows > 0) {
+                            // success
+                            resp.ok = 1;
+                            resp.insertId = insertId;
+                        }
+                        else {
+                            resp.ok = 0;
+                            resp.error = 'bla';
+                        }
+                    }
+
+                    resolve(resp);
+                });
+            });
+
+            if (saveFolderResp.ok === 1) {
+                res.send(insertDocResp);
+            }
+            else {
+                res.send({
+                    ok: 0,
+                    message: saveFolderResp.error
+                });
+            }
+        }
+        else {
+            res.send(insertDocResp);
+        }
+    }
+    else {
+        res.send(checkFileExist);
+    }
 });
 
 server.post('/api/document/delete', function (req, res) {
     const { id } = req.body;
-
+    console.log(id);
     connection.query(`DELETE FROM MS_DOCS WHERE id=${id}`,
         function (error, results, fields) {
             let resp = {};
@@ -275,37 +442,17 @@ server.post('/api/document/getall', function (req, res) {
     });
 });
 
-server.post('/api/folder/get', function (req, res) {
-    connection.query(`SELECT * FROM MS_FOLDER WHERE id=1`, function (error, results, fields) {
-        let resp = {};
-        if (error) {
-            // error
-            resp.ok = 0;
-            resp.error = error;
-        }
-        else {
-            if (results.length > 0) {
-                // success
-                resp.ok = 1;
-                try {
-                    resp.data = JSON.parse(results[0].folder);
-                }
-                catch (e) {
-                    console.log('parse folder data error', e);
-                    resp.data = [];
-                }
-            }
-            else {
-                resp.ok = 0;
-                resp.error = 'invalid id';
-            }
-        }
-
-        res.send(resp);
-    });
+server.post('/api/folder/get', async function (req, res) {
+    let resp = await folderGet();
+    res.send(resp);
 });
 
-server.post('/api/folder/save', function (req, res) {
+server.post('/api/folder/new', async function (req, res) {
+    const { path } = req.body;
+
+});
+
+server.post('/api/folder/save', async function (req, res) {
     const { data } = req.body;
     let sql = `UPDATE MS_FOLDER SET folder='${data}' where id=1`;
 
@@ -335,7 +482,7 @@ server.post('/api/folder/save', function (req, res) {
 });
 
 server.post('/api/template/get', function (req, res) {
-    connection.query(`SELECT * FROM MS_TEMPLATE`, function (error, results, fields) {
+    connection.query(`SELECT * FROM MS_TEMPLATE WHERE STATE='A'`, function (error, results, fields) {
         let resp = {};
         if (error) {
             // error
@@ -350,7 +497,6 @@ server.post('/api/template/get', function (req, res) {
         res.send(resp);
     });
 });
-
 
 // identity
 server.post('/api/identity/get', function (req, res) {
@@ -489,7 +635,6 @@ server.use('/api/identity/download', function (req, res) {
     );
 });
 
-
 server.post('/api/login', function (req, res) {
     const { username, password } = req.body;
 
@@ -517,6 +662,132 @@ server.post('/api/login', function (req, res) {
 
 server.get('/api/ping', (req, res) => {
     res.send('pong');
+});
+
+// http://127.0.0.1:33001/resource/Phieu_xac_minh_LLQS/Phieu_xac_minh_LLQS.html?id=98
+server.get('/resource/:template/:file', (req, res) => {
+    const { template, file } = req.params;
+    let filePath = path.join(__dirname, "../resource", template, file);
+
+    try {
+        if (fs.lstatSync(filePath).isFile()) {
+            return res.sendFile(filePath);
+        }
+        else {
+            throw new Error("");
+        }
+    }
+    catch (e) {
+        return res.status(404).send("File không tồn tại!");
+    }
+});
+
+server.get('/script/:folder/:file', (req, res) => {
+    const { folder, file } = req.params;
+    let filePath = path.join(__dirname, "../static/build/script", folder, file);
+
+    try {
+        if (fs.lstatSync(filePath).isFile()) {
+            return res.sendFile(filePath);
+        }
+        else {
+            throw new Error("");
+        }
+    }
+    catch (e) {
+        return res.status(404).send("File không tồn tại!");
+    }
+});
+
+server.get('/export/:type', async (req, res) => {
+    const { id } = req.query;
+    const { type } = req.params;
+
+    let documentData = await new Promise(resolve => {
+        connection.query(`SELECT D.name, D.source, T.options FROM MS_DOCS D inner join MS_TEMPLATE T on D.source = T.path where D.id=${id}`, function (error, results, fields) {
+            let resp = {};
+            resp.id = id;
+
+            if (error) {
+                // error
+                resp.ok = 0;
+                resp.error = error;
+            }
+            else {
+                if (results.length > 0) {
+                    // success
+                    resp.ok = 1;
+                    try {
+                        resp.source = results[0].source;
+                        resp.options = JSON.parse(results[0].options);
+                    }
+                    catch (e) {
+                        resp.data = {};
+                    }
+                }
+                else {
+                    resp.ok = 0;
+                    resp.error = 'invalid id';
+                }
+            }
+
+            resolve(resp);
+        });
+    });
+
+    try {
+        if (documentData.ok === 1) {
+            let filePath = path.join(__dirname, "../", documentData.source);
+            if (fs.lstatSync(filePath).isFile()) {
+                if (type === 'html') {
+                    return res.sendFile(filePath);
+                }
+                else if (type === 'pdf') {
+                    const pdfFile = path.join(__dirname, "../export/", "file-" + new Date().getTime() + ".pdf");
+                    const browser = await puppeteer.launch();
+                    const page = await browser.newPage();
+                    await page.goto('http://0.0.0.0:' + PORT + '/export/html?toolbar=false&id=' + documentData.id, { waitUntil: 'networkidle2' });
+                    await page.pdf({ path: pdfFile, format: 'A4', landscape: documentData.options.landscape });
+                    await browser.close();
+                    let stream = fs.createReadStream(pdfFile);
+                    stream.pipe(res).once("close", function () {
+                        stream.destroy();
+                        fs.unlinkSync(pdfFile);
+                    });
+                }
+                else {
+                    res.status(404).send("Invalid type. Accept html or pdf");
+                }
+            }
+            else {
+                throw new Error("");
+            }
+        }
+        else {
+            throw new Error("");
+        }
+    }
+    catch (e) {
+        console.log(e);
+        return res.status(404).send("File không tồn tại!");
+    }
+});
+
+server.get('/static/resource/:folder/:file', (req, res) => {
+    const { folder, file } = req.params;
+    let filePath = path.join(__dirname, "../resource", folder, file);
+
+    try {
+        if (fs.lstatSync(filePath).isFile()) {
+            return res.sendFile(filePath);
+        }
+        else {
+            throw new Error("");
+        }
+    }
+    catch (e) {
+        return res.status(404).send("File không tồn tại!");
+    }
 });
 
 server.listen(PORT, (err) => {

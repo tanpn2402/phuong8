@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<!-- Created by pdf2htmlEX (https://github.com/coolwanglu/pdf2htmlex) -->
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8" />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <link rel="stylesheet" href="/static/resource/Phieu_quan_nhan_du_bi/base.min.css" />
+    <link rel="stylesheet" href="/static/resource/Phieu_quan_nhan_du_bi/fancy.min.css" />
+    <link rel="stylesheet" href="/static/resource/Phieu_quan_nhan_du_bi/main.css" />
+    <script src="/static/resource/Phieu_quan_nhan_du_bi/compatibility.min.js"></script>
+    <script src="/static/resource/Phieu_quan_nhan_du_bi/theViewer.min.js"></script>
+    <script>
+        try {
+            theViewer.defaultViewer = new theViewer.Viewer({});
+        } catch (e) { }
+    </script>
+             <link href="/script/css/main.b487e68a.chunk.css" rel="stylesheet">
+         
+             <style>
+             @font-face {
+                font-family: 'myFont';
+                src: url('/static/resource/Phieu_quan_nhan_du_bi/timesbd.ttf');
+            }
+             </style>
+    <title></title>
+</head>
+
+<body>
+    <div id="fucking"></div>
+        <script>
+            window.payload = ["fullname", "gender", "birthday", "birthmonth", "birthyear", "subrank", "groupofage", "diendangki", "ngaynhapngu", "ngayxuatngu", "donvixuatngu", "capbac", "chucvukhixuatngu", "chuyennganhqstruocxuatngu", "trinhdovanhoa", "dantoc", "tongiao", "nghenghiep_noilamviec_1", "nghenghiep_noilamviec_2", "nguyenquan_1", "nguyenquan_2", "noicutruhienngay_1", "noicutruhienngay_2", "hotencha", "namsinhcha", "songchetcha", "hotenme", "namsinhme", "songchetme", "hotenvochong", "namsinhvochong", "socon", "duocxepvaodonvi_1", "duocxepvaodonvi_2", "giuchucvu", "ngaythangnam_1", "odonvi_1", "capbac_1", "ngaythangnam_2", "odonvi_2", "capbac_2", "ngaythangnam_3", "odonvi_3", "capbac_3", "ngaythangnam_4", "odonvi_4", "capbac_4", "ngaythangnam_5", "odonvi_5", "capbac_5", "thangnam_1", "songay_1", "odau_1", "ketqua_1", "thangnam_2", "songay_2", "odau_2", "ketqua_2", "thangnam_3", "songay_3", "odau_3", "ketqua_3", "thangnam_4", "songay_4", "odau_4", "ketqua_4", "thangnam_5", "songay_5", "odau_5", "ketqua_5", "ghichu_1", "ghichu_2", "cosoquantrang_1", "cosoquantrang_2", "lapphieungay", "lapphieuthang", "lapphieunam", "sign-1", "giaingachngay", "giaingachthang", "giaingachname", "sign-2"]
+
+            function handleClick(evt, id, value) {
+                if(evt.classList.contains('removed')) {
+                    evt.classList.remove('removed');
+                } else {
+                    evt.classList.add('removed');
+                    try {
+                        document.getElementById(id).value = value;
+                    }
+                    catch(e) {
+                        console.log(e)
+                    }
+                }
+            }
+
+            function setValue(data){ 
+                Object.keys(data).map(key => {
+                    try {
+                        let d = (data[key] || '').replace(new RegExp('\\|N\\|'), '\n');
+                        if(key === 'gender') {
+                            if(d == '0') {
+                                document.getElementById('male').classList.add('removed')
+                                document.getElementById('female').classList.remove('removed')
+                            } else if(d == '1') {
+                                document.getElementById('female').classList.add('removed')
+                                document.getElementById('male').classList.remove('removed')
+                            }
+                        }
+                        else if(key === 'songchetcha') {
+                            if(d == '1') {
+                                document.getElementById('f_die').classList.add('removed')
+                                document.getElementById('f_live').classList.remove('removed')
+                            } else if(d == '0') {
+                                document.getElementById('f_live').classList.add('removed')
+                                document.getElementById('f_die').classList.remove('removed')
+                            }
+                        }
+                        else if(key === 'songchetme') {
+                            if(d == '1') {
+                                document.getElementById('m_die').classList.add('removed')
+                                document.getElementById('m_live').classList.remove('removed')
+                            } else if(d == '0') {
+                                document.getElementById('m_live').classList.add('removed')
+                                document.getElementById('m_die').classList.remove('removed')
+                            }
+                        }
+                        document.getElementById(key).value = d;
+                    } catch (err) { }
+                })
+            }
+        </script>
+    <div id="sidebar">
+        <div id="outline">
+        </div>
+    </div>
+    <div id="page-container">
+        <div id="pf1" class="pf w0 h0" data-page-no="1">
+            <div class="pc pc1 w0 h0">
+                <img class="bi x0 y0 w1 h1" alt="" src="/static/resource/Phieu_quan_nhan_du_bi/bg1.png"/>
+                <div class="t m0 x1 h2 y1 ff1 fs0 fc0 sc0 ls0 ws0">BCHQS       <span class="ff2 fs1">CỘNG<span class="ff1"> HÒA XÃ </span>HỘI<span class="ff1"> </span>CHỦ<span class="ff1"> </span>NGHĨA<span class="ff1"> </span>VIỆT<span class="ff1"> NAM<span class="ff3 fs2">      <span class="ff2">Biểu<span class="ff1"> </span>số:<span class="ff1"> </span>639/QP-ĐV</span></span></span></span></div>
+                <div class="t m0 x2 h2 y2 ff1 fs0 fc0 sc0 ls0 ws0">                              <span class="ff2">Độc</span> <span class="ff2">lập</span> – <span class="ff2">Tự</span> do – <span class="ff2">Hạnh</span> phúc<span class="fs2">                          <span class="ff2">Khổ</span> : 19 x 27</span></div>
+                <div class="t m0 x1 h3 y3 ff1 fs1 fc0 sc0 ls0 ws0">                                          </div>
+                <div class="t m0 x3 h4 y4 ff1 fs0 fc0 sc0 ls0 ws0">                                          <span class="ff2 fs3">PHIẾU<span class="ff1"> QUÂN NHÂN </span>DỰ<span class="ff1"> </span>BỊ</span></div>
+                <div class="t m0 x1 h5 y5 ff4 fs4 fc0 sc0 ls0 ws0">Họ<span class="ff3"> và tên: <span class="fc1">………………..…………………… ………                     </span><span id='male' class="gender" onclick="handleClick(this, 'gender', '0')">Nam</span>, </span><span id='female' class="gender" onclick="handleClick(this, 'gender', '1')">Nữ</span>
+                    <input id='fullname' style="top: -20px; left: 500px; width: 2400px; text-transform: uppercase; font-family: myFont; word-spacing: 0 !important; font-size: 72pt;" />
+                    <input id='gender' style="top: -20px; left: 2800px; width: 500px;" hidden />
+                </div>
+                <div class="t m0 x1 h5 y6 ff3 fs4 fc0 sc0 ls0 ws0">Sinh ngày<span class="fc1">……..</span>tháng<span class="fc1">………</span><span class="ff4">năm</span><span class="fc1">………..</span>
+                    <input id='birthday' style="top: -20px; left: 450px; width: 230px; text-align: center;" />
+                    <input id='birthmonth' style="top: -20px; left: 950px; width: 300px; text-align: center;" />
+                    <input id='birthyear' style="top: -20px; left: 1450px; width: 330px; text-align: center;" />
+                </div>
+                <div class="t m0 x1 h5 y7 ff4 fs4 fc0 sc0 ls0 ws0">Dự<span class="ff3"> </span>bị<span class="ff3"> </span>hạng<span class="ff3"> </span>(hạng<span class="ff3"> 1, </span>hạng<span class="ff3"> 2): <span class="fc1">………………………………………………….</span></span>
+                    <input id='subrank' style="top: -20px; left: 1300px; width: 2000px;" />
+                </div>
+                <div class="t m0 x1 h5 y8 ff3 fs4 fc0 sc0 ls0 ws0">Nhóm <span class="ff4">tuổi</span> (nhóm A, nhóm B): <span class="fc1">………………………………………………..</span>
+                    <input id='groupofage' style="top: -20px; left: 1350px; width: 1900px;" />
+                </div>
+                <div class="t m0 x1 h5 y9 ff4 fs4 fc0 sc0 ls0 ws0">Diện<span class="ff3"> </span>đăng<span class="ff3"> ký (chung, riêng): <span class="fc1">………………………………………………….</span></span>
+                    <input id='diendangki' style="top: -20px; left: 1350px; width: 1900px;" />
+                </div>
+                <div class="t m0 x1 h5 ya ff3 fs4 fc0 sc0 ls0 ws0">Ngày <span class="ff4">nhập</span> <span class="ff4">ngũ:</span> <span class="fc1">……………………………</span> Ngày <span class="ff4">xuất</span> <span class="ff4">ngũ:</span> <span class="fc1">………………...</span>
+                    <input id='ngaynhapngu' style="top: -20px; left: 700px; width: 1100px;" />
+                    <input id='ngayxuatngu' style="top: -20px; left: 2600px; width: 650px;" />
+                </div>
+                <div class="t m0 x1 h5 yb ff4 fs4 fc0 sc0 ls0 ws0">Đơn<span class="ff3"> </span>vị<span class="ff3"> khi </span>xuất<span class="ff3"> </span>ngũ:<span class="ff3"> <span class="fc1">…………………………………………………….…….</span></span>
+                    <input id='donvixuatngu' style="top: -20px; left: 950px; width: 2400px;" />
+                </div>
+                <div class="t m0 x1 h5 yc ff4 fs4 fc0 sc0 ls0 ws0">Cấp<span class="ff3"> </span>bậc:<span class="ff3"> <span class="fc1">………………………</span> </span>Chức<span class="ff3"> </span>vụ<span class="ff3"> khi </span>xuất<span class="ff3"> </span>ngũ:<span class="ff3"> <span class="fc1">……………………...</span></span>
+                    <input id='capbac' style="top: -20px; left: 390px; width: 950px;" />
+                    <input id='chucvukhixuatngu' style="top: -20px; left: 2350px; width: 900px;" />
+                </div>
+                <div class="t m0 x1 h5 yd ff3 fs4 fc0 sc0 ls0 ws0">Chuyên ngành QS <span class="ff4">trước</span> khi <span class="ff4">xuất</span> <span class="ff4">ngũ:</span> <span class="fc1">………………………………………..</span>
+                    <input id='chuyennganhqstruocxuatngu' style="top: -20px; left: 1650px; width: 1600px;" />
+                </div>
+                <div class="t m0 x1 h5 ye ff3 fs4 fc0 sc0 ls0 ws0">Trình <span class="ff4">độ</span> <span class="ff4">văn</span> hóa: <span class="fc1">……………………………………………………………..</span>
+                    <input id='trinhdovanhoa' style="top: -20px; left: 790px; width: 2500px;" />
+                </div>
+                <div class="t m0 x1 h5 yf ff3 fs4 fc0 sc0 ls0 ws0">Dân <span class="ff4">tộc:</span> <span class="fc1">………………………………</span>Tôn giáo:<span class="fc1">………………………..........</span>
+                    <input id='dantoc' style="top: -20px; left: 400px; width: 1200px;" />
+                    <input id='tongiao' style="top: -20px; left: 2100px; width: 1200px;" />
+                </div>
+                <div class="t m0 x1 h5 y10 ff4 fs4 fc0 sc0 ls0 ws0">Nghề<span class="ff3"> </span>nghiệp<span class="ff3"> dân </span>sự<span class="ff3"> , </span>nơi<span class="ff3"> làm </span>việc<span class="ff3"> </span>hiện<span class="ff3"> nay: <span class="fc1">…………………..……………..</span></span>
+                    <input id='nghenghiep_noilamviec_1' style="top: -20px; left: 1900px; width: 1400px;" />
+                </div>
+                <div class="t m0 x1 h5 y11 ff3 fs4 fc1 sc0 ls0 ws0" style="color: #000;">…………………………………………………………………………………
+                    <input id='nghenghiep_noilamviec_2' style="top: -20px; left: 0px; width: 3300px;" />
+                </div>
+                <div class="t m0 x1 h5 y12 ff3 fs4 fc0 sc0 ls0 ws0">Nguyên quán: <span class="fc1" >…………………….…………………………………………....</span>
+                    <input id='nguyenquan_1' style="top: -20px; left: 650px; width: 2650px;" />
+                </div>
+                <div class="t m0 x1 h5 y13 ff3 fs4 fc1 sc0 ls0 ws0"  style="color: #000;">………………………………………………………………………………....
+                    <input id='nguyenquan_2' style="top: -40px; left: 0px; width: 3300px;" />
+                </div>
+                <div class="t m0 x1 h5 y14 ff4 fs4 fc0 sc0 ls0 ws0">Nơi<span class="ff3"> </span>cư<span class="ff3"> trú </span>hiện<span class="ff3"> nay:<span class="fc1">…………………………..………………………………..</span></span>
+                    <input id='noicutruhienngay_1' style="top: -20px; left: 890px; width: 2400px;" />
+                </div>
+                <div class="t m0 x1 h5 y15 ff3 fs4 fc1 sc0 ls0 ws0">…………………………………………………………………………………
+                    <input id='noicutruhienngay_2' style="top: -20px; left: 0px; width: 3300px;" />
+                </div>
+                <div class="t m0 x1 h5 y16 ff4 fs4 fc0 sc0 ls0 ws0">Họ<span class="ff3"> tên cha: <span class="fc1">……………………..……………...</span></span>Năm<span class="ff3"> sinh:<span class="fc1">……(  </span></span>(<span id="f_live" class="gender" onclick="handleClick(this, 'songchetcha', '0')">Sống</span>,<span class="ff3"> </span><span id="f_die" class="gender" onclick="handleClick(this, 'songchetcha', '1')">chết</span>)<span class="ff3"> </span>
+                    <input id='hotencha' style="top: -20px; left: 530px; width: 1600px;" />
+                    <input id='namsinhcha' style="top: -20px; left: 2470px; width: 300px; text-align: center;" />
+                    <input id='songchetcha' style="top: -20px; left: 2470px; width: 300px; text-align: center;" hidden/>
+                </div>
+                <div class="t m0 x1 h5 y17 ff4 fs4 fc0 sc0 ls0 ws0">Họ<span class="ff3"> tên </span>mẹ:<span class="ff3"> <span class="fc1">……………………..……………... </span></span>Năm<span class="ff3"> sinh:<span class="fc1">……(  </span></span>(<span id='m_live' class="gender" onclick="handleClick(this, 'songchetme', '0' )">Sống</span>,<span class="ff3"> </span><span id='m_die' class="gender" onclick="handleClick(this, 'songchetme', '1')">chết</span>)<span class="ff3"> </span>
+                    <input id='hotenme' style="top: -20px; left: 500px; width: 1600px;" />
+                    <input id='namsinhme' style="top: -20px; left: 2470px; width: 300px; text-align: center;" />
+                    <input id='songchetme' style="top: -20px; left: 2470px; width: 300px; text-align: center;" hidden/>
+                </div>
+                <div class="t m0 x1 h5 y18 ff4 fs4 fc0 sc0 ls0 ws0">Họ<span class="ff3"> tên </span>vợ<span class="ff3"> </span>(hoặc<span class="ff3"> </span>chồng):<span class="ff3"> <span class="fc1">………..…………..…..             </span></span>Năm<span class="ff3"> sinh:</span>
+                    <input id='hotenvochong' style="top: -20px; left: 1060px; width: 1600px;" />
+                    <input id='namsinhvochong' style="top: -20px; left: 2900px; width: 400px;" />
+                </div>
+                <div class="t m0 x1 h5 y19 ff4 fs4 fc0 sc0 ls0 ws0">Mấy<span class="ff3"> con: <span class="fc1" style="color: black;">………………………………………………………….…………...</span></span>
+                    <input id='socon' style="top: -20px; left: 480px; width: 2800px;" />
+                </div>
+                <div class="t m0 x1 h5 y1a ff4 fs4 fc0 sc0 ls0 ws0">Được<span class="ff3"> </span>sắp<span class="ff3"> </span>xếp<span class="ff3"> vào </span>đơn<span class="ff3"> </span>vị<span class="ff3"> </span>dự<span class="ff3"> </span></span>bị<span class="ff3"> (a, b, c, d):<span class="fc1" style="color: black;">…….………………………………</span></span>
+                    <input id='duocxepvaodonvi_1' style="top: -20px; left: 1840px; width: 1500px;" />
+                </div>
+                <div class="t m0 x1 h5 y1b ff3 fs4 fc1 sc0 ls0 ws0" style="color: black;">…………………………………………………………………………………
+                    <input id='duocxepvaodonvi_2' style="top: -20px; left: 0px; width: 3300px;" />
+                </div>
+                <div class="t m0 x1 h5 y1c ff4 fs4 fc0 sc0 ls0 ws0">Giữ<span class="ff3"> </span>chức<span class="ff3"> </span>vụ:<span class="ff3 fc1" style="color: black;">………………….................................…………………..............</span>
+                    <input id='giuchucvu' style="top: -20px; left: 570px; width: 2700px;" />
+                </div>
+            </div>
+            <div class="pi" data-data='{"ctm":[1.000000,0.000000,0.000000,1.000000,0.000000,0.000000]}'></div>
+        </div>
+        <div id="pf2" class="pf w0 h0" data-page-no="2">
+            <div class="pc pc2 w0 h0"><img class="bi x4 y1d w2 h6" alt="" src="/static/resource/Phieu_quan_nhan_du_bi/bg2.png" />
+                <div class="t m0 x5 h2 y1e ff1 fs0 fc0 sc0 ls0 ws0">TÓM <span class="ff2">TẮT</span> QUÁ TRÌNH <span
+                        class="ff2">TẠI</span> <span class="ff2">NGŨ</span></div>
+                <div class="c x4 y1f w3 h7">
+                    <div class="t m0 x6 h8 y20 ff1 fs2 fc0 sc0 ls0 ws0">Tháng <span class="ff2">năm</span> <span
+                            class="ff2">đến</span> </div>
+                    <div class="t m0 x7 h8 y21 ff1 fs2 fc0 sc0 ls0 ws0">tháng <span class="ff2">năm</span></div>
+                </div>
+                <div class="c x8 y1f w4 h7">
+                    <div class="t m0 x9 h8 y20 ff2 fs2 fc0 sc0 ls0 ws0">Ở<span class="ff1"> </span>đơn<span class="ff1"> </span>vị</div>
+                </div>
+                <div class="c xa y1f w5 h7">
+                    <div class="t m0 xb h8 y20 ff2 fs2 fc0 sc0 ls0 ws0">Cấp<span class="ff1"> </span>bậc,<span
+                            class="ff1"> </span>chức<span class="ff1"> </span>vụ,<span class="ff1"> CNQS</span></div>
+                </div>
+                <div class="c x4 y22 w3 h9">
+                    <div class="t m0 xc h3 y23 ff3 fs1 fc1 sc0 ls0 ws0">………………<input id='ngaythangnam_1' style="top: -20px; left: -40px; width: 660px; font-size: 68pt;" /></div>
+                </div>
+                <div class="c x8 y22 w4 h9">
+                    <div class="t m0 x6 h3 y23 ff3 fs1 fc1 sc0 ls0 ws0">……………………………<input id='odonvi_1' style="top: -20px; left: -40px; width: 1000px;" /></div>
+                </div>
+                <div class="c xa y22 w5 h9">
+                    <div class="t m0 xd h3 y23 ff3 fs1 fc1 sc0 ls0 ws0">………………………………<input id='capbac_1' style="top: -20px; left: 0px; width: 1500px;" /></div>
+                </div>
+                <div class="c x4 y24 w3 h9">
+                    <div class="t m0 xd h3 y23 ff3 fs1 fc1 sc0 ls0 ws0">………………<input id='ngaythangnam_2' style="top: -20px; left: 0px; width: 660px; font-size: 68pt;" /></div>
+                </div>
+                <div class="c x8 y24 w4 h9">
+                    <div class="t m0 xd h3 y23 ff3 fs1 fc1 sc0 ls0 ws0">………………………………<input id='odonvi_2' style="top: -20px; left: 0px; width: 1000px;" /></div>
+                </div>
+                <div class="c xa y24 w5 h9">
+                    <div class="t m0 xd h3 y23 ff3 fs1 fc1 sc0 ls0 ws0">………………………………<input id='capbac_2' style="top: -20px; left: 0px; width: 1500px;" /></div>
+                </div>
+                <div class="c x4 y25 w3 h9">
+                    <div class="t m0 xd h3 y23 ff3 fs1 fc1 sc0 ls0 ws0">………………<input id='ngaythangnam_3' style="top: -20px; left: 0px; width: 660px; font-size: 68pt;" /></div>
+                </div>
+                <div class="c x8 y25 w4 h9">
+                    <div class="t m0 xd h3 y23 ff3 fs1 fc1 sc0 ls0 ws0">………………………………<input id='odonvi_3' style="top: -20px; left: 0px; width: 1000px;" /></div>
+                </div>
+                <div class="c xa y25 w5 h9">
+                    <div class="t m0 xd h3 y23 ff3 fs1 fc1 sc0 ls0 ws0">………………………………<input id='capbac_3' style="top: -20px; left: 0px; width: 1500px;" /></div>
+                </div>
+                <div class="c x4 y26 w3 h9">
+                    <div class="t m0 xd h3 y23 ff3 fs1 fc1 sc0 ls0 ws0">………………<input id='ngaythangnam_4' style="top: -20px; left: 0px; width: 660px; font-size: 68pt;" /></div>
+                </div>
+                <div class="c x8 y26 w4 h9">
+                    <div class="t m0 xd h3 y23 ff3 fs1 fc1 sc0 ls0 ws0">………………………………<input id='odonvi_4' style="top: -20px; left: 0px; width: 1000px;" /></div>
+                </div>
+                <div class="c xa y26 w5 h9">
+                    <div class="t m0 xd h3 y23 ff3 fs1 fc1 sc0 ls0 ws0">………………………………<input id='capbac_4' style="top: -20px; left: 0px; width: 1500px;" /></div>
+                </div>
+                <div class="c x4 y27 w3 h9">
+                    <div class="t m0 xd h3 y23 ff3 fs1 fc1 sc0 ls0 ws0">………………<input id='ngaythangnam_5' style="top: -20px; left: 0px; width: 660px; font-size: 68pt;" /></div>
+                </div>
+                <div class="c x8 y27 w4 h9">
+                    <div class="t m0 xd h3 y23 ff3 fs1 fc1 sc0 ls0 ws0">………………………………<input id='odonvi_5' style="top: -20px; left: 0px; width: 1000px;" /></div>
+                </div>
+                <div class="c xa y27 w5 h9">
+                    <div class="t m0 xd h3 y23 ff3 fs1 fc1 sc0 ls0 ws0">………………………………<input id='capbac_5' style="top: -20px; left: 0px; width: 1500px;" /></div>
+                </div>
+                <div class="t m0 x0 h2 y28 ff2 fs0 fc0 sc0 ls0 ws0">HUẤN<span class="ff1"> </span>LUYỆN<span
+                        class="ff1"> </span>Ở<span class="ff1"> </span>NGẠCH<span class="ff1"> </span>DỰ<span
+                        class="ff1"> </span>BỊ</div>
+                <div class="c x4 y29 w6 h9">
+                    <div class="t m0 xe h8 y21 ff1 fs2 fc0 sc0 ls0 ws0">Tháng, <span class="ff2">năm</span></div>
+                </div>
+                <div class="c xf y29 w7 h9">
+                    <div class="t m0 xe h8 y21 ff2 fs2 fc0 sc0 ls0 ws0">Số<span class="ff1"> ngày</span></div>
+                </div>
+                <div class="c x10 y29 w8 h9">
+                    <div class="t m0 x11 h8 y21 ff2 fs2 fc0 sc0 ls0 ws0">Ở<span class="ff1"> </span>đâu</div>
+                </div>
+                <div class="c x12 y29 w9 h9">
+                    <div class="t m0 x13 h8 y21 ff2 fs2 fc0 sc0 ls0 ws0">Nội<span class="ff1"> dung, </span>kết<span
+                            class="ff1"> </span>quả</div>
+                </div>
+                <div class="c x4 y2a w6 h9">
+                    <div class="t m0 xd h3 y23 ff3 fs1 fc1 sc0 ls0 ws0">…………<input id='thangnam_1' style="top: -20px; left: 0px; width: 500px; font-size: 68pt;" /></div>
+                </div>
+                <div class="c xf y2a w7 h9">
+                    <div class="t m0 xd h3 y23 ff3 fs1 fc1 sc0 ls0 ws0">………<input id='songay_1' style="top: -20px; left: 0px; width: 300px;" /></div>
+                </div>
+                <div class="c x10 y2a w8 h9">
+                    <div class="t m0 xd h3 y23 ff3 fs1 fc1 sc0 ls0 ws0">………………<input id='odau_1' style="top: -20px; left: 0px; width: 1500px;" /></div>
+                </div>
+                <div class="c x12 y2a w9 h9">
+                    <div class="t m0 xd h3 y23 ff3 fs1 fc1 sc0 ls0 ws0">………………<input id='ketqua_1' style="top: -20px; left: 0px; width: 1500px;" /></div>
+                </div>
+                <div class="c x4 y2b w6 h9">
+                    <div class="t m0 xd h3 y23 ff3 fs1 fc1 sc0 ls0 ws0">…………<input id='thangnam_2' style="top: -20px; left: 0px; width: 500px; font-size: 68pt;" /></div>
+                </div>
+                <div class="c xf y2b w7 h9">
+                    <div class="t m0 xd h3 y23 ff3 fs1 fc1 sc0 ls0 ws0">………<input id='songay_2' style="top: -20px; left: 0px; width: 300px;" /></div>
+                </div>
+                <div class="c x10 y2b w8 h9">
+                    <div class="t m0 xd h3 y23 ff3 fs1 fc1 sc0 ls0 ws0">………………<input id='odau_2' style="top: -20px; left: 0px; width: 1500px;" /></div>
+                </div>
+                <div class="c x12 y2b w9 h9">
+                    <div class="t m0 xd h3 y23 ff3 fs1 fc1 sc0 ls0 ws0">………………<input id='ketqua_2' style="top: -20px; left: 0px; width: 1500px;" /></div>
+                </div>
+                <div class="c x4 y2c w6 h9">
+                    <div class="t m0 xd h3 y23 ff3 fs1 fc1 sc0 ls0 ws0">…………<input id='thangnam_3' style="top: -20px; left: 0px; width: 500px; font-size: 68pt;" /></div>
+                </div>
+                <div class="c xf y2c w7 h9">
+                    <div class="t m0 xd h3 y23 ff3 fs1 fc1 sc0 ls0 ws0">………<input id='songay_3' style="top: -20px; left: 0px; width: 300px;" /></div>
+                </div>
+                <div class="c x10 y2c w8 h9">
+                    <div class="t m0 xd h3 y23 ff3 fs1 fc1 sc0 ls0 ws0">………………<input id='odau_3' style="top: -20px; left: 0px; width: 1500px;" /></div>
+                </div>
+                <div class="c x12 y2c w9 h9">
+                    <div class="t m0 xd h3 y23 ff3 fs1 fc1 sc0 ls0 ws0">………………<input id='ketqua_3' style="top: -20px; left: 0px; width: 1500px;" /></div>
+                </div>
+                <div class="c x4 y2d w6 h9">
+                    <div class="t m0 xd h3 y23 ff3 fs1 fc1 sc0 ls0 ws0">…………<input id='thangnam_4' style="top: -20px; left: 0px; width: 500px; font-size: 68pt;" /></div>
+                </div>
+                <div class="c xf y2d w7 h9">
+                    <div class="t m0 xd h3 y23 ff3 fs1 fc1 sc0 ls0 ws0">………<input id='songay_4' style="top: -20px; left: 0px; width: 300px;" /></div>
+                </div>
+                <div class="c x10 y2d w8 h9">
+                    <div class="t m0 xd h3 y23 ff3 fs1 fc1 sc0 ls0 ws0">………………<input id='odau_4' style="top: -20px; left: 0px; width: 1500px;" /></div>
+                </div>
+                <div class="c x12 y2d w9 h9">
+                    <div class="t m0 xd h3 y23 ff3 fs1 fc1 sc0 ls0 ws0">………………<input id='ketqua_4' style="top: -20px; left: 0px; width: 1500px;" /></div>
+                </div>
+                <div class="c x4 y2e w6 h9">
+                    <div class="t m0 xd h3 y23 ff3 fs1 fc1 sc0 ls0 ws0">…………<input id='thangnam_5' style="top: -20px; left: 0px; width: 500px; font-size: 68pt;" /></div>
+                </div>
+                <div class="c xf y2e w7 h9">
+                    <div class="t m0 xd h3 y23 ff3 fs1 fc1 sc0 ls0 ws0">………<input id='songay_5' style="top: -20px; left: 0px; width: 300px;" /></div>
+                </div>
+                <div class="c x10 y2e w8 h9">
+                    <div class="t m0 xd h3 y23 ff3 fs1 fc1 sc0 ls0 ws0">………………<input id='odau_5' style="top: -20px; left: 0px; width: 1500px;" /></div>
+                </div>
+                <div class="c x12 y2e w9 h9">
+                    <div class="t m0 xd h3 y23 ff3 fs1 fc1 sc0 ls0 ws0">………………<input id='ketqua_5' style="top: -20px; left: 0px; width: 1500px;" /></div>
+                </div>
+                <div class="t m0 x1 h2 y2f ff3 fs0 fc0 sc0 ls0 ws0">Ghi chú <span class="ff4">đặc</span> <span class="ff4">biệt:</span> <span class="ff5">(Đủ<span class="ff6"> hay không </span>đủ<span class="ff6"> </span>điều<span class="ff6"> </span>kiện<span class="ff6"> </span>động<span class="ff6"> viên)</span></span>: <span class="fc1"  style="color: #000;">…………………………</span>
+                    <input id='ghichu_1' style="top: -20px; left: 2300px; width: 1000px;" />
+                </div>
+                <div class="t m0 x1 h2 y30 ff3 fs0 fc1 sc0 ls0 ws0"  style="color: #000;">……………………………………………………………………………………….
+                    <input id='ghichu_2' style="top: -20px; left: 0px; width: 3300px;" />
+                </div>
+                <div class="t m0 x1 h2 y31 ff4 fs0 fc0 sc0 ls0 ws0">Cỡ<span class="ff3"> </span>số<span class="ff3"> quân trang <span class="ff5">(Mũ,<span class="ff6"> </span>quần<span class="ff6"> áo, </span>giầy<span class="ff6"> dép):</span></span> <span class="fc1"  style="color: #000;">……………………………..…………..</span></span>
+                    <input id='cosoquantrang_1' style="top: -20px; left: 1700px; width: 1600px;" />
+                </div>
+                <div class="t m0 x1 h2 y32 ff3 fs0 fc1 sc0 ls0 ws0"  style="color: #000;">……………………………………………………………………………………….
+                    <input id='cosoquantrang_2' style="top: -20px; left: 0px; width: 3300px;" />
+                </div>
+                <div class="t m0 x14 h2 y33 ff5 fs0 fc0 sc0 ls0 ws0">Lập<span class="ff6"> </span>phiếu<span class="ff6"> ngày: <span class="fc1">…….</span> tháng <span class="fc1">….</span> </span>năm<span class="ff6"> <span class="fc1">……..</span></span>
+                    <input id='lapphieungay' style="top: -20px; left: 690px; width: 200px;    font-family: ff6; font-style: italic; " />
+                    <input id='lapphieuthang' style="top: -20px; left: 1140px; width: 140px;    font-family: ff6; font-style: italic; text-align: center;" />
+                    <input id='lapphieunam' style="top: -20px; left: 1500px; width: 250px;    font-family: ff6; font-style: italic; " />
+                </div>
+                <div class="t m0 x12 h2 y34 ff1 fs0 fc0 sc0 ls0 ws0"> <span class="ff2">CHỈ</span> HUY <span class="ff2">TRƯỞNG</span>
+                    <input id="sign-1" style="left: -210px ;width: 1400px; bottom: -650px; text-align: center; font-family: myFont; font-size: 72pt;" class="sign-area"/> 
+                </div>
+                <div class="t m0 x14 h2 y35 ff5 fs0 fc0 sc0 ls0 ws0">Giải<span class="ff6"> </span>ngạch<span class="ff6"> ngày: <span class="fc1">…….</span> tháng <span class="fc1">….</span> </span>năm<span class="ff6"> <span class="fc1">……..</span></span>
+                    <input id='giaingachngay' style="top: -20px; left: 720px; width: 200px; font-family: ff6; font-style: italic; " />
+                    <input id='giaingachthang' style="top: -20px; left: 1200px; width: 140px; font-family: ff6; font-style: italic; text-align: center;" />
+                    <input id='giaingachname' style="top: -20px; left: 1550px; width: 250px; font-family: ff6; font-style: italic; " />
+                </div>
+                <div class="t m0 x12 h2 y36 ff1 fs0 fc0 sc0 ls0 ws0"> <span class="ff2">CHỈ</span> HUY <span class="ff2">TRƯỞNG</span>
+                    <input id="sign-2" style="left: -210px ;width: 1400px; bottom: -650px; text-align: center; font-family: myFont; font-size: 72pt;" class="sign-area"/> 
+                </div>
+            </div>
+            <div class="pi" data-data='{"ctm":[1.000000,0.000000,0.000000,1.000000,0.000000,0.000000]}'></div>
+        </div>
+    </div>
+    <div class="loading-indicator">
+
+    </div>
+</div><script>!function (p) { function e(e) { for (var r, t, n = e[0], o = e[1], u = e[2], i = 0, l = []; i < n.length; i++)t = n[i], Object.prototype.hasOwnProperty.call(a, t) && a[t] && l.push(a[t][0]), a[t] = 0; for (r in o) Object.prototype.hasOwnProperty.call(o, r) && (p[r] = o[r]); for (s && s(e); l.length;)l.shift()(); return c.push.apply(c, u || []), f() } function f() { for (var e, r = 0; r < c.length; r++) { for (var t = c[r], n = !0, o = 1; o < t.length; o++) { var u = t[o]; 0 !== a[u] && (n = !1) } n && (c.splice(r--, 1), e = i(i.s = t[0])) } return e } var t = {}, a = { 1: 0 }, c = []; function i(e) { if (t[e]) return t[e].exports; var r = t[e] = { i: e, l: !1, exports: {} }; return p[e].call(r.exports, r, r.exports, i), r.l = !0, r.exports } i.m = p, i.c = t, i.d = function (e, r, t) { i.o(e, r) || Object.defineProperty(e, r, { enumerable: !0, get: t }) }, i.r = function (e) { "undefined" != typeof Symbol && Symbol.toStringTag && Object.defineProperty(e, Symbol.toStringTag, { value: "Module" }), Object.defineProperty(e, "__esModule", { value: !0 }) }, i.t = function (r, e) { if (1 & e && (r = i(r)), 8 & e) return r; if (4 & e && "object" == typeof r && r && r.__esModule) return r; var t = Object.create(null); if (i.r(t), Object.defineProperty(t, "default", { enumerable: !0, value: r }), 2 & e && "string" != typeof r) for (var n in r) i.d(t, n, function (e) { return r[e] }.bind(null, n)); return t }, i.n = function (e) { var r = e && e.__esModule ? function () { return e.default } : function () { return e }; return i.d(r, "a", r), r }, i.o = function (e, r) { return Object.prototype.hasOwnProperty.call(e, r) }, i.p = "/"; var r = this.webpackJsonpscript = this.webpackJsonpscript || [], n = r.push.bind(r); r.push = e, r = r.slice(); for (var o = 0; o < r.length; o++)e(r[o]); var s = n; f() }([])</script>
+<script src="/script/js/main.b9c32e2c.chunk.js"></script>
+</body>
+
+</html>

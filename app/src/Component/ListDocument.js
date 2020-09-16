@@ -8,8 +8,8 @@ import IconFolder from '@material-ui/icons/Folder';
 import IconAdd from '@material-ui/icons/Add';
 import IconRemove from '@material-ui/icons/Remove';
 import IconAttachment from '@material-ui/icons/Attachment';
-
-const URL = window.apiURL || 'http://127.0.0.1:33003';
+import constant from '../constants';
+const URL = constant.API_URL;
 
 let initState = {
     data: [],

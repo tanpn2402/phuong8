@@ -7,6 +7,8 @@ import { fade, makeStyles } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
 import { Grid, Paper, Button } from '@material-ui/core';
 import TreeViewComp from './TreeView'
+import constant from '../constants';
+const URL = constant.API_URL;
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -109,8 +111,6 @@ const useStyles = makeStyles(theme => ({
         overflow: 'auto'
     }
 }));
-
-const URL = window.apiURL || 'http://127.0.0.1:33003';
 
 
 export default function View(props) {

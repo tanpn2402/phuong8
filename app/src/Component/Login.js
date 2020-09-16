@@ -7,7 +7,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-
+import constant from '../constants';
 const useStyles = makeStyles(theme => ({
     '@global': {
         body: {
@@ -35,7 +35,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-const URL = window.apiURL || 'http://127.0.0.1:33003';
+const URL = constant.API_URL;
 
 export default function Login(props) {
     const classes = useStyles();

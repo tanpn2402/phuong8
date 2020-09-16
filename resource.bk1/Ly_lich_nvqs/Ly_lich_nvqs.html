@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<!-- Created by pdf2htmlEX (https://github.com/coolwanglu/pdf2htmlex) -->
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8" />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <link rel="stylesheet" href="/static/resource/Ly_lich_nvqs/base.min.css" />
+    <link rel="stylesheet" href="/static/resource/Ly_lich_nvqs/fancy.min.css" />
+    <link rel="stylesheet" href="/static/resource/Ly_lich_nvqs/main.css" />
+    <script src="/static/resource/Ly_lich_nvqs/compatibility.min.js"></script>
+    <script src="/static/resource/Ly_lich_nvqs/theViewer.min.js"></script>
+    <script>
+        try {
+            theViewer.defaultViewer = new theViewer.Viewer({});
+        } catch (e) { }
+    </script>
+        <style>
+            @font-face {
+               font-family: 'myFont';
+               src: url('/static/resource/Ly_lich_nvqs/timesbd.ttf');
+           }
+            </style>
+    <link href="/script/css/main.b487e68a.chunk.css" rel="stylesheet">
+    <title></title>
+</head>
+
+<body>
+    <div id="fucking"></div>
+    <script>
+            window.payload = ['fullname','birthname','birthday','birthmonth','birthyear','gender',
+            'idnumber','birthregisteredplace','nativeland','ethnic','legion','nation','permanentaddress',
+            'recentaddress','familymembers','selfrole','educationlevel','dayjoinparty','officialdayjoinparty',
+            'dayjoinunion','bonus','discipline','job','salary','jobposition','workplace','fathename','fatherstatus',
+            'fatherbirthyear','fatherbirthmonth','fatherbirthdate','fatherjob','mothername','motherstatus',
+            'motherbirthyear','motherbirthmonth','motherbirthdate','motherjob','partnername','partnerbirthdate',
+            'partnerbirthmonth','partnerbirthyear','partnerjob','childnumber','childgender','siblingsnumber',
+            'malesiblingsnumber','femalesiblingsnumber','selforder','fatherfullname','father_ngaysinh',
+            'father_thangsinh','father_namsinh','fatherdoing_1','fatherdoing_3','fatherdoing_5','motherfullname',
+            'mother_ngaysinh','mother_thangsinh','mother_namsinh','motherdoing_1','motherdoing_3',
+            'motherdoing_5', 'ace1_default', 'ace1_ten','ace1_ns','ace1_ngaysinh','ace1_ts','ace1_thangsinh','ace1_nams',
+            'ace1_namsinh','ace1_tt','ace2_ten','ace2_ns','ace2_ngaysinh','ace2_ts','ace2_thangsinh','ace2_nams',
+            'ace2_namsinh','ace2_tt','ace3_ten','ace3_ns','ace3_ngaysinh','ace3_ts','ace3_thangsinh','ace3_nams',
+            'ace3_namsinh','ace3_tt','ace4_ten','ace4_ns','ace4_ngaysinh','ace4_ts','ace4_thangsinh','ace4_nams',
+            'ace4_namsinh','ace4_tt','from6to11_1','from6to11_2','from12to15_1','from12to15_2','from16to18_1',
+            'from16to18_2','sign_day_1','sign_month_1','sign_year_1','sign_day_2','sign_month_2','sign_year_2',
+            'sign_day_3','sign_month_3','sign_year_3','sign_day_4','sign_month_4','sign_year_4','fatherdoing_2',
+            'fatherdoing_4','fatherdoing_6','motherdoing_2','motherdoing_4','fatherdoing_6','comment_1','comment_2',
+            'comment_3','comment_4', 'songchetcha', 'songchetme',
+            'sign_a_1', 'sign_a_2', 'sign_a_3', 'sign_a_4', 'sign_a_5', 'sign_a_6', 'sign_a_7']
+
+            function handleClick(evt, id, value) {
+                if(evt.classList.contains('removed')) {
+                    evt.classList.remove('removed');
+                } else {
+                    evt.classList.add('removed');
+                    try {
+                        document.getElementById(id).value = value;
+                    }
+                    catch(e) {
+                        console.log(e)
+                    }
+                }
+            }
+
+            function setValue(data){ 
+                Object.keys(data).map(key => {
+                    try {
+                        let d = (data[key] || '').replace(new RegExp('\\|N\\|'), '\n');
+                        
+                        if(key === 'songchetcha') {
+                            if(d == '1') {
+                                document.getElementById('f_die').classList.add('removed')
+                                document.getElementById('f_live').classList.remove('removed')
+                            } else if(d == '0') {
+                                document.getElementById('f_live').classList.add('removed')
+                                document.getElementById('f_die').classList.remove('removed')
+                            }
+                        }
+                        else if(key === 'songchetme') {
+                            if(d == '1') {
+                                document.getElementById('m_die').classList.add('removed')
+                                document.getElementById('m_live').classList.remove('removed')
+                            } else if(d == '0') {
+                                document.getElementById('m_live').classList.add('removed')
+                                document.getElementById('m_die').classList.remove('removed')
+                            }
+                        }
+                        document.getElementById(key).value = d;
+                    } catch (err) { }
+                })
+            }
+        </script>
+    <div id="sidebar">
+        <div id="outline">
+        </div>
+    </div>
+    <div id="page-container">
+        <div id="pf1" class="pf w0 h0" data-page-no="1">
+            <div class="pc pc1 w0 h0"><img class="bi x0 y0 w1 h1" alt="" src="/static/resource/Ly_lich_nvqs/bg1.png" />
+                <div class="t m0 x1 h2 y1 ff1 fs0 fc0 sc0 ls0 ws0">CỘNG<span class="ff2"> HOÀ XÃ </span>HỘI<span
+                        class="ff2"> </span>CHỦ<span class="ff2"> </span>NGHĨA<span class="ff2"> </span>VIỆT<span
+                        class="ff2"> NAM</span></div>
+                <div class="t m0 x2 h2 y2 ff1 fs0 fc0 sc0 ls0 ws0">Độc<span class="ff2"> </span>lập<span class="ff2"> – </span>Tự<span class="ff2"> do – </span>Hạnh<span class="ff2"> phúc</span></div>
+                <div class="t m0 x3 h2 y3 ff2 fs0 fc0 sc0 ls0 ws0">LÝ <span class="ff1">LỊCH</span></div>
+                <div class="t m0 x4 h2 y4 ff1 fs0 fc0 sc0 ls0 ws0">NGHĨA<span class="ff2"> </span>VỤ<span class="ff2"> QUÂN </span>SỰ</div>
+                <div class="t m0 x5 h2 y5 ff2 fs0 fc0 sc0 ls0 ws0">I. <span class="ff1">SƠ</span> <span
+                        class="ff1">YẾU</span> LÝ <span class="ff1">LỊCH</span></div>
+                <div class="t m0 x0 h2 y6 ff3 fs0 fc0 sc0 ls0 ws0">Họ,<span class="ff4"> </span>chữ<span class="ff4"> </span>đệm<span class="ff4"> và tên </span>thường<span class="ff4"> dùng </span>(viết<span
+                        class="ff4"> </span>chữ<span class="ff4"> in hoa):<span class="_ _0"></span><span
+                            class="fc1">..................................................................</span></span>
+                            <input id="fullname" style="left: 2100px; width: 1740px; text-transform: uppercase; font-size: 72pt; font-weight: bold;" />
+                </div>
+                <div class="t m0 x0 h2 y7 ff3 fs0 fc0 sc0 ls0 ws0">Họ,<span class="ff4"> </span>chữ<span class="ff4"> </span>đệm<span class="ff4"> và tên khai sinh:<span class="_ _1"> </span><span
+                            class="fc1">...................................................................................................</span></span>
+                            <input id="birthname" style="left: 1270px ;width: 2430px;" />
+                </div>
+                <div class="t m0 x0 h2 y8 ff4 fs0 fc0 sc0 ls0 ws0">Sinh ngày<span class="fc1">………</span>tháng<span
+                        class="fc1">….….</span><span class="ff3">năm</span><span class="fc1">…………</span><span
+                        class="ff3">Giới</span> tính <span class="ff3">(Nam,nữ):<span class="_ _2"> </span></span>.
+                        <input id="birthday" style="left: 460px;text-align: center ;width: 220px;" />
+                <input id="birthmonth" style="left: 950px;text-align: center ;width: 200px;" />
+                <input id="birthyear" style="left: 1360px;text-align: center ;width: 320px;" />
+                <input id="gender" style="left: 2810px ;width: 1290px;" />
+                </div>
+                <div class="t m0 x0 h2 y9 ff3 fs0 fc0 sc0 ls0 ws0">Số<span class="ff4"> CMND </span>hoặc<span
+                        class="ff4"> </span>số<span class="ff4"> </span>thẻ<span class="ff4"> </span>căn<span
+                        class="ff4"> </span>cước:<span class="_ _3"> </span><span class="ff4 fc1">...</span>
+                        <input id="idnumber" style="left: 1540px ;width: 2360px;" />
+                    </div>
+                <div class="t m0 x0 h2 ya ff3 fs0 fc0 sc0 ls0 ws0">Nơi<span class="ff4"> </span>đăng<span class="ff4"> ký khai sinh:</span>
+                    <input id="birthregisteredplace" style="left: 970px ;width: 2700px;" /></div>
+                <div class="t m0 x0 h2 yb ff4 fs0 fc0 sc0 ls0 ws0">Quê quán:<span class="_ _4"> </span>.
+                    <input id="nativeland" style="left: 480px ;width: 3120px;" /></div>
+                <div class="t m0 x0 h2 yc ff4 fs0 fc0 sc0 ls0 ws0">Dân <span class="ff3">tộc:</span><span
+                        class="fc1">…………………...……..</span>Tôn giáo:<span class="fc1">………..…….…….….</span><span
+                        class="ff3">Quốc</span> <span class="ff3">tịch:</span>
+                        <input id="ethnic" style="left: 610px ;width: 840px;" />
+                        <input id="legion" style="left: 2010px ;width: 760px;" />
+                        <input id="nation" style="left: 3160px ;width: 850px;" />    </div>
+                <div class="t m0 x0 h2 yd ff3 fs0 fc0 sc0 ls0 ws0">Nơi<span class="ff4"> </span>thường<span class="ff4"> trú </span>của<span class="ff4"> gia </span>đình:<span class="_ _5"> </span><span
+                        class="ff4">.</span>
+                        <input id="permanentaddress" style="left: 1200px ;width: 2500px;" /> </div>
+                <div class="t m0 x0 h2 ye ff3 fs0 fc0 sc0 ls0 ws0">Nơi<span class="ff4"> </span>ở<span class="ff4"> </span>hiện<span class="ff4"> </span>tại<span class="ff4"> </span>của<span class="ff4"> </span>bản<span class="ff4"> thân:</span>
+                    <input id="recentaddress" style="left: 1180px ;width: 2520px;" /> </div>
+                <div class="t m0 x0 h2 yf ff4 fs0 fc0 sc0 ls0 ws0">Thành <span class="ff3">phần</span> gia <span
+                        class="ff3">đình:<span class="_ _6"></span></span><span
+                        class="fc1">..............................................</span><span class="ff3">Bản</span> thân:<span class="fc1">…………………………………</span>
+                    <input id="familymembers" style="left: 1070px ;width: 1310px;" />            
+                    <input id="selfrole" style="left: 2630px ;width: 1060px;" />  </div>
+                <div class="t m0 x0 h2 y10 ff4 fs0 fc0 sc0 ls0 ws0">Trình <span class="ff3">độ</span> <span
+                        class="ff3">văn</span> hóa:<span class="_ _6"></span><span
+                        class="fc1">.......................................................................................................................</span>
+                        <input id="educationlevel" style="left: 1110px ;width: 2930px;" />
+                </div>
+                <div class="t m0 x0 h2 y11 ff4 fs0 fc0 sc0 ls0 ws0">Ngày vào <span class="ff3">Đảng</span> CSVN:<span
+                        class="fc1">.........................................</span>Chính <span
+                        class="ff3">thức:</span><span class="fc1">………………………………..</span>
+                        <input id="dayjoinparty" style="left: 1000px ;width: 900px;" />            
+                        <input id="officialdayjoinparty" style="left: 2470px ;width: 1230px;" /> </div>
+                <div class="t m0 x0 h2 y12 ff4 fs0 fc0 sc0 ls0 ws0">Ngày vào <span class="ff3">Đoàn</span> TNCS <span
+                        class="ff3">Hồ</span> Chí Minh:<span class="_ _7"></span><span
+                        class="fc1">........................................................................................</span>
+                        <input id="dayjoinunion" style="left: 1510px ;width: 2200px;" />
+                </div>
+                <div class="t m0 x0 h2 y13 ff4 fs0 fc0 sc0 ls0 ws0">Khen <span class="ff3">thưởng:<span class="_ _8"> </span></span>...........................................................<span
+                        class="ff3">Kỷ</span> <span class="ff3">luật</span>:………………………………….
+                        <input id="bonus" style="left: 610px ;width: 1390px;" />            
+                        <input id="discipline" style="left: 2410px ;width: 1290px;" /> </div>
+                <div class="t m0 x0 h2 y14 ff3 fs0 fc0 sc0 ls0 ws0">Nghề<span class="ff4"> </span>nghiệp:<span
+                        class="_ _8"> </span><span
+                        class="ff4 fc1">................................................</span>Lương:<span class="ff4"> </span>Ngạch……….……….Bậc……………..
+                    <input id="job" style="left: 790px ;width: 1160px;" />            
+                    <input id="salary" style="left: 2390px ;width: 510px;" />            
+                    <input id="jobposition" style="left: 3160px ;width: 440px;" />   </div>
+                <div class="t m0 x0 h2 y15 ff3 fs0 fc0 sc0 ls0 ws0">Nơi<span class="ff4"> làm </span>việc<span
+                        class="ff4"> </span>(học<span class="ff4"> </span>tập):<span class="_ _8"> </span><span
+                        class="ff4 fc1">..............................................................................................................</span>
+                        <input id="workplace" style="left: 940px ;width: 2660px;" />  
+                </div>
+                <div class="t m0 x0 h2 y16 ff3 fs0 fc0 sc0 ls0 ws0">Họ<span class="ff4"> tên cha:<span
+                            class="_ _0"></span><span
+                            class="fc1">......................................................................................</span></span>(<span id="f_live" class="gender" onclick="handleClick(this, 'songchetcha', '0')">sống</span>,<span
+                        class="ff4"> </span><span id="f_die" class="gender" onclick="handleClick(this, 'songchetcha', '1')">chết</span>)
+                        <input id="fathename" style="left: 920px ;width: 1700px;" />            
+                        <input id="fatherstatus" style="left: 3130px ;width: 470px;" /></div>
+                        <input id='songchetcha' style="top: -20px; left: 2470px; width: 300px; text-align: center;" hidden/>
+                <div class="t m0 x0 h2 y17 ff4 fs0 fc0 sc0 ls0 ws0">Sinh ngày<span class="fc1"> </span>     tháng      <span
+                        class="ff3">năm     </span> <span class="fc1">… </span><span class="ff3">    Nghề</span> <span
+                        class="ff3">nghiệp:<span class="_ _6"></span></span><span
+                        class="fc1">.................................................................</span>
+                        <input id="fatherbirthdate" style="left: 430px ;width: 100px;" /> 
+                        <input id="fatherbirthmonth" style="left: 800px ;width: 100px;" /> 
+                        <input id="fatherbirthyear" style="left: 1130px ;width: 200px;" />            
+                        <input id="fatherjob" style="left: 2460px ;width: 1440px;" />  </div>
+                <div class="t m0 x0 h2 y18 ff3 fs0 fc0 sc0 ls0 ws0">Họ<span class="ff4"> tên </span>mẹ:<span
+                        class="_ _9"></span><span
+                        class="ff4 fc1">.......................................................................................</span>(<span id="m_live" class="gender" onclick="handleClick(this, 'songchetme', '0')">sống</span>,<span
+                        class="ff4"> </span><span  id="m_die" class="gender" onclick="handleClick(this, 'songchetme', '1')">chết</span>)
+                        <input id="mothername" style="left: 920px ;width: 1700px;" />            
+                        <input id="motherstatus" style="left: 3130px ;width: 470px;" /></div>
+                        <input id='songchetme' style="top: -20px; left: 2470px; width: 300px; text-align: center;" hidden/>
+                <div class="t m0 x0 h2 y19 ff4 fs0 fc0 sc0 ls0 ws0">Sinh ngày<span class="fc1"> </span>     tháng     <span
+                        class="ff3"> năm       </span><span class="fc1">… </span><span class="ff3">  Nghề</span> <span
+                        class="ff3">nghiệp:<span class="_ _6"></span></span><span
+                        class="fc1">.................................................................</span>
+                        <input id="motherbirthdate" style="left: 430px ;width: 100px;" /> 
+                        <input id="motherbirthmonth" style="left: 800px ;width: 100px;" /> 
+                        <input id="motherbirthyear" style="left: 1150px ;width: 200px;" />              
+                        <input id="motherjob" style="left: 2460px ;width: 1440px;" /></div>
+                <div class="t m0 x0 h2 y1a ff3 fs0 fc0 sc0 ls0 ws0">Họ<span class="ff4"> tên </span>vợ<span class="ff4"> </span>(chồng):<span class="_ _0"></span><span
+                        class="ff4 fc1">...........................................<span class="fc0">Sinh ngày:</span>……..…<span class="fc0">tháng</span>….……</span>năm<span
+                        class="ff4 fc1">………..</span>
+                        <input id="partnername" style="left: 1120px ;width: 1280px;" />            
+                        <input id="partnerbirthdate" style="left: 2320px ;width: 260px;" />    
+                        <input id="partnerbirthmonth" style="left: 2900px ;width: 220px;" />    
+                        <input id="partnerbirthyear" style="left: 3380px ;width: 280px;" />  </div>
+                <div class="t m0 x0 h2 y1b ff3 fs0 fc0 sc0 ls0 ws0">Nghề<span class="ff4"> </span>nghiệp<span
+                        class="_ _8"> </span><span
+                        class="ff4">..............................................................</span>Bản<span
+                        class="ff4"> thân </span>đã<span class="ff4"> có………….con…………..</span>
+                        <input id="partnerjob" style="left: 570px ;width: 1450px;" />            
+                        <input id="childnumber" style="left: 2700px; text-align: center ;width: 330px;" />            
+                        <input id="childgender" style="left: 3250px; text-align: center ;width: 350px;" />  </div>
+                <div class="t m0 x0 h2 y1c ff4 fs0 fc0 sc0 ls0 ws0">Cha <span class="ff3">mẹ</span> có<span
+                        class="fc1">…………..</span><span class="ff3">người</span> con<span
+                        class="fc1">,………</span>trai<span class="fc1">……….</span>gái. <span class="ff3">Bản</span> thân là con <span class="ff3">thứ<span class="_ _7"></span></span><span
+                        class="fc1">...........................</span>
+                        <input id="siblingsnumber" style="left: 630px ;width: 350px;" />            
+                        <input id="malesiblingsnumber" style="left: 1400px ;width: 250px;" />            
+                        <input id="femalesiblingsnumber" style="left: 1850px ;width: 250px;" />            
+                        <input id="selforder" style="left: 3240px ;width: 600px;" />    </div>
+                <div class="c x6 y1d w2 h3">
+                    <div id='anh-cmnd' style="display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; position: relative; z-index: 99;"><img id="image" style="height: 100%;" /></div>
+                    <div class="t m0 x7 h2 y1e ff3 fs0 fc0 sc0 ls0 ws0">Ảnh<span class="ff4"> 3x4</span></div>
+                    <div class="t m0 x8 h2 y1f ff3 fs0 fc0 sc0 ls0 ws0">Đóng<span class="ff4"> </span>dấu<span
+                            class="ff4"> </span></div>
+                    <div class="t m0 x9 h2 y20 ff4 fs0 fc0 sc0 ls0 ws0">giáp lai</div>
+                </div>
+                <div class="c xa y21 w3 h4">
+                    <div class="t m0 xb h5 y22 ff3 fs1 fc0 sc0 ls0 ws0">Biểu<span class="ff4"> </span>số<span
+                            class="ff4"> 08/GNN-2016</span></div>
+                    <div class="t m0 xc h5 y23 ff3 fs1 fc0 sc0 ls0 ws0">Khổ<span class="ff4"> 29 x 42</span></div>
+                </div>
+            </div>
+            <div class="pi" data-data='{"ctm":[1.000000,0.000000,0.000000,1.000000,0.000000,0.000000]}'></div>
+        </div>
+        <div id="pf2" class="pf w0 h0" data-page-no="2">
+            <div class="pc pc2 w0 h0">
+                <div class="t m0 xd h6 y24 ff2 fs2 fc0 sc0 ls0 ws0">II. TÌNH HÌNH KINH <span class="ff1">TẾ,</span>CHÍNH <span class="ff1">TRỊ</span> <span class="ff1">CỦA</span> GIA <span class="ff1">ĐÌNH</span>
+                </div>
+                <div class="t m0 x0 h2 y25 ff4 fs0 fc0 sc0 ls0 ws0">(Ghi <span class="ff3">đầy</span> <span
+                        class="ff3">đủ</span> <span class="ff3">của</span> cha <span class="ff3">đẻ,</span> <span
+                        class="ff3">mẹ</span> <span class="ff3">đẻ</span> <span class="ff3">hoặc</span> <span
+                        class="ff3">người</span> <span class="ff3">trực</span> <span class="ff3">tiếp</span> nuôi <span
+                        class="ff3">dưỡng</span> <span class="ff3">của</span> <span class="ff3">bản</span> thân và <span
+                        class="ff3">của</span> <span class="ff3">vợ</span> <span class="ff3">hoặc</span> </div>
+                <div class="t m0 x0 h2 y26 ff3 fs0 fc0 sc0 ls0 ws0">chồng;<span class="ff4"> anh </span>chị<span
+                        class="ff4"> em </span>ruột;<span class="ff4"> con </span>đẻ,<span class="ff4"> con nuôi theo quy </span>định<span class="ff4"> </span>của<span class="ff4"> pháp </span>luật;<span
+                        class="ff4"> </span>Họ<span class="ff4"> tên, </span>năm<span class="ff4"> sinh; </span></div>
+                <div class="t m0 x0 h2 y27 ff3 fs0 fc0 sc0 ls0 ws0">nghề<span class="ff4"> </span>nghiệp,<span
+                        class="ff4"> tình hình kinh </span>tế,<span class="ff4"> chính </span>trị<span class="ff4"> </span>của<span class="ff4"> </span>từng<span class="ff4"> </span>người<span class="ff4"> qua các </span>thời<span class="ff4"> </span>kỳ<span class="ff4"> </span>đến<span class="ff4"> nay).</span>
+                </div>
+                <div class="t m0 x0 h2 y28 ff1 fs0 fc0 sc0 ls0 ws0">Họ<span class="ff2"> và tên cha<span class="ff4">: <span class="_ _a"> </span><span
+                                class="fc1">.............................................................</span>Sinh ngày:<span class="fc1">……</span>tháng<span class="fc1">….…</span><span
+                                class="ff3">năm</span><span class="fc1">……….</span></span></span>
+                                <input id='fatherfullname' style="left: 830px; width: 1500px;" />
+                                <input id="father_ngaysinh" style="left: 2620px ;width: 170px; text-align: center;" />    
+                                <input id="father_thangsinh" style="left: 3050px ;width: 190px; text-align: center" />    
+                                <input id="father_namsinh" style="left: 3440px ;width: 280px; text-align: center" />  </div>
+                <div class="t m0 x0 h2 y29 ff1 fs0 fc0 sc0 ls0 ws0">Trước<span class="ff2"> 30/4/1975<span class="ff4">:
+                            <span class="_ _9"></span><span
+                                class="fc1">........................................................................................................................</span></span></span>
+                                <input id='fatherdoing_1' style="left: 760px; width: 2900px;" />
+                </div>
+                <div class="t m0 x0 h2 y2a ff4 fs0 fc1 sc0 ls0 ws0">......................................................................................................................................................
+                    <textarea id='fatherdoing_2' style="left: 0px; top: -27px; width: 3700px;height: 390px;" ></textarea>
+                </div>
+                <div class="t m0 x0 h2 y2b ff4 fs0 fc1 sc0 ls0 ws0">......................................................................................................................................................
+                </div>
+                <div class="t m0 x0 h2 y2c ff4 fs0 fc1 sc0 ls0 ws0">......................................................................................................................................................
+                </div>
+                <div class="t m0 x0 h2 y2d ff2 fs0 fc0 sc0 ls0 ws0">Sau 30/4/1975<span class="ff4">:<span
+                            class="fc1">............................................................................................................................</span></span>
+                            <input id='fatherdoing_3' style="left: 760px; width: 2900px;" />
+                </div>
+                <div class="t m0 x0 h2 y2e ff4 fs0 fc1 sc0 ls0 ws0">......................................................................................................................................................
+                    <textarea id='fatherdoing_4' style="left: 0px; top: -27px; width: 3700px;height: 390px;" ></textarea>
+                </div>
+                <div class="t m0 x0 h2 y2f ff4 fs0 fc1 sc0 ls0 ws0">......................................................................................................................................................
+                </div>
+                <div class="t m0 x0 h2 y30 ff4 fs0 fc1 sc0 ls0 ws0">......................................................................................................................................................
+                </div>
+                <div class="t m0 x0 h2 y31 ff1 fs0 fc0 sc0 ls0 ws0">Hiện<span class="ff2"> nay<span class="ff4">: <span
+                                class="_ _1"> </span><span
+                                class="fc1">....................................................................................................................................</span></span></span>
+                                <input id='fatherdoing_5' style="left: 760px; width: 3100px;" />
+                            </div>
+                <div class="t m0 x0 h2 y32 ff4 fs0 fc1 sc0 ls0 ws0">......................................................................................................................................................
+                    <textarea id='fatherdoing_6' style="left: 0px; top: -27px; width: 3500px;height: 390px;" ></textarea>
+                </div>
+                <div class="t m0 x0 h2 y33 ff4 fs0 fc1 sc0 ls0 ws0">......................................................................................................................................................
+                </div>
+                <div class="t m0 x0 h2 y34 ff4 fs0 fc1 sc0 ls0 ws0">......................................................................................................................................................
+                </div>
+                <div class="t m0 x0 h2 y35 ff1 fs0 fc0 sc0 ls0 ws0">Họ<span class="ff2"> và tên </span>mẹ<span
+                        class="ff4">: <span class="_ _1"> </span><span
+                            class="fc1">..............................................................</span>Sinh ngày<span class="fc1">:……</span>tháng<span class="fc1">….…</span><span
+                            class="ff3">năm</span><span class="fc1">……….</span></span>
+                            <input id='motherfullname' style="left: 830px; width: 1500px;" />
+                            <input id="mother_ngaysinh" style="left: 2620px ;width: 170px; text-align: center;" />    
+                            <input id="mother_thangsinh" style="left: 3050px ;width: 190px; text-align: center" />    
+                            <input id="mother_namsinh" style="left: 3440px ;width: 280px; text-align: center" /> </div>
+                <div class="t m0 x0 h2 y36 ff1 fs0 fc0 sc0 ls0 ws0">Trước<span class="ff2"> 30/4/1975<span
+                            class="ff4 fc1">: <span
+                                class="_ _9"></span>........................................................................................................................</span></span>
+                                <input id='motherdoing_1' style="left: 760px; width: 2900px;" />
+                            </div>
+                <div class="t m0 x0 h2 y37 ff4 fs0 fc1 sc0 ls0 ws0">......................................................................................................................................................
+                    <textarea id='motherdoing_2' style="left: 0px; top: -27px; width: 3700px;height: 390px;" ></textarea>
+                </div>
+                <div class="t m0 x0 h2 y38 ff4 fs0 fc1 sc0 ls0 ws0">......................................................................................................................................................
+                </div>
+                <div class="t m0 x0 h2 y39 ff4 fs0 fc1 sc0 ls0 ws0">......................................................................................................................................................
+                </div>
+                <div class="t m0 x0 h2 y3a ff2 fs0 fc0 sc0 ls0 ws0">Sau 30/4/1975<span class="ff4">: <span class="_ _8"> </span><span
+                            class="fc1">............................................................................................................................</span></span>
+                           <input id='motherdoing_3' style="left: 760px; width: 2900px;" />
+                        </div>
+                <div class="t m0 x0 h2 y3b ff4 fs0 fc1 sc0 ls0 ws0">......................................................................................................................................................
+                    <textarea id='motherdoing_4' style="left: 0px; top: -27px; width: 3700px;height: 390px;" ></textarea>
+                </div>
+                <div class="t m0 x0 h2 y3c ff4 fs0 fc1 sc0 ls0 ws0">.....................................................................................................................................................
+                </div>
+                <div class="t m0 x0 h2 y3d ff4 fs0 fc1 sc0 ls0 ws0">......................................................................................................................................................
+                </div>
+                <div class="t m0 x0 h2 y3e ff1 fs0 fc0 sc0 ls0 ws0">Hiện<span class="ff2"> nay<span class="ff4">:<span
+                                class="_ _1"> </span><span
+                                class="fc1">.....................................................................................................................................</span></span></span>
+                                <input id='motherdoing_5' style="left: 760px; width: 3100px;" />
+                            </div>
+                <div class="t m0 x0 h2 y3f ff4 fs0 fc1 sc0 ls0 ws0">......................................................................................................................................................
+                    <textarea id='fatherdoing_6' style="left: 0px; top: -27px; width: 3700px;height: 390px;" ></textarea>
+                </div>
+                <div class="t m0 x0 h2 y40 ff4 fs0 fc1 sc0 ls0 ws0">......................................................................................................................................................
+                </div>
+                <div class="t m0 x0 h2 y41 ff4 fs0 fc1 sc0 ls0 ws0">......................................................................................................................................................
+                </div>
+                <div class="t m0 x0 h2 y42 ff1 fs0 fc0 sc0 ls0 ws0">Họ<span class="ff2"> và tên anh, </span>chị,<span
+                        class="ff2"> em </span>ruột<span class="ff4">:</span>
+                        <input id='ace1_default' style="left: 2050px; width: 1100px;" />
+                    </div>
+                <div class="t m0 x0 h2 y43 ff4 fs0 fc1 sc0 ls0 ws0">......................................................................................................................................................
+                    <input id='ace1_ten' style="left: 0px; width: 3100px;" />
+                <input id='ace1_ns' style="left: 2190px; width: 470px;" />
+                <input id="ace1_ngaysinh" style="left: 2640px ;width: 270px; text-align: center;" />    
+                <input id="ace1_ts" style="left: 2820px ;width: 270px;" />    
+                <input id="ace1_thangsinh" style="left: 3050px ;width: 190px; text-align: center" /> 
+                <input id="ace1_nams" style="left: 3260px ;width: 200px;" />       
+                <input id="ace1_namsinh" style="left: 3440px ;width: 300px; text-align: center" /> 
+                </div>
+                <div class="t m0 x0 h2 y44 ff4 fs0 fc1 sc0 ls0 ws0">......................................................................................................................................................
+                    <input id='ace1_tt' style="left: 0px; width: 3700px;" />
+                </div>
+                <div class="t m0 x0 h2 y45 ff4 fs0 fc1 sc0 ls0 ws0">......................................................................................................................................................
+                    <input id='ace2_ten' style="left: 0px; width: 3100px;" />
+                    <input id='ace2_ns' style="left: 2190px; width: 470px;" />
+                    <input id="ace2_ngaysinh" style="left: 2640px ;width: 270px; text-align: center;" />    
+                    <input id="ace2_ts" style="left: 2820px ;width: 270px;" />    
+                    <input id="ace2_thangsinh" style="left: 3050px ;width: 190px; text-align: center" /> 
+                    <input id="ace2_nams" style="left: 3260px ;width: 200px;" />       
+                    <input id="ace2_namsinh" style="left: 3440px ;width: 280px; text-align: center" /> 
+                </div>
+                <div class="t m0 x0 h2 y46 ff4 fs0 fc1 sc0 ls0 ws0">......................................................................................................................................................
+                    <input id='ace2_tt' style="left: 0px; width: 3700px;" />
+                </div>
+                <div class="t m0 x0 h2 y47 ff4 fs0 fc1 sc0 ls0 ws0">......................................................................................................................................................
+                    <input id='ace3_ten' style="left: 0px; width: 3100px;" />
+                    <input id='ace3_ns' style="left: 2190px; width: 470px;" />
+                    <input id="ace3_ngaysinh" style="left: 2640px ;width: 270px; text-align: center;" />    
+                    <input id="ace3_ts" style="left: 2820px ;width: 270px;" />    
+                    <input id="ace3_thangsinh" style="left: 3050px ;width: 190px; text-align: center" /> 
+                    <input id="ace3_nams" style="left: 3260px ;width: 200px;" />       
+                    <input id="ace3_namsinh" style="left: 3440px ;width: 280px; text-align: center" /> 
+                </div>
+                <div class="t m0 x0 h2 y48 ff4 fs0 fc1 sc0 ls0 ws0">......................................................................................................................................................
+                    <input id='ace3_tt' style="left: 0px; width: 3700px;" />
+                </div>
+                <div class="t m0 x0 h2 y49 ff4 fs0 fc1 sc0 ls0 ws0">......................................................................................................................................................
+                    <input id='ace4_ten' style="left: 0px; width: 3100px;" />
+                    <input id='ace4_ns' style="left: 2190px; width: 470px;" />
+                    <input id="ace4_ngaysinh" style="left: 2640px ;width: 270px; text-align: center;" />    
+                    <input id="ace4_ts" style="left: 2820px ;width: 270px;" />    
+                    <input id="ace4_thangsinh" style="left: 3050px ;width: 190px; text-align: center" /> 
+                    <input id="ace4_nams" style="left: 3260px ;width: 200px;" />       
+                    <input id="ace4_namsinh" style="left: 3440px ;width: 280px; text-align: center" /> 
+                </div>
+                <div class="t m0 x0 h2 y4a ff4 fs0 fc1 sc0 ls0 ws0">.....................................................................................................................................................
+                    <input id='ace4_tt' style="left: 0px; width: 3700px;" />
+                </div>
+            </div>
+            <div class="pi" data-data='{"ctm":[1.000000,0.000000,0.000000,1.000000,0.000000,0.000000]}'></div>
+        </div>
+        <div id="pf3" class="pf w0 h0" data-page-no="3">
+            <div class="pc pc3 w0 h0">
+                <div class="t m0 x0 h2 y4b ff2 fs0 fc0 sc0 ls0 ws0">III. TÌNH HÌNH KINH <span class="ff1">TẾ,</span>  CHÍNH <span class="ff1">TRỊ,</span> QUÁ TRÌNH CÔNG TÁC <span class="ff1">CỦA</span> <span
+                        class="ff1">BẢN</span> THÂN</div>
+                <div class="t m0 x0 h2 y4c ff4 fs0 fc0 sc0 ls0 ws0">(Nêu <span class="ff3">thời</span> gian, <span
+                        class="ff3">kết</span> <span class="ff3">quả</span> <span class="ff3">học</span> <span
+                        class="ff3">tập,</span> rèn <span class="ff3">luyện</span> <span class="ff3">phấn</span> <span
+                        class="ff3">đấu</span> <span class="ff3">từ</span> <span class="ff3">nhỏ</span> <span
+                        class="ff3">đến</span> <span class="ff3">thời</span> <span class="ff3">điểm</span> <span
+                        class="ff3">nhập</span> <span class="ff3">ngũ)</span></div>
+                <div class="t m0 x0 h2 y4d ff4 fs0 fc0 sc0 ls0 ws0">- <span class="ff3">Từ</span> 6 <span
+                        class="ff3">tuổi</span> <span class="ff3">đến</span> 11 <span class="ff3">tuổi:</span> <span
+                        class="_ _7"></span><span
+                        class="fc1">................................................................................................................</span>
+                        <input id='from6to11_1' style="left: 1000px; width: 2700px;" />
+                </div>
+                <div class="t m0 x0 h2 y4e ff4 fs0 fc1 sc0 ls0 ws0">......................................................................................................................................................
+                    <input id='from6to11_2' style="left: 0; width: 3700px;" />
+                </div>
+                <div class="t m0 x0 h2 y4f ff4 fs0 fc0 sc0 ls0 ws0">- <span class="ff3">Từ</span> 12 <span
+                        class="ff3">tuổi</span> <span class="ff3">đến</span> 15 <span class="ff3">tuổi:</span> <span
+                        class="_ _7"></span><span
+                        class="fc1">..............................................................................................................</span>
+                        <input id='from12to15_1' style="left: 1000px; width: 2700px;" />
+                </div>
+                <div class="t m0 x0 h2 y50 ff4 fs0 fc1 sc0 ls0 ws0">......................................................................................................................................................
+                    <input id='from12to15_2' style="left: 0; width: 3700px;" />
+                </div>
+                <div class="t m0 x0 h2 y51 ff4 fs0 fc0 sc0 ls0 ws0">- <span class="ff3">Từ</span> 16 <span
+                        class="ff3">tuổi</span> <span class="ff3">đến</span> 18 <span class="ff3">tuổi:</span> <span
+                        class="_ _7"></span><span
+                        class="fc1">..............................................................................................................</span>
+                        <input id='from16to18_1' style="left: 1000px; width: 2700px;" />
+                </div>
+                <div class="t m0 x0 h2 y52 ff4 fs0 fc1 sc0 ls0 ws0">......................................................................................................................................................
+                    <input id='from16to18_2' style="left: 0; width: 3700px;" />
+                </div>
+                <div class="t m0 xe h2 y53 ff1 fs0 fc0 sc0 ls0 ws0">NGƯỜI<span class="ff2"> KHAI</span></div>
+                <div class="t m0 xf h7 y54 ff5 fs0 fc0 sc0 ls0 ws0">(Ký, ghi rõ <span class="ff6">họ</span> tên)
+                    <input id="sign_a_1" style="left: -340px ;width: 1400px; bottom: -590px; text-align: center; font-family: myFont;" class="sign-area"/> 
+                </div>
+                <div class="t m0 x0 h2 y55 ff2 fs0 fc0 sc0 ls0 ws0">IV. <span class="ff1">NHẬN</span> XÉT VÀ <span
+                        class="ff1">ĐỀ</span> <span class="ff1">NGHỊ</span> <span class="ff1">CỦA</span> CHÍNH <span
+                        class="ff1">QUYỀN</span> <span class="ff1">CƠ</span> <span class="ff1">SỞ</span> <span
+                        class="ff4">(xã, <span class="ff3">phường,</span> <span class="ff3">thị</span> <span
+                            class="ff3">trấn)</span></span></div>
+                <div class="t m0 x10 h2 y56 ff1 fs0 fc0 sc0 ls0 ws0">(HOẶC<span class="ff2"> </span>CƠ<span class="ff2"> QUAN, </span>TỔ<span class="ff2"> </span>CHỨC,<span class="ff2"> DOANH </span>NGHIỆP)</div>
+                <div class="t m0 x0 h2 y57 ff4 fs0 fc0 sc0 ls0 ws0">.....................................................................................................................................................
+                    <textarea id='comment_1' style="left: 0px; top: -25px; width: 3700px;height: 1400px; line-height: 1.29;" ></textarea>
+                </div>
+                <div class="t m0 x0 h2 y58 ff4 fs0 fc0 sc0 ls0 ws0">.....................................................................................................................................................
+                </div>
+                <div class="t m0 x0 h2 y59 ff4 fs0 fc0 sc0 ls0 ws0">.....................................................................................................................................................
+                </div>
+                <div class="t m0 x0 h2 y5a ff4 fs0 fc0 sc0 ls0 ws0"> .....................................................................................................................................................
+                </div>
+                <div class="t m0 x0 h2 y5b ff4 fs0 fc0 sc0 ls0 ws0">.....................................................................................................................................................
+                </div>
+                <div class="t m0 x0 h2 y5c ff4 fs0 fc0 sc0 ls0 ws0">.....................................................................................................................................................
+                </div>
+                <div class="t m0 x0 h2 y5d ff4 fs0 fc0 sc0 ls0 ws0">.....................................................................................................................................................
+                </div>
+                <div class="t m0 x0 h2 y5e ff4 fs0 fc0 sc0 ls0 ws0">.....................................................................................................................................................
+                </div>
+                <div class="t m0 x11 h7 y5f ff6 fs0 fc0 sc0 ls0 ws0">Ngày……tháng……năm<span class="ff5"> 20..….</span>
+                    <input id="sign_day_1" style="left: 220px;text-align: center ;width: 170px; bottom: -30px;font-style: italic; font-family: ff5;" />       
+                <input id="sign_month_1" style="left: 650px;text-align: center ;width: 120px;bottom: -30px;font-style: italic; font-family: ff5;" />      
+                <input id="sign_year_1" style="left: 1084px ;width: 120px;bottom: -30px;font-style: italic; font-family: ff5;" />
+                </div>
+                <div class="t m0 x12 h2 y60 ff1 fs0 fc0 sc0 ls0 ws0">TRƯỞNG<span class="ff2"> CÔNG AN<span class="_ _b">
+                        </span>CHI HUY </span>TRƯỞNG<span class="ff2"> QS<span class="_ _b"> </span></span>CHỦ<span
+                        class="ff2"> </span>TỊCH<span class="ff2"> UBND</span>
+                        <input id="sign_a_2" style="left: -230px ;width: 1400px; bottom: -850px; text-align: center; font-family: myFont;" class="sign-area"/> 
+                        <input id="sign_a_3" style="left: 1150px ;width: 1200px; bottom: -850px; text-align: center; font-family: myFont;" class="sign-area"/> 
+                        <input id="sign_a_4" style="left: 2350px ;width: 1200px; bottom: -850px; text-align: center; font-family: myFont;" class="sign-area"/> 
+                    </div>
+            </div>
+            <div class="pi" data-data='{"ctm":[1.000000,0.000000,0.000000,1.000000,0.000000,0.000000]}'></div>
+        </div>
+        <div id="pf4" class="pf w0 h0" data-page-no="4">
+            <div class="pc pc4 w0 h0">
+                <div class="t m0 x13 h2 y4b ff2 fs0 fc0 sc0 ls0 ws0">V. Ý <span class="ff1">KIẾN</span> <span
+                        class="ff1">CỦA</span> CÁN <span class="ff1">BỘ</span> <span class="ff1">THẨM</span> TRA</div>
+                <div class="t m0 x0 h2 y61 ff3 fs0 fc0 sc0 ls0 ws0">(Về<span class="ff4"> lai </span>lịch<span
+                        class="ff4"> chính </span>trị<span class="ff4"> gia </span>đình,<span class="ff4">tiêu </span>chuẩn<span class="ff4"> </span>của<span class="ff4"> công dân </span>đủ<span class="ff4"> </span>điều<span class="ff4"> </span>kiện<span class="ff4"> </span>nhập<span class="ff4"> </span>ngũ<span class="ff4"> hay không)</span></div>
+                <div class="t m0 x0 h2 y62 ff4 fs0 fc0 sc0 ls0 ws0">.....................................................................................................................................................
+                    <textarea id='comment_2' style="left: 0px; top: -27px; width: 3700px;height: 620px;" ></textarea>
+                </div>
+                <div class="t m0 x0 h2 y63 ff4 fs0 fc0 sc0 ls0 ws0">.....................................................................................................................................................
+                </div>
+                <div class="t m0 x0 h2 y64 ff4 fs0 fc0 sc0 ls0 ws0">.....................................................................................................................................................
+                </div>
+                <div class="t m0 x0 h2 y65 ff4 fs0 fc0 sc0 ls0 ws0">.....................................................................................................................................................
+                </div>
+                <div class="t m0 x0 h2 y66 ff4 fs0 fc0 sc0 ls0 ws0">.....................................................................................................................................................
+                </div>
+                <div class="t m0 x14 h7 y67 ff6 fs0 fc0 sc0 ls0 ws0">Ngày……tháng……năm<span class="ff5"> 20..…..</span>
+                    <input id="sign_day_2" style="left: 230px;text-align: center ;width: 120px; bottom: -30px;font-style: italic; font-family: ff5;" />       
+                <input id="sign_month_2" style="left: 650px;text-align: center ;width: 120px;bottom: -30px;font-style: italic; font-family: ff5;" />      
+                <input id="sign_year_2" style="left: 1086px ;width: 120px;bottom: -30px;font-style: italic; font-family: ff5;" />    
+                </div>
+                <div class="t m0 x15 h2 y68 ff1 fs0 fc0 sc0 ls0 ws0">BỘ<span class="ff2"> </span>THẨM<span class="ff2"> TRA</span>
+                    <input id="sign_a_5" style="left: -220px ;width: 1200px; bottom: -490px; text-align: center; font-family: myFont;" class="sign-area"/> 
+                </div>
+                <div class="t m0 x16 h2 y69 ff2 fs0 fc0 sc0 ls0 ws0">VI. <span class="ff1">KẾT</span> <span
+                        class="ff1">LUẬN</span> <span class="ff1">CỦA</span> <span class="ff1">CƠ</span> QUAN QUÂN <span
+                        class="ff1">SỰ</span> <span class="ff1">CẤP</span> <span class="ff1">HUYỆN</span></div>
+                <div class="t m0 x0 h2 y6a ff4 fs0 fc0 sc0 ls0 ws0">.....................................................................................................................................................
+                    <textarea id='comment_3' style="left: 0px; top: -27px; width: 3700px;height: 640px;" ></textarea>
+                </div>
+                <div class="t m0 x0 h2 y6b ff4 fs0 fc0 sc0 ls0 ws0">.....................................................................................................................................................
+                </div>
+                <div class="t m0 x0 h2 y6c ff4 fs0 fc0 sc0 ls0 ws0">.....................................................................................................................................................
+                </div>
+                <div class="t m0 x0 h2 y6d ff4 fs0 fc0 sc0 ls0 ws0">.....................................................................................................................................................
+                </div>
+                <div class="t m0 x0 h2 y6e ff4 fs0 fc0 sc0 ls0 ws0">.....................................................................................................................................................
+                </div>
+                <div class="t m0 x14 h7 y6f ff6 fs0 fc0 sc0 ls0 ws0">Ngày……tháng……năm<span class="ff5"> 20..…..</span>
+                    <input id="sign_day_3" style="left: 230px;text-align: center ;width: 120px; bottom: -30px;font-style: italic; font-family: ff5;" />       
+                <input id="sign_month_3" style="left: 650px;text-align: center ;width: 120px; bottom: -30px;font-style: italic; font-family: ff5;" />      
+                <input id="sign_year_3" style="left: 1086px ;width: 120px; bottom: -30px;font-style: italic; font-family: ff5;" />   
+                </div>
+                <div class="t m0 x17 h2 y70 ff1 fs0 fc0 sc0 ls0 ws0">CHỈ<span class="ff2"> HUY </span>TRƯỞNG
+                    <input id="sign_a_6" style="left: -100px ;width: 1200px; bottom: -490px; text-align: center; font-family: myFont;" class="sign-area"/> 
+                </div>
+                <div class="t m0 x18 h2 y71 ff2 fs0 fc0 sc0 ls0 ws0">VII. <span class="ff1">KẾT</span> <span
+                        class="ff1">LUẬN</span> <span class="ff1">CỦA</span> <span class="ff1">HỘI</span> <span
+                        class="ff1">ĐỒNG</span> NVQS <span class="ff1">CẤP</span> <span class="ff1">HUYỆN</span></div>
+                <div class="t m0 x13 h2 y72 ff1 fs0 fc0 sc0 ls0 ws0">TRƯỚC<span class="ff2"> KHI CÔNG DÂN </span>NHẬP<span class="ff2"> </span>NGŨ</div>
+                <div class="t m0 x0 h2 y73 ff4 fs0 fc0 sc0 ls0 ws0">.....................................................................................................................................................
+                    <textarea id='comment_4' style="left: 0px; top: -27px; width: 3500px;height: 640px;" ></textarea>
+                </div>
+                <div class="t m0 x0 h2 y74 ff4 fs0 fc0 sc0 ls0 ws0">.....................................................................................................................................................
+                </div>
+                <div class="t m0 x0 h2 y75 ff4 fs0 fc0 sc0 ls0 ws0">.....................................................................................................................................................
+                </div>
+                <div class="t m0 x0 h2 y76 ff4 fs0 fc0 sc0 ls0 ws0">.....................................................................................................................................................
+                </div>
+                <div class="t m0 x0 h2 y77 ff4 fs0 fc0 sc0 ls0 ws0">.....................................................................................................................................................
+                </div>
+                <div class="t m0 x19 h7 y78 ff6 fs0 fc0 sc0 ls0 ws0">Ngày……tháng……năm<span class="ff5"> 20..…</span>
+                    <input id="sign_day_4" style="left: 230px;text-align: center ;width: 120px;  bottom: -30px;font-style: italic; font-family: ff5;" />       
+                <input id="sign_month_4" style="left: 650px;text-align: center ;width: 120px;  bottom: -30px;font-style: italic; font-family: ff5;" />      
+                <input id="sign_year_4" style="left: 1086px ;width: 120px;  bottom: -30px;font-style: italic; font-family: ff5;" />      
+                </div>
+                <div class="t m0 x1a h2 y79 ff2 fs0 fc0 sc0 ls0 ws0">TM. <span class="ff1">HỘI</span> <span
+                        class="ff1">ĐỒNG</span> <span class="ff1">NGHĨA</span> <span class="ff1">VỤ</span> QUÂN <span
+                        class="ff1">SỰ</span>
+                        <input id="sign_a_7" style="left: 300px ;width: 1200px; bottom: -590px; text-align: center; font-family: myFont;" class="sign-area"/> 
+                    </div>
+            </div>
+            <div class="pi" data-data='{"ctm":[1.000000,0.000000,0.000000,1.000000,0.000000,0.000000]}'></div>
+        </div>
+    </div>
+    <div class="loading-indicator">
+
+    </div>
+    <script>!function (p) { function e(e) { for (var r, t, n = e[0], o = e[1], u = e[2], i = 0, l = []; i < n.length; i++)t = n[i], Object.prototype.hasOwnProperty.call(a, t) && a[t] && l.push(a[t][0]), a[t] = 0; for (r in o) Object.prototype.hasOwnProperty.call(o, r) && (p[r] = o[r]); for (s && s(e); l.length;)l.shift()(); return c.push.apply(c, u || []), f() } function f() { for (var e, r = 0; r < c.length; r++) { for (var t = c[r], n = !0, o = 1; o < t.length; o++) { var u = t[o]; 0 !== a[u] && (n = !1) } n && (c.splice(r--, 1), e = i(i.s = t[0])) } return e } var t = {}, a = { 1: 0 }, c = []; function i(e) { if (t[e]) return t[e].exports; var r = t[e] = { i: e, l: !1, exports: {} }; return p[e].call(r.exports, r, r.exports, i), r.l = !0, r.exports } i.m = p, i.c = t, i.d = function (e, r, t) { i.o(e, r) || Object.defineProperty(e, r, { enumerable: !0, get: t }) }, i.r = function (e) { "undefined" != typeof Symbol && Symbol.toStringTag && Object.defineProperty(e, Symbol.toStringTag, { value: "Module" }), Object.defineProperty(e, "__esModule", { value: !0 }) }, i.t = function (r, e) { if (1 & e && (r = i(r)), 8 & e) return r; if (4 & e && "object" == typeof r && r && r.__esModule) return r; var t = Object.create(null); if (i.r(t), Object.defineProperty(t, "default", { enumerable: !0, value: r }), 2 & e && "string" != typeof r) for (var n in r) i.d(t, n, function (e) { return r[e] }.bind(null, n)); return t }, i.n = function (e) { var r = e && e.__esModule ? function () { return e.default } : function () { return e }; return i.d(r, "a", r), r }, i.o = function (e, r) { return Object.prototype.hasOwnProperty.call(e, r) }, i.p = "/"; var r = this.webpackJsonpscript = this.webpackJsonpscript || [], n = r.push.bind(r); r.push = e, r = r.slice(); for (var o = 0; o < r.length; o++)e(r[o]); var s = n; f() }([])</script>
+    <script src="/script/js/main.b9c32e2c.chunk.js"></script>
+</body>
+
+</html>
