@@ -1,7 +1,7 @@
 const express = require('express')
 const bodyParser = require('body-parser');
 var cors = require('cors');
-const PORT = 33001;
+
 const server = express()
 server.use(bodyParser.json({ limit: '50mb' }));
 server.use(bodyParser.urlencoded({ extended: true }));
@@ -10,12 +10,24 @@ const fs = require('fs');
 const path = require('path');
 const puppeteer = require('puppeteer');
 
+let ARGV = {};
+(process.argv).forEach(e => {
+    let key = e.split(":")[0];
+    let value = e.split(":")[1];
+
+    if (key && value) {
+        ARGV[key] = value;
+    }
+});
+
+const PORT = process.env.PORT || ARGV.port || 33001;
+
 var connection = mysql.createConnection({
-    host: "127.0.0.1",
-    // host: "167.179.65.8",
-    user: "root",
-    password: "root",
-    database: 'MS_DOCUMENT'
+    host: ARGV.dbhost || "66.42.48.254",
+    port: ARGV.dbport || 3306,
+    user: ARGV.dbuser || "dev",
+    password: ARGV.dbpwd || "ypFcRhXBbctCQIW8",
+    database: ARGV.dbname || 'MS_DOCUMENT_DEV'
 });
 
 connection.connect(function (err) {
@@ -111,7 +123,43 @@ server.post('/api/document/save', function (req, res) {
     });
 });
 
-server.post('/api/document/new', async function (req, res) {
+/**
+ * This api for Web only
+ */
+server.post('/api/document/new', function (req, res) {
+    const { name, folder, data, source } = req.body;
+
+    connection.query(`INSERT INTO MS_DOCS (name, folder, data, source) VALUES('${name}', '${folder}', '${data || '{}'}', '${source}')`,
+        function (error, results, fields) {
+            let resp = {};
+
+            if (error) {
+                // error
+                resp.ok = 0;
+                resp.error = error;
+            }
+            else {
+                let { insertId, affectedRows } = results;
+                if (affectedRows > 0) {
+                    // success
+                    resp.ok = 1;
+                    resp.insertId = insertId;
+                }
+                else {
+                    resp.ok = 0;
+                    resp.error = 'bla';
+                }
+            }
+
+            res.send(resp);
+        }
+    );
+});
+
+/**
+ * This api for Mobile only
+ */
+server.post('/api/document/create', async function (req, res) {
     const { name, folder: path, data, source } = req.body;
 
     let folder = await folderGet();
