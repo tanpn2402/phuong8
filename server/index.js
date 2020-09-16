@@ -26,8 +26,8 @@ var connection = mysql.createConnection({
     host: ARGV.dbhost || "66.42.48.254",
     port: ARGV.dbport || 3306,
     user: ARGV.dbuser || "dev",
-    password: ARGV.dbpwd || "ypFcRhXBbctCQIW8",
-    database: ARGV.dbname || 'MS_DOCUMENT_DEV'
+    password: ARGV.dbpwd || "T6GEc1QttnMJsQ8W",
+    database: ARGV.dbname || 'MS_DOCUMENT_PROD'
 });
 
 connection.connect(function (err) {
@@ -828,6 +828,42 @@ server.get('/static/resource/:folder/:file', (req, res) => {
     try {
         if (fs.lstatSync(filePath).isFile()) {
             return res.sendFile(filePath);
+        }
+        else {
+            throw new Error("");
+        }
+    }
+    catch (e) {
+        return res.status(404).send("File không tồn tại!");
+    }
+});
+
+server.get(['/static/:folder/:file'], (req, res) => {
+    const { folder, file } = req.params;
+    let filePath = path.join(__dirname, "../app/build/static/", folder, file);
+
+    try {
+        if (fs.lstatSync(filePath).isFile()) {
+            return res.sendFile(filePath);
+        }
+        else {
+            throw new Error("");
+        }
+    }
+    catch (e) {
+        return res.status(404).send("File không tồn tại!");
+    }
+});
+
+server.get(['/'], (req, res) => {
+    let indexFilePath = path.join(__dirname, "../app/build/index.html");
+
+    try {
+        if (fs.lstatSync(indexFilePath).isFile()) {
+            let stream = fs.createReadStream(indexFilePath);
+            stream.pipe(res).once("close", function () {
+                stream.destroy();
+            });
         }
         else {
             throw new Error("");
