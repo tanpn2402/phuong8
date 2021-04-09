@@ -2,13 +2,14 @@ import React from 'react';
 import { withStyles } from '@material-ui/styles';
 import ReactTable from "react-table";
 import "react-table/react-table.css";
-import matchSorter from 'match-sorter'
 import { Grid, IconButton, Tooltip, Menu, MenuItem, Button, Select } from '@material-ui/core';
 import IconFolder from '@material-ui/icons/Folder';
 import IconAdd from '@material-ui/icons/Add';
 import IconRemove from '@material-ui/icons/Remove';
 import IconAttachment from '@material-ui/icons/Attachment';
 import constant from '../constants';
+import moment from "moment";
+
 const URL = constant.API_URL;
 
 let initState = {
@@ -17,6 +18,34 @@ let initState = {
     anchorEl: null,
     filteredData: []
 }
+
+const FILTER_KNOWLEDGE = [
+    {
+        id: 10,
+        value: "10/12",
+        label: "10/12"
+    },
+    {
+        id: 0,
+        value: "11/12",
+        label: "11/12"
+    },
+    {
+        id: 1,
+        value: "12/12",
+        label: "12/12"
+    },
+    {
+        id: 2,
+        value: "caodang",
+        label: "Cao đẳng"
+    },
+    {
+        id: 3,
+        value: "daihoc",
+        label: "Đại học"
+    }
+]
 
 class ListDocument extends React.Component {
     constructor(props) {
@@ -33,14 +62,15 @@ class ListDocument extends React.Component {
         this.setState({ anchorEl: event.target });
     };
 
-    handleCloseMenuFilter = (event, filterId, filterName) => {
+    handleCloseMenuFilter = (_, filterId, filterName, options = {}) => {
         this.setState({
             anchorEl: null,
             filters: this.state.filters.concat(filterId ? [{
                 id: filterId + '-' + (this.state.filters.filter(e => e.filterId === filterId).length + 1),
                 filterId,
                 filterName,
-                value: ''
+                value: '',
+                placeholder: options.placeholder || ""
             }] : [])
         });
     };
@@ -67,6 +97,10 @@ class ListDocument extends React.Component {
             if (e.filterId === 'fileType') {
                 return e
             }
+            else if (e.filterId === 'educationlevel') {
+                return e
+            }
+
             return {
                 ...e,
                 value: document.getElementById(e.id).value || ''
@@ -80,6 +114,10 @@ class ListDocument extends React.Component {
                 fileData = JSON.parse(e.data);
                 filters.forEach(condition => {
 
+                    console.log(e);
+                    console.log(condition);
+                    console.log(fileData);
+                    console.log("----------");
                     if (rlt === false) {
                         return;
                     }
@@ -152,6 +190,63 @@ class ListDocument extends React.Component {
                             rlt = false;
                         }
                     }
+                    else if (condition.filterId === 'fromDOB') {
+                        let { birthday, birthmonth, birthyear, ngaysinh_1, thangsinh_1, namsinh_1 } = fileData;
+                        if (birthyear && birthyear !== "") {
+                            birthday = (!birthday || birthday === "") ? 30 : (birthday.replace(/\./g, ""));
+                            birthmonth = (!birthmonth || birthmonth === "") ? 12 : (birthmonth.replace(/\./g, ""));
+                            birthyear = (birthyear.replace(/\./g, ""));
+                            let conditionDOB = moment(condition.value, "DD-MM-YYYY").format("YYYY-MM-DD");
+                            let valueDOB = birthyear + "-" + birthmonth.padStart(2, "0") + "-" + birthday.padStart(2, "0");
+                            rlt = valueDOB >= conditionDOB;
+                        }
+                        else if (namsinh_1 && namsinh_1 !== "") {
+                            ngaysinh_1 = (!ngaysinh_1 || ngaysinh_1 === "") ? 30 : (ngaysinh_1.replace(/\./g, ""));
+                            thangsinh_1 = (!thangsinh_1 || thangsinh_1 === "") ? 12 : (thangsinh_1.replace(/\./g, ""));
+                            namsinh_1 = (namsinh_1.replace(/\./g, ""));
+                            let conditionDOB = moment(condition.value, "DD-MM-YYYY").format("YYYY-MM-DD");
+                            let valueDOB = namsinh_1 + "-" + thangsinh_1.padStart(2, "0") + "-" + ngaysinh_1.padStart(2, "0");
+                            rlt = valueDOB >= conditionDOB;
+                        }
+                    }
+                    else if (condition.filterId === 'toDOB') {
+                        let { birthday, birthmonth, birthyear, ngaysinh_1, thangsinh_1, namsinh_1 } = fileData;
+                        if (birthyear && birthyear !== "") {
+                            birthday = (!birthday || birthday === "") ? 1 : (birthday.replace(/\./g, "")).trim();
+                            birthmonth = (!birthmonth || birthmonth === "") ? 1 : (birthmonth.replace(/\./g, "")).trim();
+                            birthyear = (birthyear.replace(/\./g, "")).trim();
+                            let conditionDOB = moment(condition.value, "DD-MM-YYYY").format("YYYY-MM-DD");
+                            let valueDOB = birthyear + "-" + birthmonth.padStart(2, "0") + "-" + birthday.padStart(2, "0");
+                            rlt = valueDOB >= conditionDOB;
+                        }
+                        else if (namsinh_1 && namsinh_1 !== "") {
+                            ngaysinh_1 = (!ngaysinh_1 || ngaysinh_1 === "") ? 1 : (ngaysinh_1.replace(/\./g, "")).trim();
+                            thangsinh_1 = (!thangsinh_1 || thangsinh_1 === "") ? 1 : (thangsinh_1.replace(/\./g, "")).trim();
+                            namsinh_1 = (namsinh_1.replace(/\./g, "")).trim();
+                            let conditionDOB = moment(condition.value, "DD-MM-YYYY").format("YYYY-MM-DD");
+                            let valueDOB = namsinh_1 + "-" + thangsinh_1.padStart(2, "0") + "-" + ngaysinh_1.padStart(2, "0");
+                            rlt = valueDOB <= conditionDOB;
+                        }
+                    }
+                    else if (condition.filterId === 'educationlevel') {
+                        console.log(condition.value);
+                        let { trinhdovanhoa, trinhdohocvan, educationlevel } = fileData;
+                        if (trinhdovanhoa && trinhdovanhoa !== "") {
+                            trinhdovanhoa = xoa_dau(trinhdovanhoa.trim().replace(/\./g, "").replace(/\ /g, "").toLowerCase());
+                            console.log(trinhdovanhoa);
+                            rlt = trinhdovanhoa === condition.value.value;
+                        }
+                        else if (trinhdohocvan && trinhdohocvan !== "") {
+                            trinhdohocvan = xoa_dau(trinhdohocvan.trim().replace(/\./g, "").replace(/\ /g, "").toLowerCase());
+                            console.log(trinhdohocvan);
+                            rlt = trinhdohocvan === condition.value.value;
+                        }
+                        else if (educationlevel && educationlevel !== "") {
+                            educationlevel = xoa_dau(educationlevel.trim().replace(/\./g, "").replace(/\ /g, "").toLowerCase());
+                            console.log(educationlevel);
+                            rlt = educationlevel === condition.value.value;
+                        }
+                    }
                 })
 
 
@@ -168,8 +263,20 @@ class ListDocument extends React.Component {
         })
     }
 
-
     handleFilterByFileType = (f, event) => {
+        // console.log(e);
+        let { filters } = this.state;
+        let t = filters.filter(e => e.id === f.id)[0];
+
+        if (t) {
+            t.value = event.target.value;
+            this.setState({
+                filters
+            })
+        }
+    }
+
+    handleChangeEducationLevelFilter = (f, event) => {
         // console.log(e);
         let { filters } = this.state;
         let t = filters.filter(e => e.id === f.id)[0];
@@ -207,6 +314,10 @@ class ListDocument extends React.Component {
                             <MenuItem onClick={e => this.handleCloseMenuFilter(e, 'address', 'Địa chỉ')}>Địa chỉ thường trú của gia đình</MenuItem>
                             <MenuItem onClick={e => this.handleCloseMenuFilter(e, 'sex', 'Giới tính')}>Giới tính</MenuItem>
                             <MenuItem onClick={e => this.handleCloseMenuFilter(e, 'fileType', 'Loại văn bản')}>Loại văn bản</MenuItem>
+                            {/* from bod -> to dob */}
+                            <MenuItem onClick={e => this.handleCloseMenuFilter(e, 'fromDOB', 'Ngày sinh từ', { placeholder: "DD-MM-YYYY" })}>Ngày sinh từ</MenuItem>
+                            <MenuItem onClick={e => this.handleCloseMenuFilter(e, 'toDOB', 'Ngày sinh đến', { placeholder: "DD-MM-YYYY" })}>Ngày sinh đến</MenuItem>
+                            <MenuItem onClick={e => this.handleCloseMenuFilter(e, 'educationlevel', 'Trình độ văn hóa')}>Trình độ văn hóa</MenuItem>
                         </Menu>
                     </Grid>
                 </Grid>
@@ -228,8 +339,32 @@ class ListDocument extends React.Component {
                                     id="demo-simple-select"
                                     value={e.value}
                                     onChange={evt => this.handleFilterByFileType(e, evt)}
+                                    style={{ width: "100%", paddingLeft: 10 }}
                                 >
                                     {fileTemplate.map(type => <MenuItem value={type}>{type.name}</MenuItem>)}
+                                </Select>
+                            </Grid>
+                        </Grid>
+                    }
+                    else if (e.filterId === "educationlevel") {
+                        return <Grid container alignItems='center' style={{ marginBottom: 10 }}>
+                            <Grid item style={{ paddingLeft: 10 }}>
+                                <Tooltip title='Xoá điều kiện lọc'>
+                                    <IconButton size='small' onClick={() => this.handleRemoveFilter(e)}>
+                                        <IconRemove fontSize='small' />
+                                    </IconButton>
+                                </Tooltip>
+                            </Grid>
+                            <Grid item style={{ minWidth: 100, textAlign: 'left', paddingLeft: 10 }}>{e.filterName}</Grid>
+                            <Grid item xs>
+                                <Select
+                                    labelId="demo-simple-select-label"
+                                    id="demo-simple-select"
+                                    value={e.value}
+                                    onChange={evt => this.handleChangeEducationLevelFilter(e, evt)}
+                                    style={{ width: "100%", paddingLeft: 10 }}
+                                >
+                                    {FILTER_KNOWLEDGE.map(type => <MenuItem value={type}>{type.label}</MenuItem>)}
                                 </Select>
                             </Grid>
                         </Grid>
@@ -243,10 +378,13 @@ class ListDocument extends React.Component {
                                 </IconButton>
                             </Tooltip>
                         </Grid>
-                        <Grid item style={{ minWidth: 100, textAlign: 'left', paddingLeft: 10 }}>{e.filterName}</Grid>
+                        <Grid item style={{ minWidth: 150, textAlign: 'left', paddingLeft: 10, paddingRight: 10 }}>{e.filterName}</Grid>
                         <Grid item xs>
-                            <input className={classes.filterInput} id={e.id}
+                            <input
+                                className={classes.filterInput}
+                                id={e.id}
                                 defaultValue={e.value}
+                                placeholder={e.placeholder || ""}
                             />
                         </Grid>
                     </Grid>
@@ -352,23 +490,23 @@ class ListDocument extends React.Component {
                             let age = '';
                             try {
                                 let d = JSON.parse(p.original.data);
-                                if (d.birthyear) {
-                                    if (d.birthday !== '') {
-                                        age += d.birthday + '-';
+                                if (d.birthyear || d.namsinh_1) {
+                                    if (d.birthday !== '' || d.ngaysinh_1 !== "") {
+                                        age += (d.birthday || d.ngaysinh_1).replace(/\./g, "").padStart(2, "0") + '-';
                                     }
                                     else {
                                         age += 'DD' + '-';
                                     }
 
-                                    if (d.birthmonth !== '') {
-                                        age += d.birthmonth + '-';
+                                    if (d.birthmonth !== '' || d.thangsinh_1 !== "") {
+                                        age += (d.birthmonth || d.thangsinh_1).replace(/\./g, "").padStart(2, "0") + '-';
                                     }
                                     else {
                                         age += 'MM' + '-';
                                     }
 
-                                    if (d.birthyear !== '') {
-                                        age += d.birthyear;
+                                    if (d.birthyear !== '' || d.namsinh_1 !== "") {
+                                        age += (d.birthyear || d.namsinh_1).replace(/\./g, "");
                                     }
                                     else {
                                         age += '__';
